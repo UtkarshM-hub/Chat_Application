@@ -1,0 +1,55 @@
+.Sidebar {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 25%;
+  box-shadow: 0 0px 20px 0px darkgrey;
+}
+
+.Sidebar_Sections,
+.Sidebar_Content,
+.Sidebar_AddNew {
+  width: 100%;
+}
+
+.Sidebar_Content {
+  height: 100%;
+}
+
+.Sidebar button {
+  cursor: pointer;
+}
+
+.Sidebar_Sections {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.Sidebar_Sections p {
+  padding: 0.8em;
+  width: 50%;
+  text-align: center;
+  background-color: rgb(211, 211, 211);
+  cursor: pointer;
+}
+
+.active {
+  background-color: white !important;
+}
+
+.Sidebar_AddNew {
+  width: 100%;
+}
+
+.Sidebar_addBtn {
+  width: 100%;
+  padding: 1em 0.5em;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  color: white;
+  background-color: rgb(13, 131, 82);
+}

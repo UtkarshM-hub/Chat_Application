@@ -1,0 +1,49 @@
+.ConvModal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ConvModal form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 1em;
+  color: black;
+  width: 30%;
+}
+
+.ConvModal form h2 {
+  margin: 0 0 0.5em 0;
+}
+
+.ConvModal form input,
+.ConvModal form button {
+  width: 100%;
+  outline: none;
+  font-size: 1.1em;
+  padding: 0.5em 1em;
+  margin: 0.5em 0;
+}
+
+.ConvModal form button {
+  background-color: rgb(13, 131, 82);
+  color: white;
+  border: none;
+  font-weight: 550;
+  margin: 1em 0 0 0;
+  cursor: pointer;
+}
+
+.ConvModal_CloseBtn {
+  background-color: transparent !important;
+  color: red !important;
+  margin: 0.5em 0 0 0 !important;
+}
