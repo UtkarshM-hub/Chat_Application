@@ -1,28 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import classes from "../CSS/Sidebar.module.css";
-import socket, { getSocket } from "../../../socket";
+import { getSocket } from "../../../socket";
 import Conversation from "../../Conversation/JS/Conversation";
 import ConvModal from "../../ConvoModal/JS/ConvModal";
 
-const Sidebar = () => {
+const Sidebar = ({ getActive }) => {
   const Socket = getSocket();
   const [conversations, setConversations] = useState({});
+  const [contacts, setContacts] = useState([]);
   const [sectionOpen, setSectionOpen] = useState("Conversations");
+  const [ActiveGroup, setActiveGroup] = useState({
+    name: undefined,
+  });
   const [ContactModal, setContactModal] = useState(false);
-  const [ActiveGroup, setActiveGroup] = useState({});
 
   useEffect(() => {
     Socket.emit("getRoomData");
     Socket.on("RoomData", (message) => {
       let conv = message.data.rooms.split(" ");
       setConversations({ id: message.data.id, rooms: conv });
+      setContacts(message.data.contacts);
     });
-  }, [ContactModal]);
+    getActive(ActiveGroup.name);
+  }, [ContactModal, ActiveGroup.name]);
 
   const AddHandler = () => {
     if (sectionOpen === "Contact") {
       setContactModal(true);
     }
+  };
+
+  const setActiveGroupHandler = (name) => {
+    setActiveGroup({ name: name });
   };
 
   return (
@@ -53,14 +62,20 @@ const Sidebar = () => {
             conversations.rooms.map((item, index) => {
               return (
                 <Conversation
-                  onClick={() => setActiveGroup({ name: item })}
+                  onClick={() => {
+                    return setActiveGroupHandler(item);
+                  }}
                   key={index}
                   name={item}
                   isActive={ActiveGroup.name === item}
                 />
               );
             })}
-          {sectionOpen !== "Conversations" && <h2>Contacts</h2>}
+          {sectionOpen === "Contact" &&
+            contacts[0] !== undefined &&
+            contacts.map((item, index) => {
+              return <Conversation key={index} name={item.name} />;
+            })}
         </div>
         <div className={classes.Sidebar_AddNew}>
           <button onClick={AddHandler} className={classes.Sidebar_addBtn}>

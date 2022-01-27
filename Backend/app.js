@@ -78,6 +78,10 @@ io.on("connect",socket=>{
     console.log(updateUsers);
     cb(users);
   })
+
+  socket.on("ConnectedToConvo",(data)=>{
+    socket.emit("EnteredGroup",`Welcome to group ${data.id}`)
+  })
 })
 
 module.exports = app;
