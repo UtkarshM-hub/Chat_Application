@@ -51,37 +51,7 @@ app.use(function(err, req, res, next) {
 });
 
 io.on("connect",socket=>{
-  socket.on("joinRoom",(data,cb)=>{
-    const isUserExist=users.findIndex((item)=>item.username===data.username);
-    if(isUserExist=== -1){
-      socket.join(data.room);
-      users.push({id:socket.id,username:data.username,rooms:data.room});
-      cb({isUserExist:false});
-    }
-    else{
-      return cb({isUserExist:true});
-    }
-    console.log(isUserExist,users);
-  })
-  socket.on("getRoomData",()=>{
-    let data=users.find((item)=>item.id==='jMZ0sf9TqQn4WTaYAAAF');
-    console.log(users);
-    socket.emit("RoomData",{data:data})
-  })
-
-  socket.on("AddContact",(data,cb)=>{
-    let updateUsers=users;
-    let index=updateUsers.findIndex((item)=>item.id==='jMZ0sf9TqQn4WTaYAAAF');
-    updateUsers[index].contacts.push({id:data.id,name:data.name});
-    updateUsers[index].rooms=updateUsers[index].rooms+" "+data.name;
-    users=updateUsers;
-    console.log(updateUsers);
-    cb(users);
-  })
-
-  socket.on("ConnectedToConvo",(data)=>{
-    socket.emit("EnteredGroup",`Welcome to group ${data.id}`)
-  })
+  console.log("we have a connect")
 })
 
 module.exports = app;

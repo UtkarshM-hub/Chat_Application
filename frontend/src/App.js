@@ -1,9 +1,6 @@
-import { useEffect } from 'react';
 import './App.css';
-import Login from './Pages/Login';
-import { init,getSocket } from './socket';
+import { init } from './socket';
 import { Switch,Route } from 'react-router-dom';
-import Chat from './Pages/Chat';
 import { useHistory } from 'react-router-dom';
 
 function App() {
@@ -14,11 +11,8 @@ function App() {
   },[]);
   return (
     <Switch>
-      <Route path="/login" exact>
-        <Login/>
-      </Route>
-      <Route path="/chatbox">
-        <Chat/>
+      <Route path="/" exact>
+      <h1>home</h1>
       </Route>
     </Switch>
   );
