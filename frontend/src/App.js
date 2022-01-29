@@ -1,18 +1,23 @@
 import './App.css';
 import { init } from './socket';
-import { Switch,Route } from 'react-router-dom';
+import { Switch,Route, Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import Login from './Pages/Login';
+import Chat from './Pages/Chat';
 
 function App() {
   const history=useHistory();
   const socket=init("http://localhost");
-  useEffect(()=>{
-    history.push("/chatbox")
-  },[]);
   return (
     <Switch>
       <Route path="/" exact>
-      <h1>home</h1>
+        <Redirect to="/login"/>
+      </Route>
+      <Route path="/login">
+        <Login/>
+      </Route>
+      <Route path="/chatbox">
+        <Chat/>
       </Route>
     </Switch>
   );

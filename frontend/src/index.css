@@ -1,3 +1,8 @@
+:root {
+  --BgCard: #1c1c1c;
+  --mainColor: #2e7e4d;
+}
+
 * {
   margin: 0;
   padding: 0;

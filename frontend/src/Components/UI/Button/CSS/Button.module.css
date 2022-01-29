@@ -1,0 +1,12 @@
+.Button {
+  width: 100%;
+  color: white;
+  background-color: var(--mainColor);
+  border: none;
+  outline: none;
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 0.5em;
+  margin: 0.8em 0 0 0;
+  cursor: pointer;
+}

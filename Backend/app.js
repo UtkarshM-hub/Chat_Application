@@ -16,8 +16,8 @@ const socket = require('../frontend/src/socket');
 
 var app = express();
 
-let users=[{ id: 'jMZ0sf9TqQn4WTaYAAAF', username: 'utkarsh', rooms: 'js css html',contacts:[] }];
-const messages=[];
+// let users=[{ id: 'jMZ0sf9TqQn4WTaYAAAF', username: 'utkarsh', rooms: 'js css html',contacts:[] }];
+let users=[];
 
 
 
@@ -51,7 +51,24 @@ app.use(function(err, req, res, next) {
 });
 
 io.on("connect",socket=>{
-  console.log("we have a connect")
+  console.log("we have a connection")
+  socket.on("login",(data,cb)=>{
+    const {userName,roomName}=data;
+    try{
+      let user=users.findIndex((u)=>u.userName.toString()===userName.toString());
+      if(user!==-1){
+        cb({type:"error",message:"UserName is already in use"});
+      }
+      else{
+        let newUser={userName:userName,roomName:roomName};
+        users.push(newUser);
+        cb({type:"success",message:"Successfully joined the room"});
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
+  })
 })
 
 module.exports = app;
