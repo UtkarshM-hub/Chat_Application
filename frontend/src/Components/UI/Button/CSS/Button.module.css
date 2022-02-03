@@ -1,12 +1,14 @@
 .Button {
   width: 100%;
   color: white;
+  font-size: 1.1em;
+  font-weight: bold;
   background-color: var(--mainColor);
   border: none;
   outline: none;
-  font-size: 1.1em;
-  font-weight: 600;
-  padding: 0.5em;
-  margin: 0.8em 0 0 0;
+  padding: 0.4em;
   cursor: pointer;
+}
+.Button:hover {
+  background-color: var(--mainColorHover);
 }

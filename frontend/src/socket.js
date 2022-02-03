@@ -1,4 +1,4 @@
-let socket;
+let socket=undefined;
 let io;
 
 module.exports={

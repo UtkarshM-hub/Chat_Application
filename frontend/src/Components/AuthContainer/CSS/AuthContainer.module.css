@@ -1,0 +1,76 @@
+.AuthContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  background-color: var(--MainBG);
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.AuthContainer_formContainer {
+  width: 50%;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.AuthContainer_ImageContainer {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.AuthContainer_ImageContainer img {
+  width: 100%;
+}
+
+.AuthContainer_InnerForm {
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 70%;
+}
+
+.AuthContainer_Header {
+  margin: 0.5em 0;
+}
+
+.AuthContainer_Header h1,
+.AuthContainer_Header h2 {
+  color: white;
+}
+
+.AuthContainer_Header h2 {
+  margin: 0 0 0.3em 0;
+  font-weight: normal;
+}
+
+.AuthContainer_Dot {
+  color: var(--mainTextColor);
+}
+
+.AuthContainer_copyright,
+.AuthContainer_Header p {
+  color: var(--SecondaryText);
+}
+
+.AuthContainer_copyright {
+  width: 70%;
+  margin: 0 0 1em 0;
+  font-size: 0.85em;
+}
+
+.AuthContainer_FormSec {
+  height: 70%;
+  width: 100%;
+}

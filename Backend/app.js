@@ -4,33 +4,32 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors=require("cors");
-const io=require("socket.io")(80,{
-  cors:{
-    origin:["http://localhost:3000"]
-  }
-});
+const Mongoose = require('mongoose');
+const { ppid } = require('process');
+const app = express();
+const server=require("http").createServer(app);
+const io=require("socket.io")(server);
 
+// imports
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const socket = require('../frontend/src/socket');
 
-var app = express();
-
-// let users=[{ id: 'jMZ0sf9TqQn4WTaYAAAF', username: 'utkarsh', rooms: 'js css html',contacts:[] }];
-let users=[];
+// declerations
+const MONGODB_URI='mongodb+srv://UtMandape:1BGR3QO2fcFmFHXw@cluster0.akibk.mongodb.net/Chat?retryWrites=true&w=majority';
 
 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -44,31 +43,14 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
 
-io.on("connect",socket=>{
-  console.log("we have a connection")
-  socket.on("login",(data,cb)=>{
-    const {userName,roomName}=data;
-    try{
-      let user=users.findIndex((u)=>u.userName.toString()===userName.toString());
-      if(user!==-1){
-        cb({type:"error",message:"UserName is already in use"});
-      }
-      else{
-        let newUser={userName:userName,roomName:roomName};
-        users.push(newUser);
-        cb({type:"success",message:"Successfully joined the room"});
-      }
-    }
-    catch(err){
-      console.log(err);
-    }
-  })
+Mongoose.connect(MONGODB_URI,()=>{
+  console.log("connected");
+  server.listen(80);
 })
 
 module.exports = app;

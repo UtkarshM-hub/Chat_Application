@@ -1,0 +1,70 @@
+.SignUpform_Form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.SignUpform_First,
+.SignUpform_Second {
+  width: 100%;
+  margin: 0 0 0.5em 0;
+}
+
+.SignUpform_Element {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0.5em 0;
+}
+
+.SignUpform_Element p,
+.SignUpform_Redirect {
+  color: white;
+  font-size: 0.85em;
+}
+
+.SignUpform_Impo,
+.SignUpform_Redirect a {
+  color: var(--mainTextColor);
+}
+
+.SignUpform_InputElement {
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  padding: 0.8em;
+  margin: 0.2em 0;
+  border: 1px solid var(--StrokeColor);
+}
+
+.SignUpform_Redirect {
+  font-size: 0.85em;
+  margin: 1em 0;
+}
+
+.SignUpform_Back {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 4%;
+  left: 38.5%;
+  border-radius: 50%;
+  border: 1px solid var(--StrokeColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+}
+
+.SignUpform_Back:hover {
+  background-color: white;
+  color: black;
+}
+
+.error {
+  border-color: var(--mainRed) !important;
+}

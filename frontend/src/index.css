@@ -1,6 +1,12 @@
 :root {
+  --mainColor: #6c44a0;
+  --mainRed: #fd5454;
+  --mainColorHover: #815cb1;
+  --mainTextColor: #c59df8;
+  --SecondaryText: #adaaaa;
   --BgCard: #1c1c1c;
-  --mainColor: #2e7e4d;
+  --MainBG: #1f1c25;
+  --StrokeColor: #4a494b;
 }
 
 * {
