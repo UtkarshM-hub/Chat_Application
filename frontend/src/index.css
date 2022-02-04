@@ -1,12 +1,17 @@
 :root {
-  --mainColor: #6c44a0;
+  --mainColor: #9068fe;
   --mainRed: #fd5454;
-  --mainColorHover: #815cb1;
-  --mainTextColor: #c59df8;
-  --SecondaryText: #adaaaa;
+  --mainColorHover: #a180fb;
+  --mainTextColor: #9068fe;
+  --SecondaryText: #5b5b66;
   --BgCard: #1c1c1c;
-  --MainBG: #1f1c25;
+  /* --BgCard: #1d1e26; */
+  --CardHover: #272735;
+  --MainBG: #171c24;
   --StrokeColor: #4a494b;
+  --SuccessColor: #06a08e;
+  --WarningColor: #df7211;
+  --CancelColor: #fe572f;
 }
 
 * {

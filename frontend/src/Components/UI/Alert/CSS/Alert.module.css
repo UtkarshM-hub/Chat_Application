@@ -1,0 +1,52 @@
+.Alert {
+  position: absolute;
+  background-color: #242c38;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.8em;
+  width: 25%;
+  right: 5%;
+  transition: top 200ms;
+}
+
+.show {
+  top: 3%;
+}
+
+.hide {
+  top: -15%;
+}
+
+.Alert_Icon {
+  align-self: flex-start;
+}
+
+.Alert_Message_Container {
+  padding: 0 0.5em;
+}
+
+.Alert_Heading {
+  font-weight: bold;
+}
+
+.Alert_Message {
+  color: grey;
+  font-size: 0.9em;
+}
+
+.Success {
+  color: var(--SuccessColor);
+}
+
+.Error {
+  color: var(--CancelColor);
+}
+
+.Info {
+  color: var(--mainColor);
+}
+
+.Warning {
+  color: var(--WarningColor);
+}

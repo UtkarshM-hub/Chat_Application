@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Button from "../../../UI/Button/JS/Button";
 import classes from "../CSS/SignUpForm.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const emailRegx =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-const SignUpForm = ({ SignIn }) => {
+const SignUpForm = ({ SignIn, show }) => {
   // Declerations
   const [Next, setNext] = useState(false);
   const [Show, setShow] = useState(false);
@@ -29,12 +30,12 @@ const SignUpForm = ({ SignIn }) => {
   const [NameVal, setNameVal] = useState("");
   const [NameIsValid, setNameIsValid] = useState(false);
 
-  const [ProfilePicVal, setProfilePicVal] = useState("");
+  const [ProfilePicVal, setProfilePicVal] = useState(undefined);
 
-  const [DescriptionVal, setDescriptionVal] = useState("");
+  const [DescriptionVal, setDescriptionVal] = useState(undefined);
 
   // Handlers
-  const setNextHandler = (e) => {
+  const setNextHandler = async (e) => {
     e.preventDefault();
     if (!Next) {
       if (
@@ -43,11 +44,43 @@ const SignUpForm = ({ SignIn }) => {
         EmailIsValid &&
         ConfPasswordIsValid
       ) {
-        setShow(false);
-        return setNext(true);
+        setShow(true);
+        await axios
+          .post("http://localhost/users/CheckCred", {
+            Email: EmailVal,
+            UserName: UserNameVal,
+          })
+          .then(async (res) => {
+            if (res.data.type === "Success") {
+              setEmailIsValid(true);
+              setUserNameIsValid(true);
+              setNext(true);
+              return;
+            } else {
+              console.log(res.data.inValidOptions);
+              if (res.data.inValidOptions === "Email") {
+                setEmailIsValid(false);
+                setShow(true);
+              } else if (res.data.inValidOptions === "UserName") {
+                setUserNameIsValid(false);
+                setShow(true);
+              } else {
+                setUserNameIsValid(false);
+                setEmailIsValid(false);
+                setShow(true);
+              }
+              return show({
+                type: res.data.type,
+                message: res.data.message,
+                next: setNext,
+              });
+            }
+          })
+          .catch((err) => console.log(err));
       } else {
         return setShow(true);
       }
+      return;
     }
     if (
       Next &&
@@ -57,6 +90,7 @@ const SignUpForm = ({ SignIn }) => {
       EmailIsValid &&
       ConfPasswordIsValid
     ) {
+      console.log(UserNameIsValid, PasswordIsValid);
       const data = new FormData();
       data.append("UserName", UserNameVal);
       data.append("Email", EmailVal);
@@ -73,6 +107,7 @@ const SignUpForm = ({ SignIn }) => {
   const checkUserNameHandler = (value) => {
     setUserNameVal(value);
     if (value !== "") {
+      console.log("UserName working");
       setUserNameIsValid(true);
     } else {
       setUserNameIsValid(false);

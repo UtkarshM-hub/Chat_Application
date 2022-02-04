@@ -3,7 +3,7 @@ import AuthContainer from "../Components/AuthContainer/JS/AuthContainer";
 import SignUpForm from "../Components/SignUp/SignUpForm/JS/SignUpform";
 import axios from "axios";
 
-const SignUp = () => {
+const SignUp = ({ show }) => {
   // Handlers
   const SignInHandler = (data) => {
     axios
@@ -11,7 +11,9 @@ const SignUp = () => {
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
-        console.log(res);
+        if (res.data.type === "Success") {
+          show({ message: res.data.message, type: res.data.type });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -20,7 +22,7 @@ const SignUp = () => {
 
   return (
     <AuthContainer>
-      <SignUpForm SignIn={SignInHandler} />
+      <SignUpForm show={show} SignIn={SignInHandler} />
     </AuthContainer>
   );
 };
