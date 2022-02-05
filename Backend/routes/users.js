@@ -29,4 +29,6 @@ router.post('/signup',upload.single("picture"),userController.SignUpHandler);
 
 router.post('/CheckCred',userController.checkCred);
 
+router.post('/login',userController.LoginController);
+
 module.exports = router;

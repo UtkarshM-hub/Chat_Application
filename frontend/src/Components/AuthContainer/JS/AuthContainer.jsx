@@ -14,7 +14,7 @@ const AuthContainer = ({ children, type }) => {
               </h1>
             </div>
             <div className={classes.AuthContainer_Header}>
-              <h2>Sign Up</h2>
+              <h2>{type === "Signup" ? "Sign Up" : "Login"}</h2>
               <p>Connect with your friends and have fun!</p>
             </div>
           </div>

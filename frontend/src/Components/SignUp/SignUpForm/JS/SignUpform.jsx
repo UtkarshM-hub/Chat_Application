@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "../../../UI/Button/JS/Button";
 import classes from "../CSS/SignUpForm.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -51,6 +51,7 @@ const SignUpForm = ({ SignIn, show }) => {
             UserName: UserNameVal,
           })
           .then(async (res) => {
+            console.log(res);
             if (res.data.type === "Success") {
               setEmailIsValid(true);
               setUserNameIsValid(true);
@@ -278,7 +279,7 @@ const SignUpForm = ({ SignIn, show }) => {
         </Button>
         <p className={classes.SignUpform_Redirect}>
           Already have an Account?{" "}
-          <Link to="/" className={classes.SignUpform_link}>
+          <Link to="/login" className={classes.SignUpform_link}>
             Sign in
           </Link>
         </p>

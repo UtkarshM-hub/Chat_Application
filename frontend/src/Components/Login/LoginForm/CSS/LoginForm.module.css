@@ -1,0 +1,79 @@
+.LoginForm_FormElement {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0.5em 0;
+}
+
+.LoginForm_FormElement p,
+.LoginForm_FormElement a,
+.LoginForm_Redirect {
+  color: white;
+  font-size: 0.85em;
+}
+
+.LoginForm_Impo,
+.LoginForm_FormElement a,
+.LoginForm_Redirect a {
+  color: var(--mainTextColor);
+}
+
+.LoginForm_InputElement {
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  padding: 0.8em;
+  margin: 0.2em 0;
+  border: 1px solid var(--StrokeColor);
+}
+
+.LoginForm_Redirect {
+  font-size: 0.85em;
+  margin: 1em 0;
+}
+
+.LoginForm_Options {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0.8em 0 !important;
+}
+
+.LoginForm_Options p {
+  color: white;
+  margin: 0 0.5em;
+}
+
+.LoginForm_Check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.LoginForm_CheckBox {
+  border: 2px solid var(--StrokeColor);
+  padding: 0.2em 0.3em;
+  font-size: 0.8em;
+  border-radius: 7px;
+}
+
+.activeCheck .LoginForm_CheckBox {
+  color: white;
+  background-color: var(--mainColor);
+}
+
+.hiddenCheck svg {
+  color: var(--MainBG);
+}
+
+.LoginForm_Redirect a {
+  margin: 0 0.5em;
+}
+
+.error {
+  border-color: var(--mainRed) !important;
+}

@@ -1,5 +1,6 @@
 const User=require("../Models/UserModal");
 const bcrypt=require("bcrypt");
+const jwt=require("jsonwebtoken");
 
 exports.SignUpHandler=async(req,res,next)=>{
     const file=req.file;
@@ -49,4 +50,28 @@ exports.checkCred=async(req,res,next)=>{
     catch(err){
         console.log(err);
     }
+}
+
+exports.LoginController=async(req,res,next)=>{
+    const { Email,Password,Remember } =req.body;
+    let expiresIn={};
+    if(Remember===true){
+        expiresIn={expiresIn:"1h"}
+    }
+    try{
+        const user=await User.findOne({"Email":Email});
+        if(!user){
+            return res.send({message:"User does not exists!",inValidOptions:"",type:"Error"});
+        }
+        const PasswordIsValid=await bcrypt.compare(Password,user.Password);
+        if(!PasswordIsValid){
+            return res.send({message:"Invalid Password",inValidOptions:"Password",type:"Error"})
+        }
+        const token=jwt.sign({Email:Email,userId:user._id.toString()},'2e84dKZVTP',expiresIn);
+        res.status(200).json({message:"You Logged in successfully",inValidOptions:"",type:"Success",token:token,userId:user._id.toString()})
+    }
+    catch(err){
+        console.log(err)
+    }
+    
 }
