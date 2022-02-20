@@ -99,6 +99,7 @@ const SignUpForm = ({ SignIn, show }) => {
       data.append("Name", NameVal);
       data.append("Description", DescriptionVal);
       data.append("picture", ProfilePicVal);
+      console.log("Signing in");
       return SignIn(data);
     } else {
       return setShowSecond(true);

@@ -1,0 +1,23 @@
+.RequestBtn {
+  color: black;
+  background-color: var(--mainColor);
+  outline: none;
+  border: 1px solid var(--mainColor);
+  border-radius: 5px;
+  padding: 0.2em 0.3em;
+  cursor: pointer;
+}
+
+.RequestBtn:hover {
+  background-color: var(--mainColorHover);
+}
+
+.Requested {
+  color: var(--SecondaryText);
+  background-color: transparent;
+  outline: none;
+  border: 1px solid var(--StrokeColor);
+  border-radius: 5px;
+  padding: 0.2em 0.3em;
+  cursor: pointer;
+}

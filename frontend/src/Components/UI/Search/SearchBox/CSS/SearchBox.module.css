@@ -1,0 +1,37 @@
+.SearchBox {
+  position: absolute;
+  top: 100%;
+  left: 9%;
+  border-radius: 10px;
+  background-color: #171c24;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 25%;
+  border: 1px solid var(--StrokeColor);
+  max-height: 45vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.SearchBox::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+}
+
+.SearchBox::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: var(--CardHover);
+}
+
+.SearchBox::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--mainColor);
+}
+
+.SearchBox::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  background-color: var(--mainColorHover);
+}

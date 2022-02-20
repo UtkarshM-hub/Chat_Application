@@ -1,0 +1,9 @@
+.Layout {
+  width: 100%;
+  height: 100%;
+}
+.Layout_main {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--MainBG);
+}

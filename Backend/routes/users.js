@@ -31,4 +31,6 @@ router.post('/CheckCred',userController.checkCred);
 
 router.post('/login',userController.LoginController);
 
+router.post('/findUsers',userController.findUsersHandler);
+
 module.exports = router;

@@ -21,7 +21,7 @@ const UserSchema=new Schema({
     "ProfilePic":{
         type:String,
         required:false,
-        default:'http://localhost/images/DefaultProfile.jpg'
+        default:'https://res.cloudinary.com/dcglxmssd/image/upload/v1645077067/ProfilePic/DefaultProfile_o0zbci.jpg'
     },
     "Description":{
         type:String,

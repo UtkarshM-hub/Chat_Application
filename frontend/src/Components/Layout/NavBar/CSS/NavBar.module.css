@@ -1,0 +1,109 @@
+.NavBar {
+  width: 100%;
+  background-color: var(--MainBG);
+  color: white;
+  padding: 0.5em 0;
+  border-bottom: 1px solid var(--StrokeColor);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.NavBar_ContentContianer {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.NavBar_Logo {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.NavBar_BellIcon {
+  color: var(--StrokeColor);
+  cursor: pointer;
+}
+
+.NavBar_LogoSec {
+  cursor: pointer;
+}
+
+.NavBar_LogoSec p {
+  color: white;
+  font-weight: 550;
+  font-size: 1.3em;
+}
+
+.NavBar_LogoSec p span {
+  color: var(--mainTextColor);
+  font-weight: 550;
+  font-size: 1.2em;
+}
+
+.NavBar_Search {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.NavBar_SearchIcon {
+  color: var(--StrokeColor);
+  font-size: 1.3em;
+  font-weight: 400;
+}
+
+.NavBar_SearchInput {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.8em;
+  padding: 0.5em;
+  color: white;
+  margin: 0 0.5em;
+  width: 100%;
+}
+
+.NavBar_Profile {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.NavBar_ProfileContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.NavBar_ProfileContainer p {
+  margin: 0 0.5em;
+  font-size: 0.9em;
+}
+
+.NavBar_ProfilePic {
+  width: 2em;
+  height: 2em;
+  overflow: hidden;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.NavBar_ProfilePic img {
+  width: 100%;
+}
+
+.NavBar_ToggleIcon {
+  color: var(--StrokeColor);
+}
+
+.NavBar_XMark {
+  cursor: pointer;
+}

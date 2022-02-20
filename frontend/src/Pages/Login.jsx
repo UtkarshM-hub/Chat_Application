@@ -20,6 +20,7 @@ const Login = ({ show }) => {
           history.push("/");
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("userId", res.data.userId);
+          localStorage.setItem("newBie", true);
         }
       })
       .catch((err) => console.log(err));

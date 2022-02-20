@@ -1,6 +1,13 @@
 const User=require("../Models/UserModal");
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
+const cloudinary=require("cloudinary").v2;
+
+cloudinary.config({
+    cloud_name:'dcglxmssd',
+    api_key:'794641158514839',
+    api_secret:'2aJZb6u-QdkJV-HDb2MTTg5PtQ8'
+})
 
 exports.SignUpHandler=async(req,res,next)=>{
     const file=req.file;
@@ -11,17 +18,22 @@ exports.SignUpHandler=async(req,res,next)=>{
     const {UserName,Email,Password,Name,Description}=req.body;
     try{
         const hashedPassword=await bcrypt.hash(Password,12);
-        const newUser=await new User({
-            UserName:UserName,
-            Name:Name,
-            Email:Email,
-            Password:hashedPassword,
-            ProfilePic:filePath,
-            Description:Description,
-            Contacts:[]
-        });
-        newUser.save();
-        res.status(200).send({message:"Successfully Signed in",type:"Success"});
+        cloudinary.uploader.upload(filePath,async(err,result)=>{
+            if(err){
+                return res.status(500).send({message:"Error uploading image",type:"Error"});
+            }
+            const newUser=await new User({
+                UserName:UserName,
+                Name:Name,
+                Email:Email,
+                Password:hashedPassword,
+                ProfilePic:result.url,
+                Description:Description,
+                Contacts:[]
+            });
+            newUser.save();
+            res.status(200).send({message:"Successfully Signed in",type:"Success"});
+        })
     }
     catch(err){
         console.log(err);
@@ -74,4 +86,19 @@ exports.LoginController=async(req,res,next)=>{
         console.log(err)
     }
     
+}
+
+exports.findUsersHandler=async(req,res,next)=>{
+    const { Name }=req.body;
+    try{
+        const regex=new RegExp(`${Name}`,'i');
+        const isUserExists=await User.find({"Name":{$regex:regex}});
+        if(isUserExists[0]===undefined){
+            return res.status(200).json({Data:"User Not Found"})
+        }
+        return res.status(200).json({Data:isUserExists})
+    }
+    catch(err){
+        console.log(err);
+    }
 }
