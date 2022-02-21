@@ -36,8 +36,41 @@ const UserSchema=new Schema({
             },
             ref:this
         },
+    ],
+    "Notifications":{
+        "notification":[
+            {
+                message:{
+                    type:String,
+                    required:false
+                }
+            }
+        ],
+        "Requests":[
+            {from:{
+                type:Schema.Types.ObjectId,
+                required:true
+            }}
+        ]
+    },
+    "Requested":[
+        {
+            To:{
+                type:Schema.Types.ObjectId,
+                required:true
+            },
+            Status:{
+                type:String,
+                default:"Pending",
+                required:true
+            }
+        }
     ]
 });
+
+UserSchema.methods.AddNotification=function(data){
+    console.log(data);
+}
 
 
 module.exports=Mongoose.model("User",UserSchema);

@@ -8,20 +8,18 @@ const Mongoose = require('mongoose');
 const { ppid } = require('process');
 const app = express();
 const server=require("http").createServer(app);
-const io=require("socket.io")(server,{
-  cors:{
-    origin:["http://localhost:3000"]
-  }
-});
+const io=require("./Socket").init(server);
 const User=require("./Models/UserModal");
+const Online=require("./Models/OnlineUsers");
 
 // imports
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var ConnectionRouter = require('./routes/Connections');
 const socket = require('../frontend/src/socket');
 
 // declerations
-const MONGODB_URI='YOUR_MONGODB_URI';
+const MONGODB_URI='mongodb+srv://UtMandape:1BGR3QO2fcFmFHXw@cluster0.akibk.mongodb.net/Chat?retryWrites=true&w=majority';
 
 
 // view engine setup
@@ -42,7 +40,7 @@ app.use((req, res, next) => {
   }
   if (req.method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-      return res.status(200).json({});
+    return res.status(200).json({});
   }
   next();
 }); 
@@ -50,6 +48,7 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/Connection', ConnectionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -70,8 +69,28 @@ app.use(function(err, req, res, next) {
 
 Mongoose.connect(MONGODB_URI,()=>{
   console.log("connected");
-  io.on("connection",socket=>{
+  io.on("connection",(socket)=>{
     console.log(socket.id)
+    socket.on("saveConnect",async(data)=>{
+      try{
+        const doesAlreadyExists=await Online.find({userId:data.userId});
+        // console.log(socket.id)
+        if(doesAlreadyExists[0]!==undefined){
+          console.log(doesAlreadyExists);
+          const updated=await Online.findByIdAndUpdate(doesAlreadyExists[0]._id,{socketId:socket.id,IsOnline:true});
+          return;
+        }
+        const newOnline=await new Online({userId:data.userId,socketId:socket.id,IsOnline:true});
+        return newOnline.save();
+      }
+      catch(err){
+        next(); // Temporary
+      }
+    });
+    socket.on("disconnect",async()=>{
+      console.log("event fired")
+      await Online.findOneAndUpdate({socketId:socket.id},{IsOnline:false});
+    })
   })
   server.listen(80);
 })

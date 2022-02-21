@@ -29,7 +29,12 @@ exports.SignUpHandler=async(req,res,next)=>{
                 Password:hashedPassword,
                 ProfilePic:result.url,
                 Description:Description,
-                Contacts:[]
+                Contacts:[],
+                Notifications:{
+                    notification:[],
+                    Requests:[]
+                },
+                Requested:[]
             });
             newUser.save();
             res.status(200).send({message:"Successfully Signed in",type:"Success"});

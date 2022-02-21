@@ -8,6 +8,7 @@
   width: 25%;
   right: 5%;
   transition: top 200ms;
+  z-index: 9999;
 }
 
 .show {
@@ -15,7 +16,7 @@
 }
 
 .hide {
-  top: -15%;
+  top: -25%;
 }
 
 .Alert_Icon {

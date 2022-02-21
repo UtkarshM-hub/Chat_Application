@@ -107,3 +107,18 @@
 .NavBar_XMark {
   cursor: pointer;
 }
+
+.NavBar_Notification {
+  position: relative;
+}
+
+.NavBar_Dot {
+  width: 7px;
+  height: 7px;
+  background-color: var(--mainRed);
+  border-radius: 50%;
+  outline: none;
+  position: absolute;
+  top: 15%;
+  right: -4%;
+}

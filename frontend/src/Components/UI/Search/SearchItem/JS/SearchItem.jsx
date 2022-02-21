@@ -2,7 +2,8 @@ import React from "react";
 import classes from "../CSS/SearchItem.module.css";
 import RequestBtn from "../../../RequestBtn/JS/RequestBtn";
 
-const SearchItem = ({ name, picture, id }) => {
+const SearchItem = ({ name, picture, id, addFriend }) => {
+  const userId = localStorage.getItem("userId");
   return (
     <div className={classes.SearchItem}>
       <div className={classes.SearchItem_Info}>
@@ -11,7 +12,14 @@ const SearchItem = ({ name, picture, id }) => {
         </div>
         <p>{name}</p>
       </div>
-      <RequestBtn>Request</RequestBtn>
+      <RequestBtn
+        Btype="Normal"
+        onClick={(e) => {
+          return addFriend({ friendId: id, userId: userId });
+        }}
+      >
+        Request
+      </RequestBtn>
     </div>
   );
 };

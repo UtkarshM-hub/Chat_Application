@@ -1,21 +1,14 @@
 import React from "react";
-import SearchItem from "../../SearchItem/JS/SearchItem";
 import classes from "../CSS/SearchBox.module.css";
 
-const SearchBox = ({ items }) => {
-  console.log(items);
+const SearchBox = ({ children, Mode }) => {
+  // Handlers
   return (
-    <div className={classes.SearchBox}>
-      {items !== "User Not Found" &&
-        items.map((item) => (
-          <SearchItem
-            name={item.Name}
-            picture={item.ProfilePic}
-            key={item._id}
-            id={item._id}
-          />
-        ))}
-      {items === "User Not Found" && <p>No Result</p>}
+    <div
+      style={{ left: Mode === "Notification" ? "75%" : "9%" }}
+      className={classes.SearchBox}
+    >
+      {children}
     </div>
   );
 };
