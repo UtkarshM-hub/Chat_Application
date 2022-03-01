@@ -30,6 +30,10 @@ const UserSchema=new Schema({
     },
     "Contacts":[
         {
+            friend:{
+                type:Object,
+                required:true
+            },
             conversationId:{
                 type:Schema.Types.ObjectId,
                 ref:"Conversation"
@@ -47,10 +51,13 @@ const UserSchema=new Schema({
             }
         ],
         "Requests":[
-            {from:{
-                type:Schema.Types.ObjectId,
-                required:true
-            }}
+            {
+                from:{
+                    type:Schema.Types.ObjectId,
+                    ref:'User',
+                    required:true
+                }
+            }
         ]
     },
     "Requested":[

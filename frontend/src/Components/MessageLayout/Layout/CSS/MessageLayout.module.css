@@ -1,0 +1,9 @@
+.MessageLayout {
+  max-height: 92vh;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

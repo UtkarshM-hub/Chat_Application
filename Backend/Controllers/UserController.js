@@ -94,7 +94,7 @@ exports.LoginController=async(req,res,next)=>{
 }
 
 exports.findUsersHandler=async(req,res,next)=>{
-    const { Name }=req.body;
+    const { Name,userId }=req.body;
     try{
         const regex=new RegExp(`${Name}`,'i');
         const isUserExists=await User.find({"Name":{$regex:regex}});
@@ -104,6 +104,17 @@ exports.findUsersHandler=async(req,res,next)=>{
         return res.status(200).json({Data:isUserExists})
     }
     catch(err){
+        console.log(err);
+    }
+}
+
+exports.GetUserData=async(req,res,next)=>{
+    const { userId }=req.body;
+    try{
+        const user=await User.findById(userId);
+        console.log({_id:user._id,Name:user.Name,ProfilePic:user.ProfilePic});
+        res.send({_id:user._id,Name:user.Name,ProfilePic:user.ProfilePic});
+    }catch(err){
         console.log(err);
     }
 }

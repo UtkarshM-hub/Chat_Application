@@ -33,4 +33,6 @@ router.post('/login',userController.LoginController);
 
 router.post('/findUsers',userController.findUsersHandler);
 
+router.post('/GetUserData',userController.GetUserData);
+
 module.exports = router;

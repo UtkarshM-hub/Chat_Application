@@ -5,37 +5,9 @@ import Alert from './Components/UI/Alert/JS/Alert';
 import { useState } from 'react';
 import Login from './Pages/Login';
 import Layout from './Components/Layout/Layout/JS/Layout';
-import { init } from './socket';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { ChatActions } from './Store/store';
-import { useDispatch } from 'react-redux'
+import Home from './Pages/Home';
 
 function App() { 
-  const state=useSelector(state=>state);
-  const dispatch=useDispatch();
-  const IsNewBie=localStorage.getItem("newBie");
-  const userId=localStorage.getItem("userId");
-  let socket;
-  const initialize=async ()=>{
-    socket=init("http://localhost");
-    socket.emit("saveConnect",{userId:userId});
-    socket.on("disconnect",()=>{
-      socket.emit("deleteStatus",{userId:userId});
-    })
-    socket.on("notification",message=>{
-      console.log(message)
-      dispatch(ChatActions.AddNotification({ Notifications: message }));
-    })
-  }
-  console.log(state)
-  useEffect(()=>{
-     initialize();
-    if(IsNewBie){
-      // it will be applied at the end
-    }
-  },[])
-  
   // Declerations
   const [show,setShow] =useState(false);
   const [MessageData,setMessageData] =useState(false);
@@ -63,7 +35,7 @@ function App() {
       </Route>
       <Layout>
         <Route path="/" exact>
-          <h1>Working</h1>
+          <Home/>
         </Route>
       </Layout>
     </Switch>

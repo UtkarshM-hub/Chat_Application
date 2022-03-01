@@ -2,7 +2,7 @@ import React from "react";
 import classes from "../CSS/FriendRequest.module.css";
 import RequestBtn from "../../RequestBtn/JS/RequestBtn";
 
-const FriendRequest = ({ name, picture, id, DeleteRequest }) => {
+const FriendRequest = ({ name, picture, id, DeleteRequest, Accept }) => {
   const userId = localStorage.getItem("userId");
   return (
     <div className={classes.FriendRequest}>
@@ -12,7 +12,12 @@ const FriendRequest = ({ name, picture, id, DeleteRequest }) => {
         </div>
         <p>{name}</p>
       </div>
-      <RequestBtn Btype="Normal" onClick={(e) => {}}>
+      <RequestBtn
+        Btype="Normal"
+        onClick={(e) => {
+          Accept({ friendId: id, userId: userId });
+        }}
+      >
         Accept
       </RequestBtn>
       <RequestBtn

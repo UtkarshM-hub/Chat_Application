@@ -72,6 +72,7 @@ Mongoose.connect(MONGODB_URI,()=>{
   io.on("connection",(socket)=>{
     console.log(socket.id)
     socket.on("saveConnect",async(data)=>{
+      if(data.userId!==null || data.userId!==undefined){
       try{
         const doesAlreadyExists=await Online.find({userId:data.userId});
         // console.log(socket.id)
@@ -85,6 +86,7 @@ Mongoose.connect(MONGODB_URI,()=>{
       }
       catch(err){
         next(); // Temporary
+      }
       }
     });
     socket.on("disconnect",async()=>{

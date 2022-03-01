@@ -1,0 +1,90 @@
+.ContactItem {
+  width: 100%;
+  height: 4.3em;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0.5em;
+  border-bottom: 0.5px solid var(--StrokeColor);
+  cursor: pointer;
+}
+
+.ContactItem_ImageContainer {
+  width: 2.5em;
+  height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.ContactItem_ImageContainer img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.ContactItem_Both {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.ContactItem_InfoContainer {
+  margin: 0 0.5em;
+  overflow: hidden;
+  width: 70%;
+}
+
+.ContactItem_InfoContainer h3,
+.ContactItem_InfoContainer p {
+  overflow: hidden;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  margin: 0 0 0 0.5em;
+  width: 100%;
+  font-size: 0.9em;
+}
+
+.ContactItem_InfoContainer p,
+.ContactItem_DataContainer p {
+  color: var(--SecondaryText);
+}
+
+.ContactItem_InfoContainer h3 {
+  color: white;
+  font-weight: 500;
+}
+
+.ContactItem_DataContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5em;
+  justify-content: center;
+}
+
+.ContactItem_DataContainer p {
+  font-size: 0.8em;
+}
+
+.ContactItem_NewMSG {
+  height: 1.5em;
+  width: 1.5em;
+  border-radius: 50%;
+  background-color: var(--mainColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ContactItem_NewMSG p {
+  color: white;
+  font-size: 0.7em;
+}
