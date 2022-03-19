@@ -34,7 +34,9 @@ exports.SignUpHandler=async(req,res,next)=>{
                     notification:[],
                     Requests:[]
                 },
-                Requested:[]
+                Requested:[],
+                IsOnline:false,
+                socketId:""
             });
             newUser.save();
             res.status(200).send({message:"Successfully Signed in",type:"Success"});

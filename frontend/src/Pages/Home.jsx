@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MessageLayout from "../Components/MessageLayout/Layout/JS/MessageLayout";
 import ContactsContainer from "../Components/MessageLayout/Contacts/JS/ContactsContainer";
 import ContactItem from "../Components/MessageLayout/ContactItem/JS/ContactItem";
@@ -6,76 +6,193 @@ import { getSocket, init } from "../socket";
 import { ChatActions } from "../Store/store";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import Chat from "../Components/MessageLayout/Chat/Chat/JS/Chat";
+import InputContainer from "../Components/MessageLayout/Chat/InputContainer/JS/InputContainer";
+import ChatContainer from "../Components/MessageLayout/Chat/ChatContainer/JS/ChatContainer";
+
+let refresh = true;
 
 const Home = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const IsNewBie = localStorage.getItem("newBie");
   const userId = localStorage.getItem("userId");
+  const [ActiveContactState, setActiveContactState] = useState({
+    id: undefined,
+    socketId: undefined,
+    friendId: undefined,
+    IsOnline: false,
+  });
   let socket;
   const initialize = async () => {
-    socket = init("http://localhost");
+    if (refresh) {
+      socket = init("http://localhost");
+      refresh = false;
+    }
     socket.emit("saveConnect", { userId: userId });
+
+    socket.on("getMsg", (message) => {
+      dispatch(ChatActions.AddMessage(message.data));
+    });
+    socket.on("IsMyFriendOffline", (data) => {
+      dispatch(ChatActions.IsMyFriendOffline(data));
+    });
+    socket.on("IsMyFriendOnline", (data) => {
+      console.log(data.id, ActiveContactState);
+      if (
+        data.id === ActiveContactState.friendId &&
+        ActiveContactState.friendId !== undefined
+      ) {
+        console.log("working", data.socketId);
+        setActiveContactState({
+          id: ActiveContactState.id,
+          socketId: data.socketId,
+          friendId: ActiveContactState.friendId,
+          IsOnline: ActiveContactState.IsOnline,
+        });
+      }
+      dispatch(ChatActions.IsMyFriendOnline(data));
+    });
+    socket.on("disconnect", () => {
+      socket.emit("deleteStatus", { userId: userId });
+    });
+    socket.on("notification", (message) => {
+      if (message.type === "Add") {
+        dispatch(ChatActions.AddRequest({ Request: { from: message } }));
+      }
+      if (message.type === "Remove") {
+        console.log("Removing");
+        dispatch(ChatActions.RemoveRequest({ id: message._id }));
+      }
+    });
+
+    socket.on("DenyRequested", (message) => {
+      return dispatch(ChatActions.DenyRequested(message));
+    });
+    socket.on("AddFriend", (data) => {
+      dispatch(ChatActions.AddFriend(data));
+    });
   };
 
-  console.log(state);
+  const newSocket = getSocket();
+
+  const getMessages = async () => {
+    await axios
+      .post(
+        "http://localhost/Connection/GetMsg",
+        JSON.stringify({ userId: userId }),
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then((res) => {
+        dispatch(ChatActions.SetMessages({ messages: res.data }));
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const getContactsHandler = async () => {
+    await axios
+      .post(
+        "http://localhost/Connection/getContacts",
+        { userId: userId },
+        {
+          Headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((res) => dispatch(ChatActions.setFriend(res.data)))
+      .catch((err) => console.log(err));
+  };
   useEffect(() => {
     initialize();
-    if (socket !== undefined) {
-      socket.on("disconnect", () => {
-        socket.emit("deleteStatus", { userId: userId });
-      });
-      socket.on("notification", (message) => {
-        if (message.type === "Add") {
-          dispatch(ChatActions.AddRequest({ Request: { from: message } }));
-        }
-        if (message.type === "Remove") {
-          console.log("Removing");
-          dispatch(ChatActions.RemoveRequest({ id: message._id }));
-        }
-      });
+    getContactsHandler();
 
-      socket.on("DenyRequested", (message) => {
-        return dispatch(ChatActions.DenyRequested(message));
-      });
-      socket.on("AddFriend", (data) => {
-        dispatch(ChatActions.AddFriend(data));
+    getMessages();
+  }, []);
+
+  const setActiveContact = async (data) => {
+    const object = await state.Friends.find(
+      (item) => item.conversationId === data.id
+    );
+    console.log({
+      id: data.id,
+      socketId: object.friend.id.socketId,
+      IsOnline: data.IsOnline,
+      friendId: data.friendId,
+    });
+    setActiveContactState({
+      id: data.id,
+      socketId: object.friend.id.socketId,
+      IsOnline: data.IsOnline,
+      friendId: data.friendId,
+    });
+  };
+
+  const sendMessageHandler = async (data) => {
+    dispatch(
+      ChatActions.AddMessage({
+        id: ActiveContactState.id,
+        userId: userId,
+        friendId: ActiveContactState.friendId,
+        message: data,
+      })
+    );
+    console.log(
+      newSocket !== undefined && ActiveContactState.IsOnline === true
+    );
+    if (newSocket !== undefined && ActiveContactState.IsOnline === true) {
+      console.log("sending");
+      newSocket.emit("sendMsg", {
+        data: {
+          id: ActiveContactState.id,
+          userId: userId,
+          friendId: ActiveContactState.friendId,
+          message: data,
+        },
+        socketId: ActiveContactState.socketId,
       });
     }
-  });
-
-  // Handlers
-
-  useEffect(() => {
-    const getContactsHandler = async () => {
-      await axios
-        .post(
-          "http://localhost/Connection/getContacts",
-          { userId: userId },
-          {
-            Headers: { "Content-Type": "application/json" },
-          }
-        )
-        .then((res) => dispatch(ChatActions.setFriend(res.data)))
-        .catch((err) => console.log(err));
-    };
-    getContactsHandler();
-  }, []);
-  console.log(state.Friends);
+    await axios
+      .post(
+        "http://localhost/Connection/SaveMessage",
+        JSON.stringify({
+          id: ActiveContactState.id,
+          from: userId,
+          to: ActiveContactState.friendId,
+          message: data,
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
   return (
     <MessageLayout>
       <ContactsContainer>
         {state.Friends[0] !== undefined &&
-          state.Friends[0].friend.Name !== undefined &&
+          state.Friends[0].friend.id.Name !== undefined &&
           state.Friends.map((item) => (
             <ContactItem
-              name={item.friend.Name}
-              image={item.friend.ProfilePic}
+              Active={
+                ActiveContactState.id === item.conversationId ? true : false
+              }
+              name={item.friend.id.Name}
+              image={item.friend.id.ProfilePic}
               id={item.conversationId}
               key={item.conversationId}
+              socketId={item.friend.id.socketId}
+              IsOnline={item.friend.id.IsOnline}
+              onClick={setActiveContact}
+              friendId={item.friend.id._id}
             />
           ))}
       </ContactsContainer>
+      {ActiveContactState.id !== undefined && (
+        <Chat>
+          <ChatContainer CurrentConversatsionId={ActiveContactState.id} />
+          <InputContainer getMsg={sendMessageHandler} />
+        </Chat>
+      )}
     </MessageLayout>
   );
 };

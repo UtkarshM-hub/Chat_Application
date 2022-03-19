@@ -31,8 +31,11 @@ const UserSchema=new Schema({
     "Contacts":[
         {
             friend:{
-                type:Object,
-                required:true
+                id:{
+                    type:Schema.Types.ObjectId,
+                    required:true,
+                    ref:'User'
+                }
             },
             conversationId:{
                 type:Schema.Types.ObjectId,
@@ -72,7 +75,16 @@ const UserSchema=new Schema({
                 required:true
             }
         }
-    ]
+    ],
+    IsOnline:{
+        type:Boolean,
+        required:false,
+        default:false
+    },
+    socketId:{
+        type:String,
+        required:false
+    }
 });
 
 UserSchema.methods.AddNotification=function(data){

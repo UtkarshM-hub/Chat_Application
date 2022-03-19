@@ -1,13 +1,16 @@
 let socket=undefined;
-let io;
+let io=require("socket.io-client").io;
 
 module.exports={
     init:(route)=>{
-        io=require("socket.io-client");
-        socket=io(route) ;
+        socket=io(route);
         return socket;
     },
     getSocket:()=>{
+        if(socket===undefined){
+            socket=io("http://localhost");
+            return socket;
+        }
         return socket;
-    }
+    },
 }

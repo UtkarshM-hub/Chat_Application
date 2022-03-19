@@ -1,5 +1,5 @@
 import { createSlice,configureStore } from '@reduxjs/toolkit';
-
+//{id:of conversation,messages:[]}
 const ChatSlice=createSlice({
     name:"ChatSlice",
     initialState:{
@@ -9,6 +9,7 @@ const ChatSlice=createSlice({
             notification:[],
             Requested:[]
         },
+        Messages:[]
     },
     reducers:{
         createMessage(state,actions){
@@ -71,6 +72,52 @@ const ChatSlice=createSlice({
         setFriend(state,actions){
             const data=actions.payload;
             state.Friends=data;
+            return;
+        },
+        IsMyFriendOnline(state,actions){
+            const {id,socketId}=actions.payload;
+            const IsFriend=state.Friends.findIndex((item)=>item.friend.id._id.toString()===id.toString());
+            if(IsFriend===-1){
+                return;
+            }
+            let updatedArray=state.Friends;
+            updatedArray[IsFriend].friend.id.IsOnline=true;
+            updatedArray[IsFriend].friend.id.socketId=socketId;
+            state.Friends=updatedArray;
+            return;
+        },
+        IsMyFriendOffline(state,actions){
+            const {id}=actions.payload;
+            console.log(id);
+            const IsFriend=state.Friends.findIndex((item)=>item.friend.id._id===id);
+            if(IsFriend===-1){
+                return;
+            }
+            let updatedArray=state.Friends;
+            updatedArray[IsFriend].friend.id.IsOnline=false;
+            state.Friends=updatedArray;
+            return;
+        },
+        AddMessage(state,actions){
+            const {id,message,userId,friendId}=actions.payload;
+            let updatedArray=state.Messages;
+            const doesExist=state.Messages.findIndex((item)=>item._id===id);
+            console.log(doesExist);
+            if(doesExist===-1){
+                let newObject={_id:id,messages:[{from:userId,to:friendId,message:message}]};
+                updatedArray=[...updatedArray,newObject];
+                state.Messages=updatedArray;
+                return;
+            }
+            if(doesExist!==-1){
+                updatedArray[doesExist].messages=[...updatedArray[doesExist].messages,{from:userId,to:friendId,message:message}];
+                state.Messages=updatedArray;
+                return;
+            }
+        },
+        SetMessages(state,actions){
+            const {messages}=actions.payload;
+            state.Messages=messages;
             return;
         }
     },

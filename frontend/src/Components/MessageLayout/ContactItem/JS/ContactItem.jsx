@@ -1,9 +1,28 @@
 import React from "react";
 import classes from "../CSS/ContactItem.module.css";
 
-const ContactItem = ({ image, name, id }) => {
+const ContactItem = ({
+  image,
+  name,
+  id,
+  onClick,
+  socketId,
+  IsOnline,
+  Active,
+  friendId,
+}) => {
   return (
-    <div className={classes.ContactItem}>
+    <div
+      className={`${classes.ContactItem} ${Active ? classes.Active : ""}`}
+      onClick={(e) =>
+        onClick({
+          id: id,
+          socketId: IsOnline ? socketId : undefined,
+          friendId: friendId,
+          IsOnline: IsOnline,
+        })
+      }
+    >
       <div className={classes.ContactItem_Both}>
         <div className={classes.ContactItem_ImageContainer}>
           <img src={image} alt="Profile" />

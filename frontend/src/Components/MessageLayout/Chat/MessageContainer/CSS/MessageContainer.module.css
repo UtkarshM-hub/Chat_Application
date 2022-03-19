@@ -1,0 +1,26 @@
+.MessageContainer {
+  overflow: hidden;
+  max-width: 35%;
+  min-width: 5%;
+  height: max-content;
+  font-size: 1em;
+  padding: 0.3em;
+  color: white;
+  word-wrap: break-word;
+  background-color: var(--MessageBox);
+  margin: 0.3em 0;
+}
+
+.MyMsg {
+  align-self: flex-end;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.OtherMsg {
+  align-self: flex-start;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}

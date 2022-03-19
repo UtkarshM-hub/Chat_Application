@@ -2,7 +2,7 @@
   max-height: 92vh;
   min-height: 92vh;
   height: 100%;
-  width: 25%;
+  width: 30%;
   border-right: 1px solid var(--StrokeColor);
   overflow-y: scroll;
   background-color: var(--SecondMain);
@@ -15,7 +15,6 @@
   justify-content: flex-start;
   height: 100%;
   width: 100%;
-  border-right: 1px solid var(--StrokeColor);
   background-color: var(--SecondMain);
 }
 
@@ -26,7 +25,7 @@
 
 .ContactsContainer::-webkit-scrollbar-track {
   border-radius: 10px;
-  background-color: var(--CardHover);
+  background-color: var(--SecondMain);
 }
 
 .ContactsContainer::-webkit-scrollbar-thumb {
@@ -35,6 +34,26 @@
 }
 
 .ContactsContainer::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  background-color: var(--mainColorHover);
+}
+
+.ContactsContainer::-moz-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+}
+
+.ContactsContainer::-moz-scrollbar-track {
+  border-radius: 10px;
+  background-color: var(--CardHover);
+}
+
+.ContactsContainer::-moz-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--mainColor);
+}
+
+.ContactsContainer::-moz-scrollbar-thumb:hover {
   border-radius: 10px;
   background-color: var(--mainColorHover);
 }

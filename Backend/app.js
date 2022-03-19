@@ -74,24 +74,35 @@ Mongoose.connect(MONGODB_URI,()=>{
     socket.on("saveConnect",async(data)=>{
       if(data.userId!==null || data.userId!==undefined){
       try{
-        const doesAlreadyExists=await Online.find({userId:data.userId});
-        // console.log(socket.id)
+        const doesAlreadyExists=await User.findById(data.userId);
         if(doesAlreadyExists[0]!==undefined){
           console.log(doesAlreadyExists);
-          const updated=await Online.findByIdAndUpdate(doesAlreadyExists[0]._id,{socketId:socket.id,IsOnline:true});
+          const updated=await User.findByIdAndUpdate(doesAlreadyExists._id,{socketId:socket.id,IsOnline:true});
           return;
         }
-        const newOnline=await new Online({userId:data.userId,socketId:socket.id,IsOnline:true});
-        return newOnline.save();
+        const newOnline=await User.findByIdAndUpdate(doesAlreadyExists._id,{socketId:socket.id,IsOnline:true});
+        socket.broadcast.emit("IsMyFriendOnline",{id:data.userId,socketId:socket.id});
+        return;
       }
       catch(err){
-        next(); // Temporary
+        console.log(err)
       }
       }
     });
     socket.on("disconnect",async()=>{
       console.log("event fired")
-      await Online.findOneAndUpdate({socketId:socket.id},{IsOnline:false});
+      const user=await User.findOne({"socketId":socket.id});
+      console.log(socket.id)
+      await User.findOneAndUpdate({"socketId":socket.id},{IsOnline:false});
+      if(user!==null){
+        socket.broadcast.emit("IsMyFriendOffline",{id:user._id});
+      }
+      return;
+    })
+
+    socket.on("sendMsg",(message)=>{
+      console.log(message)
+      socket.to(message.socketId).emit("getMsg",{data:message.data});
     })
   })
   server.listen(80);

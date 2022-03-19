@@ -88,3 +88,7 @@
   color: white;
   font-size: 0.7em;
 }
+
+.Active {
+  background-color: var(--CardHover);
+}

@@ -15,4 +15,10 @@ route.post("/AcceptRequest",ConnectionController.AcceptRequestHandler);
 
 route.post("/getContacts",ConnectionController.getContacts);
 
+route.post("/getMessages",ConnectionController.getMessages);
+
+route.post("/SaveMessage",ConnectionController.SaveMessages);
+
+route.post("/GetMsg",ConnectionController.getMessagesHandler);
+
 module.exports=route;

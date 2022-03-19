@@ -1,0 +1,41 @@
+.InputContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--StrokeColor);
+}
+
+.InputContainer_Inputs,
+.InputContainer_Inputs input {
+  height: 100%;
+  width: 100%;
+}
+
+.InputContainer_Inputs input {
+  padding: 0.5em 1em;
+  border: none;
+  background-color: transparent;
+  font-size: 1.01em;
+  color: white;
+  outline: none;
+  border-bottom: 0.5px solid var(--StrokeColor);
+}
+
+.InputContainer_Send {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--StrokeColor);
+  cursor: pointer;
+}
+
+.InputContainer_Send:hover > svg {
+  color: var(--mainColor) !important;
+}
+
+.InputContainer_Send svg {
+  padding: 1em 1.5em;
+  width: 1.5em;
+  color: white;
+}
