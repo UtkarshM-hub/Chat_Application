@@ -9,20 +9,25 @@ import axios from "axios";
 import Chat from "../Components/MessageLayout/Chat/Chat/JS/Chat";
 import InputContainer from "../Components/MessageLayout/Chat/InputContainer/JS/InputContainer";
 import ChatContainer from "../Components/MessageLayout/Chat/ChatContainer/JS/ChatContainer";
+import { useHistory } from "react-router-dom";
+import { config } from "@fortawesome/fontawesome-svg-core";
 
 let refresh = true;
 
 const Home = () => {
-  const state = useSelector((state) => state);
+  const history = useHistory();
+  const { Friends } = useSelector((state) => state);
   const dispatch = useDispatch();
   const IsNewBie = localStorage.getItem("newBie");
   const userId = localStorage.getItem("userId");
+  const [Contacts, setContacts] = useState([]);
   const [ActiveContactState, setActiveContactState] = useState({
     id: undefined,
     socketId: undefined,
     friendId: undefined,
     IsOnline: false,
   });
+
   let socket;
   const initialize = async () => {
     if (refresh) {
@@ -70,7 +75,12 @@ const Home = () => {
       return dispatch(ChatActions.DenyRequested(message));
     });
     socket.on("AddFriend", (data) => {
+      console.log(data);
       dispatch(ChatActions.AddFriend(data));
+      // setContacts((prev) => {
+      //   let updated = [...prev, data];
+      //   return updated;
+      // });
     });
   };
 
@@ -98,10 +108,24 @@ const Home = () => {
           Headers: { "Content-Type": "application/json" },
         }
       )
-      .then((res) => dispatch(ChatActions.setFriend(res.data)))
+      .then((res) => {
+        dispatch(ChatActions.setFriend(res.data));
+        return setContacts(res.data);
+      })
       .catch((err) => console.log(err));
   };
+
   useEffect(() => {
+    const setContactsHandler = () => {
+      setContacts(Friends);
+    };
+    setContactsHandler();
+  }, [Friends]);
+  useEffect(() => {
+    console.log(userId);
+    if (userId === undefined || userId === null) {
+      history.push("/signup");
+    }
     initialize();
     getContactsHandler();
 
@@ -109,7 +133,7 @@ const Home = () => {
   }, []);
 
   const setActiveContact = async (data) => {
-    const object = await state.Friends.find(
+    const object = await Contacts.find(
       (item) => item.conversationId === data.id
     );
     console.log({
@@ -166,12 +190,13 @@ const Home = () => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
+  console.log(Contacts);
   return (
     <MessageLayout>
       <ContactsContainer>
-        {state.Friends[0] !== undefined &&
-          state.Friends[0].friend.id.Name !== undefined &&
-          state.Friends.map((item) => (
+        {Contacts[0] !== undefined &&
+          Contacts[0].friend.id.Name !== undefined &&
+          Contacts.map((item) => (
             <ContactItem
               Active={
                 ActiveContactState.id === item.conversationId ? true : false
@@ -180,10 +205,10 @@ const Home = () => {
               image={item.friend.id.ProfilePic}
               id={item.conversationId}
               key={item.conversationId}
-              socketId={item.friend.id.socketId}
-              IsOnline={item.friend.id.IsOnline}
+              socketId={item.friend.socketId}
+              IsOnline={item.friend.IsOnline}
               onClick={setActiveContact}
-              friendId={item.friend.id._id}
+              friendId={item.friend.id.id}
             />
           ))}
       </ContactsContainer>

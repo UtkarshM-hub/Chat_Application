@@ -2,6 +2,7 @@ const Online=require("../Models/OnlineUsers");
 const Conversation=require("../Models/ConversationModel");
 const User=require("../Models/UserModal");
 const Socket = require("../Socket");
+const { getSocket } = require("../../frontend/src/socket");
 const IO=require("../Socket").getIO();
 const ObjectId=require("mongoose").Types.ObjectId;
 
@@ -78,7 +79,7 @@ exports.AcceptRequestHandler=async(req,res,next)=>{
                 id:MySelf._id,
                 Name:MySelf.Name,
                 ProfilePic:MySelf.ProfilePic,
-                SocketId:IO.socketId,
+                SocketId:MySelf.socketId,
                 IsOnline:true
             },conversationId:ConvoId}
             IO.to(Friend.socketId).emit("AddFriend",FriendData);

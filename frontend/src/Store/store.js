@@ -65,7 +65,8 @@ const ChatSlice=createSlice({
             console.log(data)
             const exists=state.Friends.find((item)=>item.friend.id===data.id);
             if(!exists){
-                state.Friends=[...state.Friends,data];
+                state.Friends=[...state.Friends,{friend:{id:data.friend},conversationId:data.conversationId}];
+                
             }
             return;
         },
@@ -76,7 +77,7 @@ const ChatSlice=createSlice({
         },
         IsMyFriendOnline(state,actions){
             const {id,socketId}=actions.payload;
-            const IsFriend=state.Friends.findIndex((item)=>item.friend.id._id.toString()===id.toString());
+            const IsFriend=state.Friends.findIndex((item)=>item.friend.id._id===id);
             if(IsFriend===-1){
                 return;
             }

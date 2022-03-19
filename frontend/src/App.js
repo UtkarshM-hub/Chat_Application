@@ -27,17 +27,17 @@ function App() {
     <>
     <Alert type={MessageData.type} message={MessageData.message} show={show}/>
     <Switch>
+      <Layout>
+        <Route path="/" exact>
+          <Home/>
+        </Route>
+      </Layout>
       <Route path="/signup" exact>
         <SignUp show={setShowHandler}/>
       </Route>
       <Route path="/login" exact>
         <Login show={setShowHandler}/>
       </Route>
-      <Layout>
-        <Route path="/" exact>
-          <Home/>
-        </Route>
-      </Layout>
     </Switch>
     </>
   );

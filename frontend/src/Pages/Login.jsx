@@ -17,10 +17,10 @@ const Login = ({ show }) => {
       .then(async (res) => {
         await show({ type: res.data.type, message: res.data.message });
         if (res.data.type === "Success") {
-          history.push("/");
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("userId", res.data.userId);
           localStorage.setItem("newBie", true);
+          history.push("/");
         }
       })
       .catch((err) => console.log(err));

@@ -11,6 +11,7 @@ const ContactItem = ({
   Active,
   friendId,
 }) => {
+  console.log(name);
   return (
     <div
       className={`${classes.ContactItem} ${Active ? classes.Active : ""}`}
