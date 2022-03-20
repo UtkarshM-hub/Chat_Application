@@ -100,6 +100,7 @@ const ChatSlice=createSlice({
             return;
         },
         AddMessage(state,actions){
+            console.log(actions.payload)
             const {id,message,userId,friendId}=actions.payload;
             let updatedArray=state.Messages;
             const doesExist=state.Messages.findIndex((item)=>item._id===id);

@@ -37,13 +37,17 @@ const Home = () => {
     socket.emit("saveConnect", { userId: userId });
 
     socket.on("getMsg", (message) => {
+      console.log(message);
       dispatch(ChatActions.AddMessage(message.data));
     });
     socket.on("IsMyFriendOffline", (data) => {
       dispatch(ChatActions.IsMyFriendOffline(data));
     });
     socket.on("IsMyFriendOnline", (data) => {
-      console.log(data.id, ActiveContactState);
+      console.log(
+        data.id === ActiveContactState.friendId &&
+          ActiveContactState.friendId !== undefined
+      );
       if (
         data.id === ActiveContactState.friendId &&
         ActiveContactState.friendId !== undefined
@@ -53,7 +57,7 @@ const Home = () => {
           id: ActiveContactState.id,
           socketId: data.socketId,
           friendId: ActiveContactState.friendId,
-          IsOnline: ActiveContactState.IsOnline,
+          IsOnline: true,
         });
       }
       dispatch(ChatActions.IsMyFriendOnline(data));
@@ -160,9 +164,10 @@ const Home = () => {
       })
     );
     console.log(
-      newSocket !== undefined && ActiveContactState.IsOnline === true
+      newSocket.connected === true,
+      ActiveContactState.IsOnline === true
     );
-    if (newSocket !== undefined && ActiveContactState.IsOnline === true) {
+    if (newSocket.connected === true && ActiveContactState.IsOnline === true) {
       console.log("sending");
       newSocket.emit("sendMsg", {
         data: {
@@ -205,10 +210,10 @@ const Home = () => {
               image={item.friend.id.ProfilePic}
               id={item.conversationId}
               key={item.conversationId}
-              socketId={item.friend.socketId}
-              IsOnline={item.friend.IsOnline}
+              socketId={item.friend.id.socketId}
+              IsOnline={item.friend.id.IsOnline}
               onClick={setActiveContact}
-              friendId={item.friend.id.id}
+              friendId={item.friend.id._id}
             />
           ))}
       </ContactsContainer>
