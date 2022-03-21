@@ -11,6 +11,7 @@ import InputContainer from "../Components/MessageLayout/Chat/InputContainer/JS/I
 import ChatContainer from "../Components/MessageLayout/Chat/ChatContainer/JS/ChatContainer";
 import { useHistory } from "react-router-dom";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import Sidebar from "../Components/Layout/SideBar/JS/Sidebar";
 
 let refresh = true;
 
@@ -198,6 +199,7 @@ const Home = () => {
   console.log(Contacts);
   return (
     <MessageLayout>
+      <Sidebar />
       <ContactsContainer>
         {Contacts[0] !== undefined &&
           Contacts[0].friend.id.Name !== undefined &&
