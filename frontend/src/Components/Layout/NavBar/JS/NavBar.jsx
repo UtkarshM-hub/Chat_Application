@@ -124,7 +124,9 @@ const NavBar = () => {
           Name: res.data.Name,
           ProfilePic: res.data.ProfilePic,
           _id: res.data._id,
+          Type: res.data.Type,
         });
+        localStorage.setItem("Type", res.data.Type);
       })
       .catch((err) => console.log(err));
   };

@@ -17,6 +17,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  border-left: 4px solid transparent;
+  width: 100%;
 }
 
 .Sidebar_IconContainer svg {
@@ -24,4 +26,18 @@
   height: 20px;
   font-size: 1em;
   color: var(--SecondaryText);
+}
+
+.active {
+  background: rgb(250, 250, 250);
+  background: linear-gradient(
+    90deg,
+    rgba(250, 250, 250, 0.10454604204963236) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  border-left: 4px solid var(--mainColor);
+}
+
+.active svg {
+  color: white;
 }

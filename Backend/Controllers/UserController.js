@@ -15,7 +15,7 @@ exports.SignUpHandler=async(req,res,next)=>{
     if(file!==undefined){
         filePath=file.path;
     }
-    const {UserName,Email,Password,Name,Description}=req.body;
+    const {UserName,Email,Password,Name,Description,Type}=req.body;
     try{
         const hashedPassword=await bcrypt.hash(Password,12);
         cloudinary.uploader.upload(filePath,async(err,result)=>{
@@ -36,7 +36,8 @@ exports.SignUpHandler=async(req,res,next)=>{
                 },
                 Requested:[],
                 IsOnline:false,
-                socketId:""
+                socketId:"",
+                Type:Type
             });
             newUser.save();
             res.status(200).send({message:"Successfully Signed in",type:"Success"});
@@ -115,7 +116,7 @@ exports.GetUserData=async(req,res,next)=>{
     try{
         const user=await User.findById(userId);
         console.log({_id:user._id,Name:user.Name,ProfilePic:user.ProfilePic});
-        res.send({_id:user._id,Name:user.Name,ProfilePic:user.ProfilePic});
+        res.send({_id:user._id,Name:user.Name,ProfilePic:user.ProfilePic,Type:user.Type});
     }catch(err){
         console.log(err);
     }

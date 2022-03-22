@@ -15,26 +15,49 @@ import {
   SellOutlined,
   Inventory2Outlined,
 } from "@mui/icons-material";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
     <div className={classes.Sidebar}>
       <div className={classes.Sidebar_Main}>
-        <div className={classes.Sidebar_IconContainer}>
+        <NavLink
+          exact
+          to="/"
+          activeClassName={classes.active}
+          className={classes.Sidebar_IconContainer}
+        >
           <HomeOutlined />
-        </div>
-        <div className={classes.Sidebar_IconContainer}>
+        </NavLink>
+        <NavLink
+          to="/inventory"
+          activeClassName={classes.active}
+          className={classes.Sidebar_IconContainer}
+        >
           <Inventory2Outlined />
-        </div>
-        <div className={classes.Sidebar_IconContainer}>
+        </NavLink>
+        <NavLink
+          to="/sells"
+          activeClassName={classes.active}
+          className={classes.Sidebar_IconContainer}
+        >
           <SellOutlined />
-        </div>
-        <div className={classes.Sidebar_IconContainer}>
+        </NavLink>
+        <NavLink
+          to="/chart"
+          activeClassName={classes.active}
+          className={classes.Sidebar_IconContainer}
+        >
           <BarChartOutlined />
-        </div>
-        <div className={classes.Sidebar_IconContainer}>
+        </NavLink>
+        <NavLink
+          exact
+          to="/settings"
+          className={`${classes.Sidebar_IconContainer}`}
+          // className={classes.Sidebar_IconContainer}
+        >
           <SettingsOutlined />
-        </div>
+        </NavLink>
       </div>
     </div>
   );

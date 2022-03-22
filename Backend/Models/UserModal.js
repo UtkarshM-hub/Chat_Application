@@ -84,6 +84,11 @@ const UserSchema=new Schema({
     socketId:{
         type:String,
         required:false
+    },
+    Type:{
+        type:String,
+        required:true,
+        default:"Regular"
     }
 });
 

@@ -10,16 +10,16 @@ import Chat from "../Components/MessageLayout/Chat/Chat/JS/Chat";
 import InputContainer from "../Components/MessageLayout/Chat/InputContainer/JS/InputContainer";
 import ChatContainer from "../Components/MessageLayout/Chat/ChatContainer/JS/ChatContainer";
 import { useHistory } from "react-router-dom";
-import { config } from "@fortawesome/fontawesome-svg-core";
 import Sidebar from "../Components/Layout/SideBar/JS/Sidebar";
 
 let refresh = true;
 
 const Home = () => {
   const history = useHistory();
+  const UserType = localStorage.getItem("Type");
   const { Friends } = useSelector((state) => state);
   const dispatch = useDispatch();
-  const IsNewBie = localStorage.getItem("newBie");
+  // const IsNewBie = localStorage.getItem("newBie");
   const userId = localStorage.getItem("userId");
   const [Contacts, setContacts] = useState([]);
   const [ActiveContactState, setActiveContactState] = useState({
@@ -45,22 +45,22 @@ const Home = () => {
       dispatch(ChatActions.IsMyFriendOffline(data));
     });
     socket.on("IsMyFriendOnline", (data) => {
-      console.log(
-        data.id === ActiveContactState.friendId &&
-          ActiveContactState.friendId !== undefined
-      );
       if (
         data.id === ActiveContactState.friendId &&
         ActiveContactState.friendId !== undefined
       ) {
         console.log("working", data.socketId);
-        setActiveContactState({
-          id: ActiveContactState.id,
-          socketId: data.socketId,
-          friendId: ActiveContactState.friendId,
-          IsOnline: true,
+        setActiveContactState((prev) => {
+          let statement = {
+            id: prev.id,
+            socketId: data.socketId,
+            friendId: prev.friendId,
+            IsOnline: true,
+          };
+          return statement;
         });
       }
+
       dispatch(ChatActions.IsMyFriendOnline(data));
     });
     socket.on("disconnect", () => {
@@ -199,7 +199,7 @@ const Home = () => {
   console.log(Contacts);
   return (
     <MessageLayout>
-      <Sidebar />
+      {UserType === "Business" && <Sidebar />}
       <ContactsContainer>
         {Contacts[0] !== undefined &&
           Contacts[0].friend.id.Name !== undefined &&

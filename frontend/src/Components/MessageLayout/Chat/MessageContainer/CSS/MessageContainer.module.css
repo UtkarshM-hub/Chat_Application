@@ -4,14 +4,14 @@
   min-width: 5%;
   height: max-content;
   font-size: 1em;
-  padding: 0.3em;
+  padding: 0.5em;
   color: white;
   word-wrap: break-word;
-  background-color: var(--MessageBox);
   margin: 0.3em 0;
 }
 
 .MyMsg {
+  background-color: var(--MessageBox);
   align-self: flex-end;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -19,8 +19,11 @@
 }
 
 .OtherMsg {
+  background-color: var(--SecondMain);
   align-self: flex-start;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
+  border: 1px solid var(--StrokeColor);
+  color: var(--SecondaryText);
 }

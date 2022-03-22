@@ -68,3 +68,59 @@
 .error {
   border-color: var(--mainRed) !important;
 }
+
+.SignUpform_radioContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+.SignUpform_radioContainer p {
+  color: var(--SecondaryText);
+}
+
+.SignUpform_SVGContainer {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  border: 2px solid var(--SecondaryText);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.5em;
+  padding: 0.5em;
+}
+
+.SignUpform_Label {
+  color: white !important;
+  justify-self: flex-start;
+}
+
+.SignUpform_SelectionContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5em 0;
+}
+
+.SignUpform_SVGContainer svg {
+  color: var(--SecondaryText);
+}
+
+.ActiveUser .SignUpform_SVGContainer {
+  border: 2px solid var(--mainColor);
+}
+
+.ActiveUser p {
+  color: white;
+}
+
+.ActiveUser .SignUpform_SVGContainer svg {
+  color: var(--mainColor);
+}

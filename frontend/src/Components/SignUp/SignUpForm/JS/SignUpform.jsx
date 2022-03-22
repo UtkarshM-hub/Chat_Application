@@ -5,12 +5,14 @@ import classes from "../CSS/SignUpForm.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { PersonOutline, StorefrontOutlined } from "@mui/icons-material";
 
 const emailRegx =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const SignUpForm = ({ SignIn, show }) => {
   // Declerations
+  const [UserType, setUserType] = useState("Regular");
   const [Next, setNext] = useState(false);
   const [Show, setShow] = useState(false);
   const [ShowSecond, setShowSecond] = useState(false);
@@ -98,6 +100,7 @@ const SignUpForm = ({ SignIn, show }) => {
       data.append("Password", PasswordVal);
       data.append("Name", NameVal);
       data.append("Description", DescriptionVal);
+      data.append("Type", UserType);
       data.append("picture", ProfilePicVal);
       console.log("Signing in");
       return SignIn(data);
@@ -267,10 +270,43 @@ const SignUpForm = ({ SignIn, show }) => {
                 value={DescriptionVal}
                 onChange={(e) => DescriptionChangeHandler(e.target.value)}
                 placeholder="Hi there!"
-                rows="5"
+                rows="1"
                 className={classes.SignUpform_InputElement}
                 type="text"
               />
+            </div>
+            <div
+              className={`${classes.SignUpform_Element} ${classes.UserTypeContainer}`}
+            >
+              <div className={classes.SignUpform_radioContainer}>
+                <p className={classes.SignUpform_Label}>
+                  Type<span className={classes.SignUpform_Impo}>*</span>
+                </p>
+              </div>
+              <div className={classes.SignUpform_SelectionContainer}>
+                <div
+                  className={`${classes.SignUpform_radioContainer} ${
+                    UserType === "Regular" ? classes.ActiveUser : ""
+                  }`}
+                  onClick={() => setUserType("Regular")}
+                >
+                  <div className={classes.SignUpform_SVGContainer}>
+                    <PersonOutline />
+                  </div>
+                  <p>Regular</p>
+                </div>
+                <div
+                  className={`${classes.SignUpform_radioContainer} ${
+                    UserType === "Business" ? classes.ActiveUser : ""
+                  }`}
+                  onClick={() => setUserType("Business")}
+                >
+                  <div className={classes.SignUpform_SVGContainer}>
+                    <StorefrontOutlined />
+                  </div>
+                  <p>Business</p>
+                </div>
+              </div>
             </div>
           </div>
         )}
