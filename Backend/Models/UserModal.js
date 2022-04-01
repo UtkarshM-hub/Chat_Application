@@ -89,7 +89,25 @@ const UserSchema=new Schema({
         type:String,
         required:true,
         default:"Regular"
-    }
+    },
+    Inventory:[
+        {
+            Name:{
+                type:String,
+                required:true
+            },
+            Type:{
+                type:String,
+                required:true
+            },
+            Image:{
+                type:String,
+                required:false,
+                default:"https://res.cloudinary.com/dcglxmssd/image/upload/v1648127476/Group_1_ot7swd.png"
+            },
+            Items:[]
+        }
+    ]
 });
 
 UserSchema.methods.AddNotification=function(data){

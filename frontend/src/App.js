@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Login from './Pages/Login';
 import Layout from './Components/Layout/Layout/JS/Layout';
 import Home from './Pages/Home';
+import Inventory from './Pages/Inventory';
 
 function App() { 
   // Declerations
@@ -36,6 +37,9 @@ function App() {
       <Layout>
         <Route path="/" exact>
           <Home/>
+        </Route>
+        <Route path="/inventory" exact>
+          <Inventory/>
         </Route>
       </Layout>
     </Switch>

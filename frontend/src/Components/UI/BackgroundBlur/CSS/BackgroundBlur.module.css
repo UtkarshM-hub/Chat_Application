@@ -1,0 +1,22 @@
+.BackgroundBlur {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.63);
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.BackgroundBlur_CancelBtn {
+  color: white;
+  position: absolute;
+  top: 3%;
+  right: 2%;
+  font-size: 2em;
+  cursor: pointer;
+}

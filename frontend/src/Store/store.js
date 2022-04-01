@@ -9,7 +9,9 @@ const ChatSlice=createSlice({
             notification:[],
             Requested:[]
         },
-        Messages:[]
+        Messages:[],
+        ActiveContact:{},
+        Inventory:[]
     },
     reducers:{
         createMessage(state,actions){
@@ -120,6 +122,28 @@ const ChatSlice=createSlice({
         SetMessages(state,actions){
             const {messages}=actions.payload;
             state.Messages=messages;
+            return;
+        },
+        setActiveContact(state,actions){
+            const contact=actions.payload;
+            state.ActiveContact=contact;
+            return;
+        },
+        setActiveSocket(state,actions){
+            const {socketId}=actions.payload;
+            let newCt=state.ActiveContact;
+            newCt.socketId=socketId;
+            state.ActiveContact=newCt;
+            return;
+        },
+        AddSection(state,actions){
+            const data=actions.payload;
+            state.Inventory=[...state.Inventory,data];
+            return;
+        },
+        setInventory(state,actions){
+            const Inventory=actions.payload;
+            state.Inventory=Inventory;
             return;
         }
     },

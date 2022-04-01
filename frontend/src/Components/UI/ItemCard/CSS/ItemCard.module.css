@@ -1,0 +1,11 @@
+.ItemCard {
+  background-color: var(--ItemCardBG);
+  border-radius: 10%;
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  position: relative;
+}

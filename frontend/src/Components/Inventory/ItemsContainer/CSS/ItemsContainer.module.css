@@ -1,0 +1,30 @@
+.ItemsContainer {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin: 1em 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 10em);
+  grid-gap: 1.5em;
+}
+
+.ItemsContainer::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+}
+
+.ItemsContainer::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: var(--SecondMain);
+}
+
+.ItemsContainer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--mainColor);
+}
+
+.ItemsContainer::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  background-color: var(--mainColorHover);
+}

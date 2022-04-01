@@ -29,6 +29,8 @@
 
 .AuthContainer_ImageContainer img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .AuthContainer_InnerForm {

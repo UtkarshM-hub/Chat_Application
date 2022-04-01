@@ -53,8 +53,8 @@ const Sidebar = () => {
         <NavLink
           exact
           to="/settings"
+          activeClassName={classes.active}
           className={`${classes.Sidebar_IconContainer}`}
-          // className={classes.Sidebar_IconContainer}
         >
           <SettingsOutlined />
         </NavLink>

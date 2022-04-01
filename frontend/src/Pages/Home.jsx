@@ -44,21 +44,20 @@ const Home = () => {
     socket.on("IsMyFriendOffline", (data) => {
       dispatch(ChatActions.IsMyFriendOffline(data));
     });
+
     socket.on("IsMyFriendOnline", (data) => {
+      console.log(data.id, ActiveContactState.friendId);
       if (
-        data.id === ActiveContactState.friendId &&
-        ActiveContactState.friendId !== undefined
+        ActiveContactState.friendId !== undefined &&
+        data.id === ActiveContactState.friendId
       ) {
-        console.log("working", data.socketId);
-        setActiveContactState((prev) => {
-          let statement = {
-            id: prev.id,
-            socketId: data.socketId,
-            friendId: prev.friendId,
-            IsOnline: true,
-          };
-          return statement;
+        setActiveContact({
+          id: ActiveContactState.id,
+          socketId: data.socketId,
+          friendId: ActiveContactState.id,
+          IsOnline: true,
         });
+        console.log("working", data.socketId);
       }
 
       dispatch(ChatActions.IsMyFriendOnline(data));
@@ -82,14 +81,13 @@ const Home = () => {
     socket.on("AddFriend", (data) => {
       console.log(data);
       dispatch(ChatActions.AddFriend(data));
-      // setContacts((prev) => {
-      //   let updated = [...prev, data];
-      //   return updated;
-      // });
     });
   };
 
   const newSocket = getSocket();
+  // useEffect(() => {
+  //   setActiveContact((prev) => prev);
+  // }, [ActiveContactState]);
 
   const getMessages = async () => {
     await axios
@@ -199,7 +197,7 @@ const Home = () => {
   console.log(Contacts);
   return (
     <MessageLayout>
-      {UserType === "Business" && <Sidebar />}
+      {/* {UserType === "Business" && <Sidebar />} */}
       <ContactsContainer>
         {Contacts[0] !== undefined &&
           Contacts[0].friend.id.Name !== undefined &&

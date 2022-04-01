@@ -1,0 +1,41 @@
+.SectionCard {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  overflow: hidden;
+}
+
+.SectionCard p {
+  text-align: center;
+}
+
+.SectionCard p,
+.SectionCard_MoreIcon {
+  color: white;
+}
+
+.SectionCard_MoreIcon {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  z-index: 99999999999;
+}
+
+.SectionCard_ImageContainer {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.SectionCard_ImageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

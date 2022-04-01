@@ -1,6 +1,12 @@
 .Sidebar {
   height: 100%;
+  min-height: 92vh;
   width: 5%;
+  position: relative;
+  border-right: 1px solid var(--StrokeColor);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .Sidebar_Main {
@@ -9,6 +15,7 @@
   align-items: center;
   flex-direction: column;
   height: 100%;
+  width: 100%;
 }
 
 .Sidebar_IconContainer {

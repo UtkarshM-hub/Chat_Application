@@ -16,6 +16,7 @@ const Online=require("./Models/OnlineUsers");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var ConnectionRouter = require('./routes/Connections');
+var InventoryRouter = require('./routes/Inventory');
 const socket = require('../frontend/src/socket');
 
 // declerations
@@ -49,6 +50,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/Connection', ConnectionRouter);
+app.use('/Inventory', InventoryRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

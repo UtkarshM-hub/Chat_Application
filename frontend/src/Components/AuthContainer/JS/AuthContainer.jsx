@@ -25,7 +25,10 @@ const AuthContainer = ({ children, type }) => {
         </p>
       </div>
       <div className={classes.AuthContainer_ImageContainer}>
-        <img src={sideImage} alt="sideimage" />
+        <img
+          src="https://res.cloudinary.com/dcglxmssd/image/upload/v1648387328/8323473b3e37df82514c281a506ecf31_bwfdpa.webp"
+          alt="sideimage"
+        />
       </div>
     </div>
   );
