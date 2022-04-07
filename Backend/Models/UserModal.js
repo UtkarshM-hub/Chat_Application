@@ -105,7 +105,27 @@ const UserSchema=new Schema({
                 required:false,
                 default:"https://res.cloudinary.com/dcglxmssd/image/upload/v1648127476/Group_1_ot7swd.png"
             },
-            Items:[]
+            Items:[
+                {
+                    Name:{
+                        type:String
+                    },
+                    Quantity:{
+                        type:String
+                    },
+                    Price:{
+                        type:String
+                    },
+                    Description:{
+                        type:String
+                    },
+                    Image:{
+                        type:String
+                    },
+                    type:Object
+
+                },
+            ]
         }
     ]
 });

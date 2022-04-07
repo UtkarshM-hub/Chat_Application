@@ -7,6 +7,7 @@ import Login from './Pages/Login';
 import Layout from './Components/Layout/Layout/JS/Layout';
 import Home from './Pages/Home';
 import Inventory from './Pages/Inventory';
+import Section from './Pages/Section';
 
 function App() { 
   // Declerations
@@ -40,6 +41,9 @@ function App() {
         </Route>
         <Route path="/inventory" exact>
           <Inventory/>
+        </Route>
+        <Route path="/inventory/:sectionId" exact>
+          <Section/>
         </Route>
       </Layout>
     </Switch>

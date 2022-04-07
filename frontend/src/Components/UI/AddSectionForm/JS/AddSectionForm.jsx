@@ -35,6 +35,7 @@ const AddSectionForm = ({ addInventory }) => {
               type="text"
               placeholder="My Food Section"
               className={classes.AddSectionForm_InputElements}
+              required
             />
           </div>
           <div className={classes.AddSectionForm_ElementContainer}>
@@ -46,6 +47,7 @@ const AddSectionForm = ({ addInventory }) => {
               type="text"
               placeholder="Food"
               className={classes.AddSectionForm_InputElements}
+              required
             />
           </div>
           <div className={classes.AddSectionForm_ElementContainer}>

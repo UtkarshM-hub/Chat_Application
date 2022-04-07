@@ -15,7 +15,9 @@
   --SecondMain: #1d1e26;
   --MessageBox: #9067ff;
   --AddCardBG: #2f313f;
-  --ItemCardBG: #455063;
+  --ItemCardBG: rgba(69, 80, 99, 0.4);
+  --EditNDelete: #2d2f3a;
+  --DesignMainColor: #b79cff;
 }
 
 * {

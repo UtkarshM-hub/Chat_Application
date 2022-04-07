@@ -1,0 +1,55 @@
+.EditSectionForm {
+  height: fit-content;
+  width: fit-content;
+  padding: 1em;
+  border-radius: 15px;
+  background-color: var(--AddCardBG);
+}
+
+.EditSectionForm_FormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  padding: 0.5em;
+}
+
+.EditSectionForm_FormContainer h3 {
+  color: white;
+  align-self: center;
+  margin: 0.5em 0;
+  font-size: 1.3em;
+}
+
+.EditSectionForm_ElementContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0.8em 0;
+}
+
+.EditSectionForm_ElementContainer p {
+  color: white;
+  margin: 0.3em 0;
+  font-size: 0.8em;
+}
+
+.EditSectionForm_Impo {
+  color: var(--mainTextColor);
+}
+
+.EditSectionForm_InputElements {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid var(--StrokeColor);
+  color: white;
+  background-color: transparent;
+  outline: none;
+  font-size: 1.01em;
+}
+
+.EditSectionForm_FormContainer button {
+  margin: 0.5em 0;
+}

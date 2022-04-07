@@ -1,0 +1,104 @@
+.OpenItem {
+  width: 50%;
+  height: 60%;
+  background-color: var(--AddCardBG);
+  border-radius: 15px;
+  padding: 1em;
+  position: relative;
+  overflow: hidden;
+}
+
+.OpenItem_MainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+}
+
+.OpenItem_Header,
+.OpenItem_ProductInfo {
+  z-index: 9;
+}
+
+.OpenItem_Header {
+  color: black;
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}
+
+.OpenItem_ProductInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.OpenItem_ImageSide,
+.OpenItem_InfoSide {
+  flex: 0.5;
+}
+
+.OpenItem_ImageSide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.OpenItem_ImageContainer {
+  width: 13rem;
+  height: 13rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: var(--AddCardBG);
+  box-shadow: -11px 7px 14px black;
+}
+
+.OpenItem_ImageContainer img {
+  object-fit: cover;
+}
+
+.OpenItem_SlantDesign {
+  position: absolute;
+  top: 0;
+  left: -65%;
+  transform: skewX(143deg);
+  height: 100%;
+  width: 100%;
+  background-color: var(--DesignMainColor);
+}
+
+.OpenItem_InfoSide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.OpenItem_ItemSingleInfo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 100%;
+  margin: 0.5em 0;
+}
+
+.OpenItem_ItemSingleInfo .OpenItem_Key {
+  font-weight: 550;
+  font-size: 1.1em;
+  color: white;
+  margin: 0 0.5em 0 0;
+}
+
+.OpenItem_Value {
+  color: #c4c4c4;
+}
+
+.OpenItem_Price {
+  color: var(--SuccessColor) !important;
+  font-weight: 550;
+}

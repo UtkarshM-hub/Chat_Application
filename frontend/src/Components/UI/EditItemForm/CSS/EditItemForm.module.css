@@ -1,0 +1,68 @@
+.EditItemForm {
+  background-color: var(--AddCardBG);
+  border-radius: 15px;
+  padding: 1em;
+  height: fit-content;
+  width: 60%;
+  position: relative;
+}
+.EditItemForm_MainContainer {
+  height: 100%;
+}
+
+.EditItemForm_MainContainer form {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.EditItemForm_Section {
+  width: 50%;
+  height: 100%;
+  padding: 0 0.5em;
+  display: flex;
+  flex-direction: column;
+}
+
+.EditItemForm_InputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 0.5em 0;
+  height: 100%;
+}
+
+.EditItemForm_InputContainer p {
+  color: white;
+  font-size: 0.8em;
+  margin: 0 0 0.5em 0;
+}
+
+.EditItemForm_InputContainer p span {
+  color: var(--mainTextColor);
+  font-size: 0.8em;
+}
+
+.EditItemForm_InputContainer input,
+.EditItemForm_InputContainer textarea {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid var(--StrokeColor);
+  color: white;
+  background-color: transparent;
+  outline: none;
+  font-size: 1.01em;
+}
+
+.EditItemForm_ImageContainer {
+  /* width: 100%; */
+  height: 100%;
+  overflow: hidden;
+}
+
+.EditItemForm_ImageContainer img {
+  object-fit: cover;
+  width: 100%;
+}

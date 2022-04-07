@@ -1,0 +1,29 @@
+.EditNDelete {
+  width: 80%;
+  height: fit-content;
+  padding: 0.5em;
+  border-radius: 15px;
+  background-color: var(--MainBG);
+  position: absolute;
+  z-index: 99999999;
+  border-radius: 15px;
+  color: white;
+}
+
+.EditNDelete_Options {
+  border-radius: 10px;
+  padding: 0.5em;
+}
+
+.EditNDelete_Options:hover {
+  background-color: var(--EditNDelete);
+}
+
+.EditNDelete_Options p {
+  text-align: start;
+  font-size: 0.9em;
+}
+
+.EditNDelete_DeleteOpt {
+  color: var(--mainRed) !important;
+}

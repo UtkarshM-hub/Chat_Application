@@ -1,0 +1,68 @@
+.AddItemForm {
+  background-color: var(--AddCardBG);
+  border-radius: 15px;
+  padding: 1em;
+  height: fit-content;
+  width: 60%;
+  position: relative;
+}
+.AddItemForm_MainContainer {
+  height: 100%;
+}
+
+.AddItemForm_MainContainer form {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+.AddItemForm_Section {
+  width: 50%;
+  height: 100%;
+  padding: 0 0.5em;
+  display: flex;
+  flex-direction: column;
+}
+
+.AddItemForm_InputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 0.5em 0;
+  height: 100%;
+}
+
+.AddItemForm_InputContainer p {
+  color: white;
+  font-size: 0.8em;
+  margin: 0 0 0.5em 0;
+}
+
+.AddItemForm_InputContainer p span {
+  color: var(--mainTextColor);
+  font-size: 0.8em;
+}
+
+.AddItemForm_InputContainer input,
+.AddItemForm_InputContainer textarea {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid var(--StrokeColor);
+  color: white;
+  background-color: transparent;
+  outline: none;
+  font-size: 1.01em;
+}
+
+.AddItemForm_ImageContainer {
+  /* width: 100%; */
+  height: 100%;
+  overflow: hidden;
+}
+
+.AddItemForm_ImageContainer img {
+  object-fit: cover;
+  width: 100%;
+}

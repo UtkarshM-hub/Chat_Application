@@ -8,6 +8,9 @@
   outline: none;
   padding: 0.4em;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .Button:hover {
   background-color: var(--mainColorHover);

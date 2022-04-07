@@ -145,6 +145,55 @@ const ChatSlice=createSlice({
             const Inventory=actions.payload;
             state.Inventory=Inventory;
             return;
+        },
+        RemoveSection(state,actions){
+            const {id}=actions.payload;
+            state.Inventory=state.Inventory.filter((item)=>item._id!==id);
+            return;
+        },
+        UpdateSection(state,actions){
+            const {_id,Name,Type,Image}=actions.payload;
+            let updateInventory=state.Inventory;
+            const index=updateInventory.findIndex((item)=>item._id===_id);
+            updateInventory[index].Name=Name;
+            updateInventory[index].Type=Type;
+            updateInventory[index].Image=Image;
+            state.Inventory=updateInventory;
+            return;
+        },
+        AddItemToSection(state,actions){
+            const {sectionId,data}=actions.payload;
+            const sectionIndex=state.Inventory.findIndex((item)=>item._id===sectionId);
+            let updatedInventory=state.Inventory;
+            updatedInventory[sectionIndex].Items=[...updatedInventory[sectionIndex].Items,data];
+            state.Inventory=updatedInventory;
+            return;
+        },
+        RemoveItemFromSection(state,actions){
+            const {SectionId,_id}=actions.payload;
+            console.log(SectionId,_id)
+            let updatedInventory=state.Inventory;
+            try{
+                const sectionIndex=updatedInventory.findIndex((item)=>item._id===SectionId);
+                state.Inventory[sectionIndex].Items=updatedInventory[sectionIndex].Items.filter((item)=>item._id!==_id);
+            }
+            catch(err){
+                return;
+            }
+            return;
+            
+        },
+        UpdateItemFromSection(state,actions){
+            const {data,SectionId,_id}=actions.payload;
+            let updatedInventory=state.Inventory;
+            console.log(SectionId);
+            const sectionIndex=updatedInventory.findIndex((item)=>item._id===SectionId);
+            console.log(sectionIndex);
+            const ItemIndex=updatedInventory[sectionIndex].Items.findIndex((item=>item._id===_id));
+            console.log(ItemIndex);
+            updatedInventory[sectionIndex].Items[ItemIndex]=data;
+            state.Inventory=updatedInventory;
+            return;
         }
     },
     

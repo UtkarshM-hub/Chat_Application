@@ -10,11 +10,14 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { ChatActions } from "../Store/store";
 import SectionCard from "../Components/UI/SectionCard/JS/SectionCard";
+import EditSectionForm from "../Components/UI/EditSectionForm/JS/EditSectionForm";
 
 const Inventory = () => {
   const dispatch = useDispatch();
   const { Inventory } = useSelector((state) => state);
   const [ShowAddSectionForm, setShowAddSectionForm] = useState(false);
+  const [ToggelEditSection, setToggelEditSection] = useState(false);
+  const [SectionId, setSectionId] = useState();
   const userId = localStorage.getItem("userId");
   console.log(Inventory);
   const AddInventoryHandler = async (data) => {
@@ -28,6 +31,7 @@ const Inventory = () => {
         }
         if (res.status === 200) {
           dispatch(ChatActions.AddSection(res.data));
+          setShowAddSectionForm(false);
         }
       })
       .catch((err) => console.log(err));
@@ -58,7 +62,14 @@ const Inventory = () => {
           <AddSectionForm addInventory={AddInventoryHandler} />
         </BackgroundBlur>
       )}
-
+      {ToggelEditSection && (
+        <BackgroundBlur onClick={setToggelEditSection}>
+          <EditSectionForm
+            sectionId={SectionId}
+            onClick={setToggelEditSection}
+          />
+        </BackgroundBlur>
+      )}
       <h1 style={{ color: "white", margin: "0 0 1em 0" }}>INVENTORY</h1>
       <ItemsContainer>
         <ItemCard height="10em" width="10em" onclick={setShowAddSectionForm}>
@@ -70,15 +81,18 @@ const Inventory = () => {
         {Inventory[0] !== undefined &&
           Inventory.map((item) => (
             <ItemCard
+              key={item._id}
               height="10em"
               width="10em"
-              onclick={() => console.log("Running from inventory")}
+              onclick={() => 0}
             >
               <InventoryCard>
                 <SectionCard
                   id={item._id}
                   image={item.Image}
                   name={item.Name}
+                  ToggelEditSection={setToggelEditSection}
+                  setSectionId={setSectionId}
                 />
               </InventoryCard>
             </ItemCard>

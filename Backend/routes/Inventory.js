@@ -18,4 +18,16 @@ Router.post("/AddSection",upload.single("Image"),inventoryController.AddSectionH
 
 Router.post("/getInventory",inventoryController.GetInventory);
 
+Router.post("/DeleteSection",inventoryController.DeleteSectionHandler);
+
+Router.post("/GetSectionData",inventoryController.getSectionDataHandler);
+
+Router.post("/EditSectionData",upload.single("Image"),inventoryController.EditSectionHandler);
+
+Router.post("/AddItemToSection",upload.single("Image"),inventoryController.AddItemToSectionHandler);
+
+Router.post("/EditItemFromSection",upload.single("Image"),inventoryController.EditItemFromSectionHandler);
+
+Router.post("/DeleteItem",inventoryController.DeleteItemHandler);
+
 module.exports=Router;
