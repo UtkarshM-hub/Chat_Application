@@ -1,0 +1,67 @@
+.ForwardMessage {
+  width: 30%;
+  background-color: var(--BgCard);
+  height: 90%;
+}
+
+.ForwardMessage_Header {
+  padding: 0.5em;
+  border-bottom: 1px solid var(--StrokeColor);
+  background: var(--DesignMainColor);
+}
+
+.ForwardMessage_Header h3 {
+  color: white;
+  padding: 0.5em 0;
+}
+
+.ForwardMessage_Contacts {
+  margin: 0.2em 0;
+  max-height: 75%;
+  overflow-y: scroll;
+}
+
+.ForwardMessage_ContactsContainer {
+  padding: 0 0.5em;
+}
+
+.ForwardMessage_Input {
+  color: white;
+  font-size: 1.1em;
+  outline: none;
+  border: none;
+  width: 100%;
+  padding: 0.5em;
+  background: transparent;
+}
+
+.ForwardMessage_Contacts::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+}
+
+.ForwardMessage_Contacts::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: var(--SecondMain);
+}
+
+.ForwardMessage_Contacts::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--mainColor);
+}
+
+.ForwardMessage_Contacts::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  background-color: var(--mainColorHover);
+}
+
+.ForwardMessage_Search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ForwardMessage_SearchIcon {
+  margin: 0.5em;
+  color: var(--StrokeColor);
+}

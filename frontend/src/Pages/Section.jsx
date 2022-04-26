@@ -69,7 +69,7 @@ const Section = () => {
               Quantity={OpenedItemInfo.Quantity}
               Price={OpenedItemInfo.Price}
               Description={OpenedItemInfo.Description}
-              Image="http://res.cloudinary.com/dcglxmssd/image/upload/v1649258320/cohxj6ltrwvnnvtldkuf.png"
+              Image={OpenedItemInfo.Image}
               Type={SectionData.Type}
             />
           </BackgroundBlur>

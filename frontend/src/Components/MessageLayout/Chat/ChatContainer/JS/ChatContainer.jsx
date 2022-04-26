@@ -3,7 +3,11 @@ import classes from "../CSS/ChatContainer.module.css";
 import { useSelector } from "react-redux";
 import MessageContainer from "../../MessageContainer/JS/MessageContainer";
 
-const ChatContainer = ({ CurrentConversatsionId }) => {
+const ChatContainer = ({
+  CurrentConversatsionId,
+  showForward,
+  setForwardMessage,
+}) => {
   const [Message, setMessage] = useState({});
   const state = useSelector((state) => state);
   useEffect(() => {
@@ -29,6 +33,8 @@ const ChatContainer = ({ CurrentConversatsionId }) => {
               style={{ color: "white" }}
               from={item.from}
               message={item.message}
+              showForward={showForward}
+              setForwardMessage={setForwardMessage}
             />
           ))}
       </div>

@@ -11,6 +11,8 @@ import InputContainer from "../Components/MessageLayout/Chat/InputContainer/JS/I
 import ChatContainer from "../Components/MessageLayout/Chat/ChatContainer/JS/ChatContainer";
 import { useHistory } from "react-router-dom";
 import Sidebar from "../Components/Layout/SideBar/JS/Sidebar";
+import BackgroundBlur from "../Components/UI/BackgroundBlur/JS/BackgroundBlur";
+import { ForwardMessage } from "../Components/UI/ForwardMessage/JS/ForwardMessage";
 
 let refresh = true;
 
@@ -28,6 +30,8 @@ const Home = () => {
     friendId: undefined,
     IsOnline: false,
   });
+  const [ShowForwardContainer, setShowForwardContainer] = useState(false);
+  const [ForwardMessageString, setForwardMessageString] = useState("");
 
   let socket;
   const initialize = async () => {
@@ -83,7 +87,7 @@ const Home = () => {
       dispatch(ChatActions.AddFriend(data));
     });
   };
-
+  console.log(ForwardMessage);
   const newSocket = getSocket();
   // useEffect(() => {
   //   setActiveContact((prev) => prev);
@@ -195,9 +199,20 @@ const Home = () => {
       .catch((err) => console.log(err));
   };
   console.log(Contacts);
+
+  const showForwardHandler = (data) => {
+    console.log(data);
+    setShowForwardContainer(true);
+  };
+
   return (
     <MessageLayout>
       {/* {UserType === "Business" && <Sidebar />} */}
+      {ShowForwardContainer && (
+        <BackgroundBlur onClick={setShowForwardContainer}>
+          <ForwardMessage />
+        </BackgroundBlur>
+      )}
       <ContactsContainer>
         {Contacts[0] !== undefined &&
           Contacts[0].friend.id.Name !== undefined &&
@@ -219,7 +234,11 @@ const Home = () => {
       </ContactsContainer>
       {ActiveContactState.id !== undefined && (
         <Chat>
-          <ChatContainer CurrentConversatsionId={ActiveContactState.id} />
+          <ChatContainer
+            showForward={showForwardHandler}
+            CurrentConversatsionId={ActiveContactState.id}
+            setForwardMessage={setForwardMessageString}
+          />
           <InputContainer getMsg={sendMessageHandler} />
         </Chat>
       )}

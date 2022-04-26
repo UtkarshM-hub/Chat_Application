@@ -1,29 +1,62 @@
 .MessageContainer {
-  overflow: hidden;
-  max-width: 35%;
-  min-width: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   height: max-content;
+  /* max-width: 50%; */
+  min-width: 5%;
+  margin: 0.3em 0;
+}
+.Under {
+  overflow: hidden;
+
   font-size: 1em;
   padding: 0.5em;
   color: white;
   word-wrap: break-word;
-  margin: 0.3em 0;
+  position: relative;
 }
 
 .MyMsg {
+  align-self: flex-start;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+}
+
+.OtherMsg {
+  align-self: flex-start;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+}
+
+.MyMsgContainer {
   background-color: var(--MessageBox);
-  align-self: flex-end;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
 
-.OtherMsg {
+.OtherMsgContainer {
   background-color: var(--SecondMain);
-  align-self: flex-start;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
   border: 1px solid var(--StrokeColor);
   color: var(--SecondaryText);
+}
+
+.MessageContainer_MoreIcon {
+  cursor: pointer;
+  transform: rotateY(180deg);
+  margin: 0 0.3em;
+  color: transparent;
+}
+
+.MessageContainer:hover .MessageContainer_MoreIcon {
+  color: white;
 }

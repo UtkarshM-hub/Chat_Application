@@ -12,10 +12,7 @@ const OpenItem = ({ _id, Name, Quantity, Price, Description, Image, Type }) => {
         <div className={classes.OpenItem_ProductInfo}>
           <div className={classes.OpenItem_ImageSide}>
             <div className={classes.OpenItem_ImageContainer}>
-              <img
-                src="http://res.cloudinary.com/dcglxmssd/image/upload/v1649258320/cohxj6ltrwvnnvtldkuf.png"
-                alt="Product"
-              />
+              <img src={Image} alt="Product" />
             </div>
           </div>
           <div className={classes.OpenItem_InfoSide}>
