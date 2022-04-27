@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "../CSS/InputContainer.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SendIcon from "@mui/icons-material/Send";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { useRef } from "react";
 
@@ -27,7 +27,7 @@ const InputContainer = ({ getMsg }) => {
         />
       </div>
       <div className={classes.InputContainer_Send} onClick={() => sendMsg()}>
-        <FontAwesomeIcon icon={faPaperPlane} />
+        <SendIcon className={classes.InputContainer_SendIcon} />
       </div>
     </div>
   );

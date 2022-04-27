@@ -14,6 +14,7 @@
   max-height: 45vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  z-index: 9;
 }
 
 .SearchBox::-webkit-scrollbar {

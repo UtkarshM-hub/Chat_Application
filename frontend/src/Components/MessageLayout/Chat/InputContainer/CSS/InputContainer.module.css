@@ -28,14 +28,14 @@
   justify-content: center;
   border: 1px solid var(--StrokeColor);
   cursor: pointer;
+  padding: 1em 1.5em;
 }
 
 .InputContainer_Send:hover > svg {
   color: var(--mainColor) !important;
 }
 
-.InputContainer_Send svg {
-  padding: 1em 1.5em;
+.InputContainer_SendIcon {
   width: 1.5em;
   color: white;
 }

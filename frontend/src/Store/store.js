@@ -194,6 +194,26 @@ const ChatSlice=createSlice({
             updatedInventory[sectionIndex].Items[ItemIndex]=data;
             state.Inventory=updatedInventory;
             return;
+        },
+        ForwardMessage(state,actions){
+            const userId=localStorage.getItem("userId");
+            const {message,data}=actions.payload;
+            let updatedState=state.Messages;
+            console.log(data.length)
+            for(let i=0;i<data.length;i++){
+                console.log("This is happening")
+                let doesExist=updatedState.findIndex((item)=>item._id===data[0].convoId);
+                if(doesExist===-1){
+                    let newObject={_id:data[0].convoId,messages:[{from:userId,to:data[0].id,message:message}]};
+                    updatedState=[...updatedState,newObject];
+                    state.Messages=updatedState;
+                }
+                if(doesExist!==-1){
+                    updatedState[doesExist].messages=[...updatedState[doesExist].messages,{from:userId,to:data[0].id,message:message}];
+                    state.Messages=updatedState;
+                }
+            }
+            return;
         }
     },
     

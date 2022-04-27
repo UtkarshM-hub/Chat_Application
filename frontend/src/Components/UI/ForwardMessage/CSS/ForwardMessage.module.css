@@ -2,6 +2,7 @@
   width: 30%;
   background-color: var(--BgCard);
   height: 90%;
+  position: relative;
 }
 
 .ForwardMessage_Header {
@@ -64,4 +65,47 @@
 .ForwardMessage_SearchIcon {
   margin: 0.5em;
   color: var(--StrokeColor);
+}
+
+.ForwardMessage_SendContainer {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  padding: 0.5em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: var(--ItemCardBG);
+  width: 100%;
+  min-height: 8%;
+}
+
+.ForwardMessage_ForwardIconContainer {
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: absolute;
+  top: -50%;
+  right: 5%;
+  background: var(--mainColor);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.ForwardMessage_ForwardIconContainer:hover {
+  background: var(--mainColorHover);
+}
+
+.ForwardMessage_SendIcon {
+  margin: 0.5em;
+}
+
+.ForwardMessage_ContactsList {
+  width: 80%;
+  display: flex;
+  overflow: hidden;
 }

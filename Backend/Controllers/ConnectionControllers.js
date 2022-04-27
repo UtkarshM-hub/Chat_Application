@@ -160,3 +160,33 @@ exports.getMessagesHandler=async(req,res,next)=>{
     }
     // res.send("success");
 }
+
+exports.ForwardMessageHandler=async(req,res,next)=>{
+    // {
+    //     data: {
+    //       id: ActiveContactState.id,
+    //       userId: userId,
+    //       friendId: ActiveContactState.friendId,
+    //       message: data,
+    //     },
+    //     socketId: newSocketId[0].friend.id.socketId,
+    //   }
+    const {data,message,userId}=req.body;
+    try{
+        data.map(async(item)=>{
+            await Conversation.findByIdAndUpdate(item.convoId,{$push:{"messages":{from:userId,to:item._id,message:message}}});
+            if(item.IsOnline===true){
+                IO.to(item.socketId).emit("getMsg",{data:{
+                    id:item.convoId,
+                    userId:userId,
+                    friendId:item._id,
+                    message:message
+                }})
+            }
+        })
+        res.send("success");
+    }
+    catch(err){
+        console.log(err);
+    }
+}

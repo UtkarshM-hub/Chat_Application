@@ -21,4 +21,6 @@ route.post("/SaveMessage",ConnectionController.SaveMessages);
 
 route.post("/GetMsg",ConnectionController.getMessagesHandler);
 
+route.post("/ForwardMessage",ConnectionController.ForwardMessageHandler);
+
 module.exports=route;

@@ -3,12 +3,17 @@ import { useSelector } from "react-redux";
 import ForwardContact from "../../ForwardContact/JS/ForwardContact";
 import classes from "../CSS/ForwardMessage.module.css";
 import SearchIcon from "@mui/icons-material/Search";
+import SendIcon from "@mui/icons-material/Send";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { ChatActions } from "../../../../Store/store";
 
-export const ForwardMessage = () => {
+export const ForwardMessage = ({ message, CloseHandler }) => {
+  const userId = localStorage.getItem("userId");
   const state = useSelector((state) => state.Friends);
   const [Selected, setSelected] = useState([]);
   const [SearchString, setSearchString] = useState("");
-  const [FilteredContacts, setFilteredContacts] = useState([]);
+  const dispatch = useDispatch();
 
   const addSelected = (data) => {
     setSelected((prev) => {
@@ -26,7 +31,40 @@ export const ForwardMessage = () => {
     });
   };
 
-  console.log(Selected);
+  const regex = new RegExp(`${SearchString}`, "i");
+  if (SearchString !== "") {
+    let filteredList = state.filter(
+      (item) => item.friend.id.Name.search(regex) !== -1
+    );
+  }
+
+  // const ForwardMessageHandler=async()=>{
+
+  // }
+  const ForwardMessageHandler = async () => {
+    if (Selected[0] !== undefined) {
+      const data = {
+        userId: userId,
+        data: Selected,
+        message: message,
+      };
+      await axios
+        .post(
+          "http://localhost/Connection/ForwardMessage",
+          JSON.stringify(data),
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        )
+        .then((res) => console.log(res));
+
+      dispatch(
+        ChatActions.ForwardMessage({ message: message, data: Selected })
+      );
+      CloseHandler((prev) => !prev);
+    }
+  };
+
   return (
     <div className={classes.ForwardMessage}>
       <div className={classes.ForwardMessage_Header}>
@@ -51,7 +89,7 @@ export const ForwardMessage = () => {
                 key={item._id}
                 Name={item.friend.id.Name}
                 Image={item.friend.id.ProfilePic}
-                id={item._id}
+                id={item.friend.id._id}
                 convoId={item.conversationId}
                 IsOnline={item.friend.id.IsOnline}
                 socketId={item.friend.id.socketId}
@@ -59,6 +97,36 @@ export const ForwardMessage = () => {
                 removeSelected={removeSelected}
               />
             ))}
+          {SearchString !== "" &&
+            state
+              .filter((item) => item.friend.id.Name.search(regex) !== -1)
+              .map((item) => (
+                <ForwardContact
+                  key={item._id}
+                  Name={item.friend.id.Name}
+                  Image={item.friend.id.ProfilePic}
+                  id={item._id}
+                  convoId={item.conversationId}
+                  IsOnline={item.friend.id.IsOnline}
+                  socketId={item.friend.id.socketId}
+                  addSelected={addSelected}
+                  removeSelected={removeSelected}
+                />
+              ))}
+        </div>
+      </div>
+      <div className={classes.ForwardMessage_SendContainer}>
+        <div className={classes.ForwardMessage_ContactsList}>
+          {Selected[0] !== undefined &&
+            Selected.map((item) => (
+              <p key={item._id}>{item.Name.split(" ")[0]} ,</p>
+            ))}
+        </div>
+        <div
+          className={classes.ForwardMessage_ForwardIconContainer}
+          onClick={ForwardMessageHandler}
+        >
+          <SendIcon className={classes.ForwardMessage_SendIcon} />
         </div>
       </div>
     </div>

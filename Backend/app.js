@@ -82,9 +82,12 @@ Mongoose.connect(MONGODB_URI,()=>{
           const updated=await User.findByIdAndUpdate(doesAlreadyExists._id,{socketId:socket.id,IsOnline:true});
           return;
         }
-        const newOnline=await User.findByIdAndUpdate(doesAlreadyExists._id,{socketId:socket.id,IsOnline:true});
-        socket.broadcast.emit("IsMyFriendOnline",{id:data.userId,socketId:socket.id});
-        return;
+        let timeInterval=setTimeout(async()=>{
+          const newOnline=await User.findByIdAndUpdate(doesAlreadyExists._id,{socketId:socket.id,IsOnline:true});
+          socket.broadcast.emit("IsMyFriendOnline",{id:data.userId,socketId:socket.id});
+          clearTimeout(timeInterval);
+          return;
+        })
       }
       catch(err){
         console.log(err)

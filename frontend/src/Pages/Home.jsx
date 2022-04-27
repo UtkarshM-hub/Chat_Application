@@ -18,6 +18,7 @@ let refresh = true;
 
 const Home = () => {
   const history = useHistory();
+  const state = useSelector((state) => state.Friends);
   const UserType = localStorage.getItem("Type");
   const { Friends } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -143,12 +144,7 @@ const Home = () => {
     const object = await Contacts.find(
       (item) => item.conversationId === data.id
     );
-    console.log({
-      id: data.id,
-      socketId: object.friend.id.socketId,
-      IsOnline: data.IsOnline,
-      friendId: data.friendId,
-    });
+    console.log(data);
     setActiveContactState({
       id: data.id,
       socketId: object.friend.id.socketId,
@@ -172,14 +168,17 @@ const Home = () => {
     );
     if (newSocket.connected === true && ActiveContactState.IsOnline === true) {
       console.log("sending");
-      newSocket.emit("sendMsg", {
+      const newSocketId = await state.filter(
+        (item) => item.conversationId === ActiveContactState.id
+      );
+      await newSocket.emit("sendMsg", {
         data: {
           id: ActiveContactState.id,
           userId: userId,
           friendId: ActiveContactState.friendId,
           message: data,
         },
-        socketId: ActiveContactState.socketId,
+        socketId: newSocketId[0].friend.id.socketId,
       });
     }
     await axios
@@ -205,12 +204,45 @@ const Home = () => {
     setShowForwardContainer(true);
   };
 
+  // const ForwardMessageHandler = async (Selected) => {
+  //   if (Selected[0] !== undefined) {
+  //     const data = {
+  //       userId: userId,
+  //       data: Selected,
+  //       message: ForwardMessageString,
+  //     };
+  //     await axios
+  //       .post(
+  //         "http://localhost/Connection/ForwardMessage",
+  //         JSON.stringify(data),
+  //         {
+  //           headers: { "Content-Type": "application/json" },
+  //         }
+  //       )
+  //       .then((res) => console.log(res));
+  //     for (let i = 0; i <= Selected.length(); i++) {
+  //       dispatch(
+  //         ChatActions.AddMessage({
+  //           id: Selected[i].conversationId,
+  //           friendId: ,
+  //           userId: userId,
+  //           message: ForwardMessageString,
+  //         })
+  //       );
+  //     }
+  //     setShowForwardContainer((prev) => !prev);
+  //   }
+  // };
+
   return (
     <MessageLayout>
       {/* {UserType === "Business" && <Sidebar />} */}
       {ShowForwardContainer && (
         <BackgroundBlur onClick={setShowForwardContainer}>
-          <ForwardMessage />
+          <ForwardMessage
+            CloseHandler={setShowForwardContainer}
+            message={ForwardMessageString}
+          />
         </BackgroundBlur>
       )}
       <ContactsContainer>
