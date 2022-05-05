@@ -22,7 +22,7 @@ var Payment = require('./routes/Payment');
 const socket = require('../frontend/src/socket');
 
 // declerations
-const MONGODB_URI='mongodb+srv://UtMandape:1BGR3QO2fcFmFHXw@cluster0.akibk.mongodb.net/Chat?retryWrites=true&w=majority';
+const MONGODB_URI='YOUR_MONGODB_URI';
 
 
 // view engine setup
