@@ -11,7 +11,9 @@ const ChatSlice=createSlice({
         },
         Messages:[],
         ActiveContact:{},
-        Inventory:[]
+        Inventory:[],
+        cart:[],
+        TotalAmount:0
     },
     reducers:{
         createMessage(state,actions){
@@ -165,7 +167,7 @@ const ChatSlice=createSlice({
             const {sectionId,data}=actions.payload;
             const sectionIndex=state.Inventory.findIndex((item)=>item._id===sectionId);
             let updatedInventory=state.Inventory;
-            updatedInventory[sectionIndex].Items=[...updatedInventory[sectionIndex].Items,data];
+            updatedInventory[sectionIndex].Items=[...updatedInventory[sectionIndex].Items,{ProductId:data}];
             state.Inventory=updatedInventory;
             return;
         },
@@ -175,7 +177,7 @@ const ChatSlice=createSlice({
             let updatedInventory=state.Inventory;
             try{
                 const sectionIndex=updatedInventory.findIndex((item)=>item._id===SectionId);
-                state.Inventory[sectionIndex].Items=updatedInventory[sectionIndex].Items.filter((item)=>item._id!==_id);
+                state.Inventory[sectionIndex].Items=updatedInventory[sectionIndex].Items.filter((item)=>item.ProductId._id!==_id);
             }
             catch(err){
                 return;
@@ -189,9 +191,9 @@ const ChatSlice=createSlice({
             console.log(SectionId);
             const sectionIndex=updatedInventory.findIndex((item)=>item._id===SectionId);
             console.log(sectionIndex);
-            const ItemIndex=updatedInventory[sectionIndex].Items.findIndex((item=>item._id===_id));
+            const ItemIndex=updatedInventory[sectionIndex].Items.findIndex((item=>item.ProductId._id===_id));
             console.log(ItemIndex);
-            updatedInventory[sectionIndex].Items[ItemIndex]=data;
+            updatedInventory[sectionIndex].Items[ItemIndex].ProductId=data;
             state.Inventory=updatedInventory;
             return;
         },
@@ -214,6 +216,56 @@ const ChatSlice=createSlice({
                 }
             }
             return;
+        },
+        setCart(state,actions){
+            const data=actions.payload;
+            state.cart=data;
+            state.TotalAmount=data.reduce((prev,curr)=>{
+                console.log(prev,curr)
+                return prev+(+curr.ProductId.Price*curr.Quantity);
+            },0)
+            return;
+        },
+        clearCart(state,actions){
+            state.cart=[];
+            return
+        }
+        ,
+        IncreaseProductQty(state,actions){
+            console.log("working")
+            const {ProductId}=actions.payload;
+            const index=state.cart.findIndex((item)=>item.ProductId._id===ProductId);
+            state.cart[index].Quantity=state.cart[index].Quantity+1
+            state.TotalAmount=state.cart.reduce((prev,curr)=>{
+                console.log(prev,curr)
+                return prev+(+curr.ProductId.Price*curr.Quantity);
+            },0)
+            return;
+        },
+        DecreaseProductQty(state,actions){
+            console.log("working")
+            const {ProductId}=actions.payload;
+            const index=state.cart.findIndex((item)=>item.ProductId._id===ProductId);
+            if(state.cart[index].Quantity!==1){
+            state.cart[index].Quantity=state.cart[index].Quantity-1;
+            }
+            if(state.cart[index].Quantity===1){
+            state.cart[index].Quantity=1;
+            }
+            state.TotalAmount=state.cart.reduce((prev,curr)=>{
+                console.log(prev,curr)
+                return prev+(+curr.ProductId.Price*curr.Quantity);
+            },0)
+            return;
+        },
+        RemoveFromCartHandler(state,actions){
+            const {ProductId}=actions.payload;
+            const obj=state.cart.find((item)=>item.ProductId._id===ProductId);
+            let realVal=obj.Quantity*(+obj.ProductId.Price);
+            console.log(realVal);
+            state.TotalAmount=state.TotalAmount-realVal;
+            state.cart=state.cart.filter((item)=>item.ProductId._id!==ProductId)
+            return
         }
     },
     

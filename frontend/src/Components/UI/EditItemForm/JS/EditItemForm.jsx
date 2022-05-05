@@ -79,7 +79,7 @@ const EditItemForm = ({ toggel, ItemData }) => {
           <div className={classes.EditItemForm_Section}>
             <div className={classes.EditItemForm_InputContainer}>
               <h2 style={{ color: "white", margin: "0 0 0.5em 0" }}>
-                Add Item
+                Edit Item
               </h2>
             </div>
             <div className={classes.EditItemForm_InputContainer}>
@@ -178,7 +178,7 @@ const EditItemForm = ({ toggel, ItemData }) => {
             <div className={classes.EditItemForm_InputContainer}>
               <Button onClick={AddItemHandler} type="submit">
                 <Add />
-                ADD
+                EDIT
               </Button>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import classes from "../CSS/NavBar.module.css";
+import { NavLink, useHistory } from "react-router-dom";
 import { faSearch, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
@@ -9,9 +10,14 @@ import SearchItem from "../../../UI/Search/SearchItem/JS/SearchItem";
 import { useDispatch, useSelector } from "react-redux";
 import FriendRequest from "../../../UI/FriendRequestNotificaiton/JS/FriendRequest";
 import { ChatActions } from "../../../../Store/store";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import ProfileDropDown from "../../../UI/ProfileDropDown/JS/ProfileDropDown";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const NavBar = () => {
   // Declerations
+  const history = useHistory();
+  const [ShowOptions, setShowOptions] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [ShowSearchBox, setShowSearchBox] = useState(false);
   const [ShowNotificationBox, setShowNotificationBox] = useState(false);
@@ -19,6 +25,7 @@ const NavBar = () => {
   const [SearchResult, setSearchResult] = useState([]);
   const [Notification, setNotification] = useState({});
   const state = useSelector((state) => state);
+  const cartItems = useSelector((state) => state.cart);
   const userId = localStorage.getItem("userId");
   const dispatch = useDispatch();
   const [User, setUser] = useState({});
@@ -127,6 +134,8 @@ const NavBar = () => {
           Type: res.data.Type,
         });
         localStorage.setItem("Type", res.data.Type);
+        localStorage.setItem("Name", res.data.Name);
+        localStorage.setItem("Email", res.data.Email);
       })
       .catch((err) => console.log(err));
   };
@@ -218,6 +227,29 @@ const NavBar = () => {
           </div>
         </div>
         <div className={classes.NavBar_Profile}>
+          <div className={classes.NavBar_ShopContainer}>
+            <NavLink
+              to="/Shop"
+              className={classes.NavBar_Link}
+              activeClassName={classes.active}
+            >
+              <ShoppingBagOutlinedIcon
+                onClick={(e) => {
+                  history.push("/Shop");
+                  return;
+                }}
+                className={classes.NavBar_Shop}
+              />
+            </NavLink>
+          </div>
+          <div className={classes.NavBar_Notification}>
+            <NavLink to="/Cart">
+              <ShoppingCartOutlinedIcon className={classes.NavBar_Cart} />
+              {cartItems !== undefined && cartItems[0] !== undefined && (
+                <div className={classes.NavBar_Dot}></div>
+              )}
+            </NavLink>
+          </div>
           <div className={classes.NavBar_Notification}>
             <FontAwesomeIcon
               onClick={(e) => {
@@ -228,7 +260,7 @@ const NavBar = () => {
             />
             {Notification.Requests !== undefined &&
               Notification.Requests[0] !== undefined && (
-                <div className={classes.NavBar_Dot}></div>
+                <div className={classes.NavBar_Dot}>1</div>
               )}
           </div>
           {ShowNotificationBox && Notification.Requests !== undefined && (
@@ -245,7 +277,11 @@ const NavBar = () => {
               ))}
             </SearchBox>
           )}
-          <div className={classes.NavBar_ProfileContainer}>
+          {ShowOptions && <ProfileDropDown />}
+          <div
+            className={classes.NavBar_ProfileContainer}
+            onClick={(e) => setShowOptions((prev) => !prev)}
+          >
             <div className={classes.NavBar_ProfilePic}>
               <img src={User.ProfilePic} alt="profile pic" />
             </div>

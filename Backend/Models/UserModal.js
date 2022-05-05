@@ -107,25 +107,40 @@ const UserSchema=new Schema({
             },
             Items:[
                 {
-                    Name:{
-                        type:String
-                    },
-                    Quantity:{
-                        type:String
-                    },
-                    Price:{
-                        type:String
-                    },
-                    Description:{
-                        type:String
-                    },
-                    Image:{
-                        type:String
-                    },
-                    type:Object
-
+                    ProductId:{
+                        type:Schema.Types.ObjectId,
+                        required:true,
+                        ref:'Product'
+                    }
                 },
             ]
+        }
+    ],
+    "Cart":{
+        Items:[{
+            ProductId:{
+                type:Schema.Types.ObjectId,
+                required:true,
+                ref:"Product"
+            },
+            Quantity:{
+                type:Number,
+                default:1,
+                required:false
+            }
+        }]
+    },
+    "MyOrders":[
+        {
+            ProductId:{
+                type:Object,
+                required:true
+            },
+            Quantity:{
+                type:Number,
+                required:true,
+            },
+            type:Object
         }
     ]
 });

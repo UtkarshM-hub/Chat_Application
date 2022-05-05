@@ -1,0 +1,87 @@
+.StoreItem {
+  /* background-color: rgba(196, 196, 196, 1); */
+  background-color: #72728185;
+  border-radius: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  position: relative;
+  height: 20rem;
+  width: 15rem;
+  overflow: hidden;
+}
+
+.StoreItem_ImageContainer {
+  width: 100%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--EditNDelete);
+}
+
+.StoreItem_ImageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.StoreItem_Info {
+  margin: 0.5em 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 40%;
+  width: 100%;
+  padding: 0.5em;
+}
+
+.StoreItem_Name p {
+  color: white;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.StoreItem_Name p:hover {
+  text-decoration: underline;
+}
+
+.StoreItem_Tag {
+  margin: 0 0 0.3em 0;
+  color: #c4c4c4;
+}
+
+.StoreItem_OtherInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.StoreItem_PriceTag {
+  color: var(--SuccessColor);
+  font-weight: 550;
+}
+
+.StoreItem_AddToCart {
+  background-color: var(--mainColor);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}
+
+.StoreItem_AddToCart svg {
+  color: white;
+  margin: 0.2em 0.3em;
+}
+.StoreItem_AddToCart:hover {
+  background-color: var(--mainColorHover);
+}
+
+.StoreItem_StockOut {
+  color: var(--CancelColor);
+}

@@ -38,6 +38,8 @@
   background-color: var(--MessageBox);
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
+  min-width: 10%;
+  max-width: 60%;
   border-bottom-right-radius: 8px;
 }
 

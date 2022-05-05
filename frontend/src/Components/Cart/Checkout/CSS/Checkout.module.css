@@ -1,0 +1,48 @@
+.Checkout {
+  background-color: var(--AddCardBG);
+  width: 25%;
+  border-radius: 10px;
+  padding: 0.5em;
+  min-height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.Checkout_CheckoutBtn {
+  width: 100%;
+  outline: none;
+  border: 2px solid var(--SuccessColor);
+  background-color: var(--SuccessColor);
+  color: white;
+  font-weight: 550;
+  font-size: 1.01em;
+  padding: 0.3em;
+  cursor: pointer;
+}
+
+.Checkout_Amount {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Checkout_TotalAmount {
+  color: var(--SuccessColor) !important;
+}
+
+.Checkout_Amount p {
+  color: var(--SecondaryText);
+}
+
+.Checkout_CheckoutBtn:hover {
+  background-color: var(--SuccessColorHover);
+  border: 2px solid var(--SuccessColorHover);
+}
+
+.Checkout_Price {
+  font-weight: 550;
+  color: var(--SuccessColor) !important;
+}

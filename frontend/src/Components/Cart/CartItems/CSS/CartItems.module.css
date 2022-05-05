@@ -1,0 +1,30 @@
+.CartItems {
+  width: 70%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.CartItems_MainContainer {
+  height: 100%;
+  width: 100%;
+}
+
+.CartItems::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+}
+
+.CartItems::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: var(--SecondMain);
+}
+
+.CartItems::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--mainColor);
+}
+
+.CartItems::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  background-color: var(--mainColorHover);
+}

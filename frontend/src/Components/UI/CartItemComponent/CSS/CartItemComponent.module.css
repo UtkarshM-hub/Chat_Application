@@ -1,0 +1,84 @@
+.CartItemComponent {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  /* height: calc(5 * 1.5em); */
+  margin: 0 0 1em 0;
+}
+
+.CartItemComponent_MainDataContainer {
+  width: 35%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 95%;
+}
+
+.CartItemComponent_ImageContainer {
+  width: 100%;
+}
+
+.CartItemComponent_ImageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.CartItemComponent_OtherDetails {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 0.5em;
+}
+
+.CartItemComponent_OtherDetails h3 {
+  color: white;
+  cursor: pointer;
+}
+.CartItemComponent_OtherDetails p {
+  color: var(--SecondaryText);
+}
+
+.CartItemComponent_QuantityContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.CartItemComponent_QuantityContainer p {
+  color: white;
+  margin: 0 0.5em;
+}
+
+.CartItemComponent_QuantityElement {
+  height: 2em;
+  width: 0.5em;
+  border: 1px solid var(--StrokeColor);
+  padding: 0.8em 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+.CartItemComponent_PriceContainer p span,
+.CartItemComponent_TotalPriceContainer p span {
+  color: white;
+  margin: 0 0.3em;
+  font-weight: 500;
+}
+
+.CartItemComponent_PriceContainer p,
+.CartItemComponent_TotalPriceContainer p {
+  color: var(--SuccessColor);
+  font-weight: 550;
+}
+
+.CartItemComponent_RemoveBtn {
+  cursor: pointer;
+  margin: 1em 0;
+}

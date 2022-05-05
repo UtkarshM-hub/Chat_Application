@@ -98,12 +98,12 @@ const Section = () => {
                 onclick={(e) => 0}
               >
                 <SectionItemCard
-                  Name={item.Name}
-                  Quantity={item.Quantity}
-                  Price={parseInt(item.Price)}
-                  Image={item.Image}
-                  Description={item.Description}
-                  _id={item._id}
+                  Name={item.ProductId.Name}
+                  Quantity={item.ProductId.Quantity}
+                  Price={parseInt(item.ProductId.Price)}
+                  Image={item.ProductId.Image}
+                  Description={item.ProductId.Description}
+                  _id={item.ProductId._id}
                   sectionId={sectionId.substring(1)}
                   userId={userId}
                   setData={setItemData}

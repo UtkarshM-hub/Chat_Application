@@ -55,10 +55,13 @@
   border-radius: 50%;
   background: var(--AddCardBG);
   box-shadow: -11px 7px 14px black;
+  overflow: hidden;
 }
 
 .OpenItem_ImageContainer img {
   object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .OpenItem_SlantDesign {

@@ -24,6 +24,7 @@ const SectionItemCard = ({
   const dispatch = useDispatch();
 
   const DeleteItemHandler = async () => {
+    console.log({ _id: _id, SectionId: sectionId, userId: userId });
     await axios
       .post(
         "http://localhost/Inventory/DeleteItem",
@@ -52,7 +53,6 @@ const SectionItemCard = ({
       Quantity: Quantity,
       Description: Description,
       Price: parseInt(Price),
-      _id: _id,
     });
     showEdit(true);
   };
@@ -80,7 +80,6 @@ const SectionItemCard = ({
             Quantity: Quantity,
             Description: Description,
             Price: parseInt(Price),
-            _id: _id,
           });
           openInfo((prev) => !prev);
         }}

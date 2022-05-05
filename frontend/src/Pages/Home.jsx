@@ -234,6 +234,25 @@ const Home = () => {
   //   }
   // };
 
+  useEffect(() => {
+    const getCartHandler = async () => {
+      await axios
+        .post(
+          "http://localhost/Shop/GetCart",
+          JSON.stringify({ userId: userId }),
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          dispatch(ChatActions.setCart(res.data.Items));
+        });
+    };
+    getCartHandler();
+  }, []);
+
   return (
     <MessageLayout>
       {/* {UserType === "Business" && <Sidebar />} */}

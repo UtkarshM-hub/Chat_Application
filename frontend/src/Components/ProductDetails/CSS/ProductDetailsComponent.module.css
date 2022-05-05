@@ -1,0 +1,143 @@
+.ProductDetails {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.ProductDetailsComponent_Adjuster {
+  width: 90%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.ProductDetails_ImageContainer {
+  width: 45%;
+  height: 100%;
+  border-radius: 15px;
+  background-color: var(--SecondaryText);
+  overflow: hidden;
+}
+
+.ProductDetails_ImageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ProductDetails_InfoContainer {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.ProductDetails_MainInfo,
+.ProductDetails_MoreDetails,
+.ProductDetails_MainInfo h2 {
+  margin: 0 0 1em 0;
+}
+
+.ProductDetails_MainInfo h2 {
+  color: white;
+  font-weight: 550;
+}
+
+.ProductDetails_MainInfo p {
+  color: var(--SecondaryText);
+}
+
+.ProductDetails_PriceContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ProductDetails_MoreDetails {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ProductDetails_MoreDetails p {
+  font-size: 1.1em;
+  color: white;
+}
+
+.ProductDetailsComponent_PriceTag {
+  color: var(--SuccessColor) !important;
+  margin: 0 0.3em;
+  font-weight: 550;
+}
+
+.ProductDetails_QuantityContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.ProductDetails_QuantityContainer p {
+  color: white;
+  margin: 0 0.5em;
+}
+
+.ProductDetails_QuantityElement {
+  height: 2em;
+  width: 0.5em;
+  border: 1px solid var(--StrokeColor);
+  padding: 0.8em 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ProductDetailsComponent_AddToCartBtn,
+.ProductDetailsComponent_BuyBtn {
+  font-size: 1.1em;
+  outline: none;
+  padding: 0.5em;
+  width: calc(1em * 10);
+  cursor: pointer;
+}
+
+.ProductDetailsComponent_AddToCartBtn {
+  background-color: transparent;
+  border: 2px solid var(--MainYellow);
+  color: var(--MainYellow);
+}
+
+.ProductDetailsComponent_AddToCartBtn:hover {
+  background-color: var(--MainYellow);
+  color: black;
+  font-weight: 550;
+}
+
+.ProductDetailsComponent_BuyBtn {
+  background-color: var(--SecondaryGreen);
+  border: 2px solid var(--SecondaryGreen);
+  color: black;
+  font-weight: 550;
+  margin: 0 1.5em;
+}
+
+.ProductDetailsComponent_BuyBtn:hover {
+  background-color: var(--SecondaryGreenHover);
+  border: 2px solid var(--SecondaryGreenHover);
+}
+
+.ProductDetailsComponent_MarginClass {
+  margin: 0 0 2em 0;
+}
+
+.ProductDetailsComponent_SoldOut {
+  color: var(--CancelColor);
+}

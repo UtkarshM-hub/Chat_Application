@@ -1,6 +1,7 @@
 const cloudinary=require("cloudinary").v2;
 const { Mongoose } = require("mongoose");
 const User=require("../Models/UserModal");
+const Product = require("../Models/Product");
 
 cloudinary.config({
     cloud_name:'dcglxmssd',
@@ -43,7 +44,7 @@ exports.AddSectionHandler=async(req,res,next)=>{
 exports.GetInventory=async(req,res,next)=>{
     const {userId}=req.body;
     try{
-        const user=await User.findById(userId);
+        const user=await User.findById(userId).populate("Inventory.Items.ProductId");
         res.send(user.Inventory);
     }
     catch(err){
@@ -112,8 +113,28 @@ exports.AddItemToSectionHandler=async(req,res,next)=>{
                 Description:Description,
                 Image:result.url
             }
-            await User.updateOne({_id:UserId,"Inventory._id":SectionId},{$push:{"Inventory.$.Items":data}})
-            return res.send(data);
+            const product=await new Product({
+                Name:Name,
+                Price:Price,
+                Quantity:Quantity,
+                Description:Description,
+                Image:result.url,
+                Creator:UserId
+            });
+            product.save().then(async(pro)=>{
+                await User.updateOne({_id:UserId,"Inventory._id":SectionId},{$push:{"Inventory.$.Items":{
+                    ProductId:pro._id,visits:0,purcheses:0
+                }}})
+                return res.send({
+                    _id:pro._id,
+                    Name:Name,
+                    Price:Price,
+                    Quantity:Quantity,
+                    Description:Description,
+                    Image:result.url
+                });
+            });
+            // console.log(product._id)
         })
     }
     catch(err){
@@ -124,7 +145,9 @@ exports.AddItemToSectionHandler=async(req,res,next)=>{
 exports.DeleteItemHandler=async(req,res,next)=>{
     const {_id,userId,SectionId}=req.body;
     try{
-        await User.updateOne({_id:userId,"Inventory._id":SectionId},{$pull:{"Inventory.$.Items":{_id:_id}}})
+        console.log(_id)
+        await User.updateOne({_id:userId,"Inventory._id":SectionId},{$pull:{"Inventory.$.Items":{"ProductId":_id}}});
+        await Product.findOneAndDelete({ProductId:_id});
         return res.send("success");
     }
     catch(err){
@@ -136,6 +159,7 @@ exports.EditItemFromSectionHandler=async(req,res,next)=>{
     const {Name,Quantity,Price,Description,UserId,SectionId,Image,_id}=req.body;
         const file=req.file;
         let filePath={url:Image};
+        console.log(req.body)
         try{
             if(file!==undefined){
                 filePath=await cloudinary.uploader.upload(file.path,(err,result)=>{
@@ -152,13 +176,14 @@ exports.EditItemFromSectionHandler=async(req,res,next)=>{
                 Description:Description,
                 Image:filePath.url
             }
-            const user=await User.findById(UserId);
-            let Inventory=user.Inventory;
-            let index=Inventory.findIndex((item)=>item._id.toString()===SectionId);
-            let ItemIndex=Inventory[index].Items.findIndex((item)=>item._id.toString()===_id);
-            Inventory[index].Items[ItemIndex]=Ddata;
-            console.log(Inventory[index].Items[ItemIndex]);
-            await User.updateOne({"_id":UserId},{$set:{"Inventory":Inventory}});
+            await Product.findByIdAndUpdate(_id,Ddata);
+            // const user=await User.findById(UserId);
+            // let Inventory=user.Inventory;
+            // let index=Inventory.findIndex((item)=>item._id.toString()===SectionId);
+            // let ItemIndex=Inventory[index].Items.findIndex((item)=>item._id.toString()===_id);
+            // Inventory[index].Items[ItemIndex]=Ddata;
+            // console.log(Inventory[index].Items[ItemIndex]);
+            // await User.updateOne({"_id":UserId},{$set:{"Inventory":Inventory}});
             res.send(Ddata);
         }
         catch(err){

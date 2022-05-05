@@ -1,0 +1,7 @@
+.CartContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+}

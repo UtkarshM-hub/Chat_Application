@@ -38,7 +38,9 @@ exports.SignUpHandler=async(req,res,next)=>{
                 IsOnline:false,
                 socketId:"",
                 Type:Type,
-                Inventory:[]
+                Inventory:[],
+                Cart:{},
+                MyOrders:[]
             });
             newUser.save();
             res.status(200).send({message:"Successfully Signed in",type:"Success"});
@@ -117,7 +119,7 @@ exports.GetUserData=async(req,res,next)=>{
     try{
         const user=await User.findById(userId);
         console.log({_id:user._id,Name:user.Name,ProfilePic:user.ProfilePic});
-        res.send({_id:user._id,Name:user.Name,ProfilePic:user.ProfilePic,Type:user.Type});
+        res.send({_id:user._id,Name:user.Name,ProfilePic:user.ProfilePic,Type:user.Type,Email:user.Email});
     }catch(err){
         console.log(err);
     }

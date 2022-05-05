@@ -8,6 +8,9 @@ import Layout from './Components/Layout/Layout/JS/Layout';
 import Home from './Pages/Home';
 import Inventory from './Pages/Inventory';
 import Section from './Pages/Section';
+import Store from './Pages/Store';
+import ProductDetails from './Pages/ProductDetails';
+import Cart from './Pages/Cart';
 
 function App() { 
   // Declerations
@@ -44,6 +47,15 @@ function App() {
         </Route>
         <Route path="/inventory/:sectionId" exact>
           <Section/>
+        </Route>
+        <Route path="/Shop" exact>
+          <Store/>
+        </Route>
+        <Route path="/ProductDetails/:ProductId" exact>
+          <ProductDetails/>
+        </Route>
+        <Route path="/Cart" exact>
+          <Cart show={setShow} data={setMessageData}/>
         </Route>
       </Layout>
     </Switch>

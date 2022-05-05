@@ -17,10 +17,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var ConnectionRouter = require('./routes/Connections');
 var InventoryRouter = require('./routes/Inventory');
+var ShopRouter = require('./routes/Store');
+var Payment = require('./routes/Payment');
 const socket = require('../frontend/src/socket');
 
 // declerations
-const MONGODB_URI=YOUR_MONGODB_URI;
+const MONGODB_URI='mongodb+srv://UtMandape:1BGR3QO2fcFmFHXw@cluster0.akibk.mongodb.net/Chat?retryWrites=true&w=majority';
 
 
 // view engine setup
@@ -51,6 +53,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/Connection', ConnectionRouter);
 app.use('/Inventory', InventoryRouter);
+app.use('/Shop', ShopRouter);
+app.use('/Payment', Payment);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

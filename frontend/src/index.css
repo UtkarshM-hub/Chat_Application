@@ -10,6 +10,7 @@
   --MainBG: #171c24;
   --StrokeColor: #4a494b;
   --SuccessColor: #06a08e;
+  --SuccessColorHover: #17e2ca;
   --WarningColor: #df7211;
   --CancelColor: #fe572f;
   --SecondMain: #1d1e26;
@@ -18,8 +19,10 @@
   --ItemCardBG: rgba(69, 80, 99, 0.4);
   --EditNDelete: #2d2f3a;
   --DesignMainColor: #b79cff;
+  --MainYellow: #ffe195;
+  --SecondaryGreen: #59e16f;
+  --SecondaryGreenHover: #93c69b;
 }
-
 * {
   margin: 0;
   padding: 0;
