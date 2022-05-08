@@ -1,0 +1,14 @@
+.AddressContainer {
+  width: 100%;
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--ItemCardBG);
+  margin: 0.5em 0;
+  color: white;
+}
+
+.AddressContainer p {
+  margin: 0 0.5em;
+}

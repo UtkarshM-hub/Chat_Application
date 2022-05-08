@@ -1,6 +1,7 @@
 .Chat {
-  width: 70%;
+  width: 100%;
   height: 92vh;
+  min-width: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;

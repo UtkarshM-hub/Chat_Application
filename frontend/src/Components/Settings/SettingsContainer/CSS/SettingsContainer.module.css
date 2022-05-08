@@ -1,0 +1,44 @@
+.SettingsContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  min-height: 91vh;
+}
+
+.SettingsContainer main {
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  padding: 2em;
+  max-height: 92vh;
+}
+
+.SettingsContainer_Scrollable {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.SettingsContainer main::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+}
+
+.SettingsContainer main::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: var(--SecondMain);
+}
+
+.SettingsContainer main::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--mainColor);
+}
+
+.SettingsContainer main::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  background-color: var(--mainColorHover);
+}

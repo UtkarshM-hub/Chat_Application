@@ -2,6 +2,7 @@ const cloudinary=require("cloudinary").v2;
 const { Mongoose } = require("mongoose");
 const User=require("../Models/UserModal");
 const Product = require("../Models/Product");
+const fs=require("fs");
 
 cloudinary.config({
     cloud_name:'dcglxmssd',
@@ -119,6 +120,7 @@ exports.AddItemToSectionHandler=async(req,res,next)=>{
                 Quantity:Quantity,
                 Description:Description,
                 Image:result.url,
+                Visits:0,
                 Creator:UserId
             });
             product.save().then(async(pro)=>{
@@ -157,18 +159,18 @@ exports.DeleteItemHandler=async(req,res,next)=>{
 
 exports.EditItemFromSectionHandler=async(req,res,next)=>{
     const {Name,Quantity,Price,Description,UserId,SectionId,Image,_id}=req.body;
-        const file=req.file;
-        let filePath={url:Image};
-        console.log(req.body)
-        try{
-            if(file!==undefined){
-                filePath=await cloudinary.uploader.upload(file.path,(err,result)=>{
-                    if(err){
-                        return res.send("error occured while uploading the file");
-                    }
-                    return result.url;
-                });
-            }
+    const file=req.file;
+    let filePath={url:Image};
+    console.log(req.body)
+    try{
+        if(file!==undefined){
+            filePath=await cloudinary.uploader.upload(file.path,(err,result)=>{
+                if(err){
+                    return res.send("error occured while uploading the file");
+                }
+                return result.url;
+            });
+        }
             const Ddata={
                 Name:Name,
                 Quantity:Quantity,

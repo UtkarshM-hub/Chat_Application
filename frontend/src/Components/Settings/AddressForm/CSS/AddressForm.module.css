@@ -1,0 +1,56 @@
+.AddressForm {
+  width: 70%;
+}
+
+.AddressForm form {
+  width: 100%;
+  height: 100%;
+}
+
+.AddressForm_ElementContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.AddressForm_MainElementContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  margin: 0.5em;
+}
+
+.AddressForm_MainElementContainer p {
+  color: white;
+  font-size: 0.8em;
+}
+
+.AddressForm_MainElementContainer p span {
+  color: var(--mainTextColor);
+  font-size: 0.8em;
+}
+
+.AddressForm_MainElementContainer input,
+.AddressForm_MainElementContainer select {
+  width: 100%;
+  font-size: 1.1em;
+  color: white;
+  padding: 0.5em;
+  outline: none;
+  border: 1px solid var(--StrokeColor);
+  background-color: transparent;
+  margin: 0.2em 0;
+}
+
+.AddressForm_MainElementContainer select option {
+  width: 100%;
+  font-size: 1.1em;
+  color: white;
+  padding: 0.5em;
+  outline: none;
+  border: 1px solid var(--StrokeColor);
+  background-color: black;
+  margin: 0.2em 0;
+}

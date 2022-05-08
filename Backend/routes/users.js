@@ -35,4 +35,12 @@ router.post('/findUsers',userController.findUsersHandler);
 
 router.post('/GetUserData',userController.GetUserData);
 
+router.post('/getSettingsHandler',userController.getSettingsHandler);
+
+router.post("/AddAddress",userController.AddAddressHandler)
+
+router.post("/SetSelectedAddress",userController.SetSelectedAddressHandler)
+
+router.post("/GetMyOrders",userController.GetOrdersHandler)
+
 module.exports = router;

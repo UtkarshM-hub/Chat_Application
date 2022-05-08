@@ -49,6 +49,22 @@ const ProductDetails = () => {
       });
   };
 
+  const BuyNowHandler = async (data) => {
+    await axios
+      .post(
+        "http://localhost/Shop/AddToCart",
+        JSON.stringify({ _id: userId, data: data }),
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          history.push("/Cart/:true");
+        }
+      });
+  };
+
   return (
     <Alignment>
       <ProductDetailsComponent
@@ -59,6 +75,7 @@ const ProductDetails = () => {
         Price={ProductInfo.Price}
         Quantity={ProductInfo.Quantity}
         AddToCart={AddToCartHandler}
+        BuyNow={BuyNowHandler}
       />
     </Alignment>
   );

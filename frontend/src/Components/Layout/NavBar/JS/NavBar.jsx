@@ -243,7 +243,7 @@ const NavBar = () => {
             </NavLink>
           </div>
           <div className={classes.NavBar_Notification}>
-            <NavLink to="/Cart">
+            <NavLink to="/Cart" activeClassName={classes.active}>
               <ShoppingCartOutlinedIcon className={classes.NavBar_Cart} />
               {cartItems !== undefined && cartItems[0] !== undefined && (
                 <div className={classes.NavBar_Dot}></div>

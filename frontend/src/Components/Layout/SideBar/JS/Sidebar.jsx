@@ -51,7 +51,6 @@ const Sidebar = () => {
           <BarChartOutlined />
         </NavLink>
         <NavLink
-          exact
           to="/settings"
           activeClassName={classes.active}
           className={`${classes.Sidebar_IconContainer}`}

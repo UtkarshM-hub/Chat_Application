@@ -1,0 +1,36 @@
+.MyOrderLayout {
+  width: 100%;
+  height: 95%;
+  min-height: -8vh;
+  overflow-y: scroll;
+  margin: 1em 0;
+}
+
+.MyOrderLayout_MainLayout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.MyOrderLayout::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+}
+
+.MyOrderLayout::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: var(--SecondMain);
+}
+
+.MyOrderLayout::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--mainColor);
+}
+
+.MyOrderLayout::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  background-color: var(--mainColorHover);
+}

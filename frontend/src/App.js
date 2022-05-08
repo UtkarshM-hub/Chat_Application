@@ -11,6 +11,10 @@ import Section from './Pages/Section';
 import Store from './Pages/Store';
 import ProductDetails from './Pages/ProductDetails';
 import Cart from './Pages/Cart';
+import Settings from './Pages/Settings';
+import SettingsContainer from './Components/Settings/SettingsContainer/JS/SettingsContainer';
+import Address from './Pages/Address';
+import MyOrders from './Pages/MyOrders';
 
 function App() { 
   // Declerations
@@ -56,6 +60,25 @@ function App() {
         </Route>
         <Route path="/Cart" exact>
           <Cart show={setShow} data={setMessageData}/>
+        </Route>
+        <Route path="/Cart/:BuyNow" exact>
+          <Cart show={setShow} data={setMessageData}/>
+        </Route>
+        <Route path="/Settings">
+          <SettingsContainer>
+            <Route path="/Settings/Profile" exact>
+              <Settings/>
+            </Route>
+            <Route path="/Settings/General" exact>
+              <Address/>
+            </Route>
+            <Route path="/Settings/Payments" exact>
+              <Settings/>
+            </Route>
+          </SettingsContainer>
+        </Route>
+        <Route path="/MyOrders">
+          <MyOrders/>
         </Route>
       </Layout>
     </Switch>

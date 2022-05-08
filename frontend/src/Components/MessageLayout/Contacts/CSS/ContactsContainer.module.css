@@ -2,7 +2,8 @@
   max-height: 92vh;
   min-height: 92vh;
   height: 100%;
-  width: 30%;
+  width: 100%;
+  max-width: 30%;
   border-right: 1px solid var(--StrokeColor);
   overflow-y: scroll;
   background-color: var(--SecondMain);

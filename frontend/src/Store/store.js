@@ -13,7 +13,15 @@ const ChatSlice=createSlice({
         ActiveContact:{},
         Inventory:[],
         cart:[],
-        TotalAmount:0
+        TotalAmount:0,
+        Settings:{
+            Profile:{},
+            GeneralDetails:{
+                SelectedAddress:""
+            },
+            Payments:{}
+        },
+        Orders:[]
     },
     reducers:{
         createMessage(state,actions){
@@ -260,12 +268,32 @@ const ChatSlice=createSlice({
         },
         RemoveFromCartHandler(state,actions){
             const {ProductId}=actions.payload;
-            const obj=state.cart.find((item)=>item.ProductId._id===ProductId);
+            const obj=state.cart.find((item)=>item._id.toString()===ProductId.toString());
+            console.log(obj)
             let realVal=obj.Quantity*(+obj.ProductId.Price);
             console.log(realVal);
             state.TotalAmount=state.TotalAmount-realVal;
-            state.cart=state.cart.filter((item)=>item.ProductId._id!==ProductId)
+            state.cart=state.cart.filter((item)=>item._id.toString()!==ProductId.toString())
             return
+        },
+        SetSettings(state,actions){
+            const data=actions.payload;
+            state.Settings=data;
+            return
+        },
+        SetSelectedAddress(state,actions){
+            state.Settings.GeneralDetails.SelectedAddress=actions.payload._id;
+            return;
+        },
+        AddAddressHandler(state,actions){
+            const data=actions.payload;
+            state.Settings.GeneralDetails.Addresses=[...state.Settings.GeneralDetails.Addresses,data];
+            return;
+        },
+        setOrders(state,actions){
+            const data=actions.payload;
+            state.Orders=data;
+            return;
         }
     },
     

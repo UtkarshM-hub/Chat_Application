@@ -1,4 +1,4 @@
-import React, { createElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CartContainer from "../Components/Cart/CartContainer/JS/CartContainer";
 import CartItems from "../Components/Cart/CartItems/JS/CartItems";
 import Checkout from "../Components/Cart/Checkout/JS/Checkout";
@@ -8,6 +8,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { ChatActions } from "../Store/store";
 import useRazorpay from "react-razorpay";
+import { useParams } from "react-router-dom";
 
 const LoadRazorPay = async () => {
   return new Promise((resolve) => {
@@ -29,6 +30,11 @@ const Cart = ({ show, data }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const TotalAmount = useSelector((state) => state.TotalAmount);
+  const Settings = useSelector((state) => state.Settings);
+  const [CurrentAddress, setCurrentAddress] = useState();
+  const { BuyNow } = useParams();
+
+  console.log(CurrentAddress);
   useEffect(() => {
     const getCartHandler = async () => {
       await axios
@@ -41,16 +47,12 @@ const Cart = ({ show, data }) => {
             },
           }
         )
-        .then((res) => {
+        .then(async (res) => {
           dispatch(ChatActions.setCart(res.data.Items));
         });
     };
     getCartHandler();
   }, []);
-
-  useEffect(() => {
-    setCartItemsData(cart);
-  }, [cart]);
 
   const IncreaseQtyHandler = async (id, qty) => {
     console.log(id, qty);
@@ -89,6 +91,7 @@ const Cart = ({ show, data }) => {
         }
       )
       .then((res) => console.log(res));
+    console.log("It is working");
     dispatch(ChatActions.RemoveFromCartHandler({ ProductId: id }));
   };
 
@@ -112,7 +115,7 @@ const Cart = ({ show, data }) => {
       .then((res) => {
         const options = {
           key: "rzp_test_6gYjHzxKBzZ5wm", // Enter the Key ID generated from the Dashboard
-          amount: res.data.amount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+          amount: TotalAmount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
           currency: res.data.currency,
           name: "Checkout",
           description: "Thanks for buying",
@@ -128,17 +131,24 @@ const Cart = ({ show, data }) => {
               clearTimeout(time);
             }, 5000);
 
-            await axios
-              .post(
-                "http://localhost/Payment/Checkout",
-                JSON.stringify({ userId: userId, TotalAmount: TotalAmount }),
-                { headers: { "Content-Type": "application/json" } }
-              )
-              .then((res) => {
-                if (res.status === 200) {
-                  dispatch(ChatActions.clearCart());
-                }
-              });
+            if (CurrentAddress !== undefined) {
+              await axios
+                .post(
+                  "http://localhost/Payment/Checkout",
+                  JSON.stringify({
+                    userId: userId,
+                    TotalAmount: TotalAmount,
+                    Address: `${CurrentAddress.Address},${CurrentAddress.District},${CurrentAddress.State},${CurrentAddress.PinCode}`,
+                    PhoneNumber: CurrentAddress.Phone,
+                  }),
+                  { headers: { "Content-Type": "application/json" } }
+                )
+                .then((res) => {
+                  if (res.status === 200) {
+                    dispatch(ChatActions.clearCart());
+                  }
+                });
+            }
           },
           prefill: {
             name: Name !== undefined ? Name : "Name",
@@ -155,6 +165,28 @@ const Cart = ({ show, data }) => {
       });
   };
 
+  useEffect(() => {
+    if (Settings.GeneralDetails.Addresses !== undefined) {
+      setCurrentAddress(
+        Settings.GeneralDetails.Addresses.filter(
+          (item) =>
+            item._id.toString() ===
+            Settings.GeneralDetails.SelectedAddress.toString()
+        )[0]
+      );
+    }
+  }, [Settings]);
+  useEffect(() => {
+    setCartItemsData(cart);
+  }, [cart]);
+  useEffect(() => {
+    if (BuyNow !== undefined && BuyNow.substring(1) === "true") {
+      setTimeout(() => {
+        DisplayRazorPay();
+      }, 3000);
+    }
+  }, [BuyNow, TotalAmount]);
+  console.log(cart);
   return (
     <Alignment>
       <h1 style={{ marginBottom: "1em", color: "white" }}>CART</h1>

@@ -9,6 +9,7 @@ const ProductDetailsComponent = ({
   Price,
   Quantity,
   AddToCart,
+  BuyNow,
 }) => {
   const [QuantityNumber, setQuantityNumber] = useState(1);
 
@@ -24,6 +25,14 @@ const ProductDetailsComponent = ({
           >
             <h2>{Name}</h2>
             <p>{Description}</p>
+            {Quantity <= 10 && (
+              <h3
+                style={{ margin: "0.5em 0 0 0" }}
+                className={classes.ProductDetailsComponent_SoldOut}
+              >
+                Only {Quantity} Left!
+              </h3>
+            )}
           </div>
           <div
             className={`${classes.ProductDetails_MoreDetails} ${classes.ProductDetailsComponent_MarginClass}`}
@@ -66,7 +75,12 @@ const ProductDetailsComponent = ({
                 className={classes.ProductDetails_QuantityElement}
                 onClick={(e) =>
                   setQuantityNumber((prev) => {
-                    return prev + 1;
+                    if (prev + 1 <= Quantity) {
+                      return prev + 1;
+                    }
+                    if (prev + 1 > Quantity) {
+                      return prev;
+                    }
                   })
                 }
               >
@@ -74,23 +88,32 @@ const ProductDetailsComponent = ({
               </div>
             </div>
           </div>
-          <div
-            className={`${classes.ProductDetailsComponent_ButtonContainer} ${classes.ProductDetailsComponent_MarginClass}`}
-          >
-            <button
-              onClick={(e) =>
-                Quantity !== 0
-                  ? AddToCart({ ProductId: _id, Quantity: QuantityNumber })
-                  : ""
-              }
-              className={classes.ProductDetailsComponent_AddToCartBtn}
+          {Quantity !== 0 && (
+            <div
+              className={`${classes.ProductDetailsComponent_ButtonContainer} ${classes.ProductDetailsComponent_MarginClass}`}
             >
-              Add To Cart
-            </button>
-            <button className={classes.ProductDetailsComponent_BuyBtn}>
-              Buy Now
-            </button>
-          </div>
+              <button
+                onClick={(e) =>
+                  Quantity !== 0
+                    ? AddToCart({ ProductId: _id, Quantity: QuantityNumber })
+                    : ""
+                }
+                className={classes.ProductDetailsComponent_AddToCartBtn}
+              >
+                Add To Cart
+              </button>
+              <button
+                onClick={(e) =>
+                  Quantity !== 0
+                    ? BuyNow({ ProductId: _id, Quantity: QuantityNumber })
+                    : ""
+                }
+                className={classes.ProductDetailsComponent_BuyBtn}
+              >
+                Buy Now
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

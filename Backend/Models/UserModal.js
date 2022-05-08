@@ -121,7 +121,7 @@ const UserSchema=new Schema({
             ProductId:{
                 type:Schema.Types.ObjectId,
                 required:true,
-                ref:"Product"
+                ref:'Product'
             },
             Quantity:{
                 type:Number,
@@ -132,16 +132,91 @@ const UserSchema=new Schema({
     },
     "MyOrders":[
         {
-            ProductId:{
-                type:Object,
-                required:true
+            Items:[
+                {
+                    ProductId:{
+                        type:Schema.Types.ObjectId,
+                        ref:'Product',
+                        required:true,
+                    },
+                    Quantity:{
+                        type:Number,
+                        required:true,
+                    },
+                    Status:{
+                        type:String
+                    },
+                }
+            ],
+            TotalAmount:{
+                type:String
             },
-            Quantity:{
-                type:Number,
-                required:true,
+            time:{
+                type:Date,
+                default:Date.now()
             },
-            type:Object
-        }
+        },
+    ],
+    "Settings":{
+        "Profile":{},
+        "GeneralDetails":{
+            Addresses:[
+                {
+                    FirstName:{
+                        type:String
+                    },
+                    LastName:{
+                        type:String
+                    },
+                    Address:{
+                        type:String
+                    },
+                    State:{
+                        type:String
+                    },
+                    District:{
+                        type:String
+                    },
+                    PinCode:{
+                        type:Number
+                    },
+                    Phone:{
+                        type:Number
+                    },
+                }
+            ],
+            SelectedAddress:{
+                type:Schema.Types.ObjectId,
+            }
+        },
+        "Payments":{}
+    },
+    "SalesOrder":[
+        {
+            Name:{
+                type:String
+            },
+            Email:{
+                type:String
+            },
+            Address:{
+                type:String
+            },
+            PhoneNumber:{
+                type:String
+            },
+            Item:{
+                type:Object
+            },
+            TotalAmount:{
+                type:String
+            },
+            time:{
+                type:Date,
+                default:Date.now()
+            }
+        },
+        
     ]
 });
 

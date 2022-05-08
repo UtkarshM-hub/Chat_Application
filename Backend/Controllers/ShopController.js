@@ -17,6 +17,7 @@ exports.GetProductData=async(req,res,next)=>{
     const {_id,ProductId}=req.body;
     console.log(req.body)
     try{
+        await Product.updateOne({"_id":ProductId},{$inc:{"Visits":+1}})
         const data=await Product.findById(ProductId);
         res.send(data);
     }catch(err){

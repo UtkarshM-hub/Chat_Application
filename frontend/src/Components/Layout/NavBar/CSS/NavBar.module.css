@@ -45,7 +45,7 @@
 
 .active {
   cursor: pointer;
-  color: white;
+  color: white !important;
 }
 
 .NavBar_BellIcon {

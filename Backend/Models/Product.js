@@ -18,6 +18,10 @@ const ProductSchema=new Schema(
         Image:{
             type:String
         },
+        Visits:{
+            type:Number,
+            default:0
+        },
         Creator:{
             type:Schema.Types.ObjectId,
             required:true,

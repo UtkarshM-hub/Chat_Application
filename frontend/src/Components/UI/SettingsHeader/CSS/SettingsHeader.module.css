@@ -1,0 +1,42 @@
+.SettingsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 2em 0;
+}
+
+.SettingsHeader_Component h2 {
+  color: white;
+  margin: 0 0 0.3em 0;
+}
+
+.SettingsHeader_Component p {
+  color: var(--SecondaryText);
+}
+
+.SettingsHeader_Btn {
+  font-size: 1.01em;
+  padding: 0.5em 0.8em;
+  outline: none;
+  margin: 0 0.5em;
+  width: 5em;
+  border: none;
+  cursor: pointer;
+}
+
+.SettingsHeader_CancelBtn {
+  color: #c4c4c4c4;
+  background-color: #455063;
+}
+
+.SettingsHeader_CancelBtn:hover {
+  background-color: #5d6778 !important;
+}
+
+.SettingsHeader_SaveBtn {
+  color: black;
+  background-color: var(--SecondaryGreen);
+}
+.SettingsHeader_SaveBtn:hover {
+  background-color: var(--SecondaryGreenHover) !important;
+}

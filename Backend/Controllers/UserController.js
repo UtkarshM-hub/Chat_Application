@@ -2,6 +2,8 @@ const User=require("../Models/UserModal");
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 const cloudinary=require("cloudinary").v2;
+const fs=require("fs");
+const UserModal = require("../Models/UserModal");
 
 cloudinary.config({
     cloud_name:'dcglxmssd',
@@ -40,7 +42,22 @@ exports.SignUpHandler=async(req,res,next)=>{
                 Type:Type,
                 Inventory:[],
                 Cart:{},
-                MyOrders:[]
+                MyOrders:[],
+                Settings:{
+                    Profile:{
+                        ProfilePic:result.url,
+                        UserName:UserName,
+                        Name:Name,
+                        Description:Description,
+                        Email:Email
+                    },
+                    GeneralDetails:{
+                        Addresses:[],
+                        SelectedAddress:""
+                    },
+                    Payments:{}
+                },
+                SalesOrders:[]
             });
             newUser.save();
             res.status(200).send({message:"Successfully Signed in",type:"Success"});
@@ -124,3 +141,51 @@ exports.GetUserData=async(req,res,next)=>{
         console.log(err);
     }
 }
+
+exports.getSettingsHandler=async(req,res,next)=>{
+    const {userId}=req.body;
+    try{
+        const user=await User.findById(userId);
+        res.send(user.Settings);
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+exports.AddAddressHandler=async(req,res,next)=>{
+    const {userId,data}=req.body;
+    try{
+        await User.findByIdAndUpdate(userId,{$push:{"Settings.GeneralDetails.Addresses":data}});
+        const address=await User.findById(userId);
+        let currentElement=address.Settings.GeneralDetails.Addresses[address.Settings.GeneralDetails.Addresses.length-1];
+        res.send(currentElement)
+    }   
+    catch(err){
+        console.log(err);
+    }
+}
+
+exports.SetSelectedAddressHandler=async(req,res,next)=>{
+    const {userId,_id}=req.body;
+    try{
+        console.log(userId,_id)
+        await User.findByIdAndUpdate(userId,{$set:{"Settings.GeneralDetails.SelectedAddress":_id}});
+        res.send("success");
+    }   
+    catch(err){
+        console.log(err);
+    }
+}
+
+exports.GetOrdersHandler=async(req,res,next)=>{
+    const {userId}=req.body;
+    try{
+        const user=await UserModal.findOne({_id:userId}).populate("MyOrders.Items.ProductId");
+        res.send(user.MyOrders);
+    }   
+    catch(err){
+        console.log(err);
+    }
+}
+

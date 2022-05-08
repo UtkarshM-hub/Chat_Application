@@ -1,0 +1,132 @@
+.OrderContainer {
+  width: 80%;
+  /* height: 100%; */
+  padding: 0.5em;
+  background: var(--AddCardBG);
+  border-radius: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 1em auto;
+}
+
+.OrderContainer_Info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.5em;
+}
+
+.OrderContainer_OrderId {
+  color: var(--SuccessColorHover);
+}
+
+.OrderContainer_Items {
+  width: 85%;
+  margin: 0 auto;
+  border-radius: 15px;
+  padding: 0.5em;
+  background: var(--CardHover);
+}
+
+.OrderContainer_ItemsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 90%;
+  margin: 1em auto;
+  border-bottom: 1px solid var(--StrokeColor);
+  padding: 0.5em 0;
+}
+
+.OrderContainer_ProductInfo {
+  display: flex;
+  align-items: flex-start;
+}
+
+.OrderContainer_ImageContainer {
+  width: 16em;
+  height: 12em;
+}
+
+.OrderContainer_ImageContainer img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.OrderContainer_BasicInfo {
+  margin: 0 0.5em;
+}
+
+.OrderContainer_Info p {
+  color: white;
+}
+
+.OrderContainer_BasicInfo h3 {
+  color: white;
+}
+
+.OrderContainer_Together {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.OrderContainer_Together p {
+  padding: 0 0.5em;
+  color: var(--SecondaryText);
+}
+
+.OrderContainer_PriceNumber {
+  font-size: 1.1em;
+  font-weight: 550;
+  color: var(--SecondaryGreen) !important;
+}
+
+.OrderContainer_MetaData {
+  padding: 0.5em;
+}
+
+.OrderContainer_Status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.OrderContainer_Status h3 {
+  color: white;
+}
+
+.Progress {
+  color: var(--MainYellow);
+}
+
+.Delivered,
+.OrderContainer_Amount {
+  color: var(--SecondaryGreen);
+}
+
+.OrderContainer_Action {
+  display: flex;
+  width: 85%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em;
+  margin: 0 auto;
+}
+
+.OrderContainer_CancelOrder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--SecondaryText);
+  cursor: pointer;
+}
+
+.OrderContainer_CancelOrder:hover {
+  color: var(--CancelColor);
+}
