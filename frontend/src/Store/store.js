@@ -21,7 +21,8 @@ const ChatSlice=createSlice({
             },
             Payments:{}
         },
-        Orders:[]
+        Orders:[],
+        Sales:[]
     },
     reducers:{
         createMessage(state,actions){
@@ -293,6 +294,11 @@ const ChatSlice=createSlice({
         setOrders(state,actions){
             const data=actions.payload;
             state.Orders=data;
+            return;
+        },
+        setSales(state,actions){
+            const data=actions.payload;
+            state.Sales=data;
             return;
         }
     },

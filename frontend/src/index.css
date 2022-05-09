@@ -21,8 +21,11 @@
   --DesignMainColor: #b79cff;
   --MainYellow: #ffe195;
   --SecondaryGreen: #59e16f;
+  --DeliveredGreen: #289339;
   --SecondaryGreenHover: #93c69b;
   --SideBarSettings: #0b0f16;
+  --MainBlue: #9adae2;
+  --SalesItemColor: rgb(146 146 163 / 50%);
 }
 * {
   margin: 0;

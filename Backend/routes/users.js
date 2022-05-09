@@ -43,4 +43,6 @@ router.post("/SetSelectedAddress",userController.SetSelectedAddressHandler)
 
 router.post("/GetMyOrders",userController.GetOrdersHandler)
 
+router.post("/GetSalesData",userController.GetSalesHandler)
+
 module.exports = router;

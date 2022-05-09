@@ -1,0 +1,167 @@
+.SalesItemContainer {
+  width: 100%;
+  height: fit-content;
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 0.5em 0;
+  position: relative;
+  background-color: #2d3441;
+  transition: 0.5s;
+}
+
+.SalesItemContainer_VisiblePart {
+  width: 100%;
+  /* height: 100%; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--SalesItemColor);
+  padding: 1em 0.5em;
+  color: white;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.SalesItemContainer_IdContainer p {
+  color: var(--MainBlue) !important;
+  font-weight: 550;
+}
+
+.SalesItemContainer_Status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SalesItemContainer_StatusContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em;
+  background: var(--MainYellow);
+  border-radius: 25px;
+  color: black;
+  margin: 0 0.5em;
+  font-size: 0.8em;
+  font-weight: 550;
+}
+
+.SalesItemContainer_StatusContainer p {
+  margin: 0 0.3em;
+}
+
+.SalesItemContainer_Progress {
+  color: var(--MainYellow);
+}
+
+.SalesItemContainer_ProgressDot {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background: #b89230;
+}
+
+.SalesItemContainer_Delivered {
+  color: var(--SecondaryGreenHover);
+}
+
+.SalesItemContainer_DeliveredDot {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background: var(--DeliveredGreen);
+}
+
+.SalesItemContainer_Invisible {
+  transition: 1s;
+  background-color: #2d3441;
+  border: 2px solid whites;
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+
+.SalesItemContainer_ShowIt {
+  position: relative;
+  z-index: 1;
+  top: 0%;
+}
+
+.SalesItemContainer_HideIt {
+  z-index: -1;
+  display: none;
+  top: -100%;
+}
+
+.SalesItemContainer_ItemContainer {
+  width: 100%;
+}
+
+.SalesItemContainer_Fixer {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0.5em 1em;
+}
+
+.SalesItemContainer_NormalInfo,
+.SalesItemContainer_Price {
+  padding: 2em 0;
+}
+
+.SalesItemContainer_InfoContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 100%;
+  width: 50%;
+}
+
+.SalesItemContainer_ImageContainer {
+  width: 15em;
+  height: 10em;
+}
+
+.SalesItemContainer_ImageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.SalesItemContainer_NormalInfo {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  color: white;
+  /* width: 100%; */
+}
+
+.SalesItemContainer_NormalInfo p {
+  margin: 0 2em;
+}
+
+.SalesItemContainer_NormalPrice,
+.SalesItemContainer_TotalAmount,
+.SalesItemContainer_FinalAmount h1 {
+  color: var(--SecondaryGreen) !important;
+}
+
+.SalesItemContainer_Price {
+  width: 20%;
+  display: flex;
+  align-content: center;
+  justify-content: flex-start;
+}
+
+.SalesItemContainer_Price {
+  color: white;
+}
+
+.SalesItemContainer_FinalAmount {
+  width: 100%;
+  padding: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

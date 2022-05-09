@@ -15,6 +15,7 @@ import Settings from './Pages/Settings';
 import SettingsContainer from './Components/Settings/SettingsContainer/JS/SettingsContainer';
 import Address from './Pages/Address';
 import MyOrders from './Pages/MyOrders';
+import Sales from './Pages/Sales';
 
 function App() { 
   // Declerations
@@ -79,6 +80,9 @@ function App() {
         </Route>
         <Route path="/MyOrders">
           <MyOrders/>
+        </Route>
+        <Route path="/Sales">
+          <Sales/>
         </Route>
       </Layout>
     </Switch>

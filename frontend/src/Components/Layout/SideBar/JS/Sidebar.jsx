@@ -37,7 +37,7 @@ const Sidebar = () => {
           <Inventory2Outlined />
         </NavLink>
         <NavLink
-          to="/sells"
+          to="/Sales"
           activeClassName={classes.active}
           className={classes.Sidebar_IconContainer}
         >

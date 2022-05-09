@@ -189,3 +189,15 @@ exports.GetOrdersHandler=async(req,res,next)=>{
     }
 }
 
+exports.GetSalesHandler=async(req,res,next)=>{
+    const {userId}=req.body;
+    try{
+        const user=await UserModal.findOne({_id:userId}).populate("SalesOrder.Item.ProductId");
+        // console.log(user);
+        res.send(user.SalesOrder);
+    }   
+    catch(err){
+        console.log(err);
+    }
+}
+

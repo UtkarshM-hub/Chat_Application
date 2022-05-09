@@ -1,0 +1,36 @@
+.SalesContainer {
+  width: 100%;
+  height: 75vh;
+  min-height: -8vh;
+  overflow-y: scroll;
+  margin: 1em 0;
+}
+
+.SalesContainer_MainContainer {
+  width: 100%;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.SalesContainer::-webkit-scrollbar {
+  width: 8px;
+  border-radius: 10px;
+}
+
+.SalesContainer::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: var(--SecondMain);
+}
+
+.SalesContainer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: var(--mainColor);
+}
+
+.SalesContainer::-webkit-scrollbar-thumb:hover {
+  border-radius: 10px;
+  background-color: var(--mainColorHover);
+}

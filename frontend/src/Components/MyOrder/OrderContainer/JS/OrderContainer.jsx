@@ -45,10 +45,10 @@ const OrderContainer = ({ _id, Totalamount, Items, Time }) => {
           ))}
       </div>
       <div className={classes.OrderContainer_Action}>
-        <div className={classes.OrderContainer_CancelOrder}>
+        {/* <div className={classes.OrderContainer_CancelOrder}>
           <CloseIcon />
           Cancel Order
-        </div>
+        </div> */}
         <h2 className={classes.OrderContainer_Amount}>
           ₹{Totalamount.toLocaleString("en-US")}
         </h2>

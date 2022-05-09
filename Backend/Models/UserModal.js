@@ -205,16 +205,23 @@ const UserSchema=new Schema({
             PhoneNumber:{
                 type:String
             },
-            Item:{
-                type:Object
-            },
-            TotalAmount:{
-                type:String
+            Item:[
+                {
+                ProductId:{
+                    type:Schema.Types.ObjectId,
+                    ref:"Product",
+                },
+                Quantity:{
+                    type:Number
+                }
+            }],
+            Status:{
+                type:String,
             },
             time:{
                 type:Date,
                 default:Date.now()
-            }
+            },
         },
         
     ]

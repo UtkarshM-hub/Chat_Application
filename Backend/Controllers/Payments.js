@@ -47,7 +47,7 @@ exports.CheckoutHandler=async(req,res,next)=>{
         Address:Address,
         PhoneNumber:PhoneNumber,
         Item:user.Cart.Items[i],
-        TotalAmount:TotalAmount
+        Status:"Pending"
       }}})
       console.log(user.Cart.Items[i].ProductId.Creator)
       await Product.updateOne({"_id":user.Cart.Items[i].ProductId._id},{$inc:{"Quantity":-(user.Cart.Items[i].Quantity===0?0:user.Cart.Items[i].Quantity)}});
