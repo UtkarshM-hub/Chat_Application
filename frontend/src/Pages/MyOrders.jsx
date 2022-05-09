@@ -31,7 +31,10 @@ const MyOrders = () => {
         {Orders !== undefined &&
           Orders.map((item) => (
             <OrderContainer
-              Status={item.Status}
+              key={item._id}
+              _id={item._id}
+              Items={item.Items}
+              Time={item.time}
               Totalamount={item.TotalAmount.toLocaleString("en-US")}
             />
           ))}

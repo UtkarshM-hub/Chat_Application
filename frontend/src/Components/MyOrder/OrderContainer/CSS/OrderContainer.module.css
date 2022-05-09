@@ -101,11 +101,11 @@
   color: white;
 }
 
-.Progress {
+.OrderContainer_Progress {
   color: var(--MainYellow);
 }
 
-.Delivered,
+.OrderContainer_Delivered,
 .OrderContainer_Amount {
   color: var(--SecondaryGreen);
 }

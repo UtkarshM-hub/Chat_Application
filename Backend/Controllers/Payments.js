@@ -35,7 +35,7 @@ exports.CheckoutHandler=async(req,res,next)=>{
   try{
     const user=await UserModal.findById(userId).populate("Cart.Items.ProductId").then(newUsr=>{
       newArr=newUsr.Cart.Items.map(item=>{
-        return {ProductId:{...item.ProductId._doc}}
+        return {ProductId:{...item.ProductId._doc},Quantity:item.Quantity,Status:"In-Progress"}
       });
       return newUsr;
     });

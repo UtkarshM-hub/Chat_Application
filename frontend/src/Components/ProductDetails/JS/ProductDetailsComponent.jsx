@@ -25,7 +25,7 @@ const ProductDetailsComponent = ({
           >
             <h2>{Name}</h2>
             <p>{Description}</p>
-            {Quantity <= 10 && (
+            {Quantity <= 10 && Quantity !== 0 && (
               <h3
                 style={{ margin: "0.5em 0 0 0" }}
                 className={classes.ProductDetailsComponent_SoldOut}
@@ -52,42 +52,45 @@ const ProductDetailsComponent = ({
                 </h2>
               )}
             </div>
-            <div className={classes.ProductDetails_QuantityContainer}>
-              <p>Qty:</p>
-              <div
-                className={classes.ProductDetails_QuantityElement}
-                onClick={(e) =>
-                  setQuantityNumber((prev) => {
-                    if (prev === 1) {
-                      return 1;
-                    } else {
-                      return prev - 1;
-                    }
-                  })
-                }
-              >
-                -
+            {Quantity !== 0 && (
+              <div className={classes.ProductDetails_QuantityContainer}>
+                <p>Qty:</p>
+                <div
+                  className={classes.ProductDetails_QuantityElement}
+                  onClick={(e) =>
+                    setQuantityNumber((prev) => {
+                      if (prev === 1) {
+                        return 1;
+                      } else {
+                        return prev - 1;
+                      }
+                    })
+                  }
+                >
+                  -
+                </div>
+                <div className={classes.ProductDetails_QuantityElement}>
+                  {QuantityNumber}
+                </div>
+                <div
+                  className={classes.ProductDetails_QuantityElement}
+                  onClick={(e) =>
+                    setQuantityNumber((prev) => {
+                      if (prev + 1 <= Quantity) {
+                        return prev + 1;
+                      }
+                      if (prev + 1 > Quantity) {
+                        return prev;
+                      }
+                    })
+                  }
+                >
+                  +
+                </div>
               </div>
-              <div className={classes.ProductDetails_QuantityElement}>
-                {QuantityNumber}
-              </div>
-              <div
-                className={classes.ProductDetails_QuantityElement}
-                onClick={(e) =>
-                  setQuantityNumber((prev) => {
-                    if (prev + 1 <= Quantity) {
-                      return prev + 1;
-                    }
-                    if (prev + 1 > Quantity) {
-                      return prev;
-                    }
-                  })
-                }
-              >
-                +
-              </div>
-            </div>
+            )}
           </div>
+
           {Quantity !== 0 && (
             <div
               className={`${classes.ProductDetailsComponent_ButtonContainer} ${classes.ProductDetailsComponent_MarginClass}`}
