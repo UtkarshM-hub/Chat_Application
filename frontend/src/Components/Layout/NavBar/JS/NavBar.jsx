@@ -136,6 +136,17 @@ const NavBar = () => {
         localStorage.setItem("Type", res.data.Type);
         localStorage.setItem("Name", res.data.Name);
         localStorage.setItem("Email", res.data.Email);
+        dispatch(
+          ChatActions.setUser({
+            Name: res.data.Name,
+            ProfilePic: res.data.ProfilePic,
+            _id: res.data._id,
+            Type: res.data.Type,
+            Description: res.data.Description,
+            Email: res.data.Email,
+            UserName: res.data.UserName,
+          })
+        );
       })
       .catch((err) => console.log(err));
   };
@@ -283,9 +294,9 @@ const NavBar = () => {
             onClick={(e) => setShowOptions((prev) => !prev)}
           >
             <div className={classes.NavBar_ProfilePic}>
-              <img src={User.ProfilePic} alt="profile pic" />
+              <img src={state.user.ProfilePic} alt="profile pic" />
             </div>
-            <p>{User.Name}</p>
+            <p>{state.user.Name}</p>
             <FontAwesomeIcon
               className={classes.NavBar_ToggleIcon}
               icon={faAngleDown}

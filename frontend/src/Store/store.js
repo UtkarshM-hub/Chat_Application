@@ -22,7 +22,8 @@ const ChatSlice=createSlice({
             Payments:{}
         },
         Orders:[],
-        Sales:[]
+        Sales:[],
+        user:{}
     },
     reducers:{
         createMessage(state,actions){
@@ -299,6 +300,15 @@ const ChatSlice=createSlice({
         setSales(state,actions){
             const data=actions.payload;
             state.Sales=data;
+            return;
+        },
+        setUser(state,actions){
+            const data=actions.payload;
+            state.user=data;
+        },
+        setImage(state,actions){
+            const ImageUrl=actions.payload.url;
+            state.user.ProfilePic=ImageUrl;
             return;
         }
     },

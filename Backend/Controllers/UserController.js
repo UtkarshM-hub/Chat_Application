@@ -136,7 +136,7 @@ exports.GetUserData=async(req,res,next)=>{
     try{
         const user=await User.findById(userId);
         console.log({_id:user._id,Name:user.Name,ProfilePic:user.ProfilePic});
-        res.send({_id:user._id,Name:user.Name,ProfilePic:user.ProfilePic,Type:user.Type,Email:user.Email});
+        res.send({_id:user._id,Name:user.Name,ProfilePic:user.ProfilePic,Type:user.Type,Email:user.Email,Description:user.Description,UserName:user.UserName});
     }catch(err){
         console.log(err);
     }
@@ -195,6 +195,58 @@ exports.GetSalesHandler=async(req,res,next)=>{
         const user=await UserModal.findOne({_id:userId}).populate("SalesOrder.Item.ProductId");
         // console.log(user);
         res.send(user.SalesOrder);
+    }   
+    catch(err){
+        console.log(err);
+    }
+}
+
+
+exports.EditUserDataHandler=async(req,res,next)=>{
+    const {userId,data}=req.body;
+    try{
+        const user=await UserModal.findByIdAndUpdate({_id:userId},{
+            Name:data.Name,
+            Email:data.Email,
+            Description:data.Description,
+            UserName:data.UserName
+        })
+        // console.log(user);
+        res.send("Success");
+    }   
+    catch(err){
+        console.log(err);
+    }
+}
+
+exports.RemoveUserProfilePic=async(req,res,next)=>{
+    const {userId}=req.body;
+    try{
+        const user=await UserModal.findByIdAndUpdate({_id:userId},{
+            ProfilePic:'https://res.cloudinary.com/dcglxmssd/image/upload/v1645077067/ProfilePic/DefaultProfile_o0zbci.jpg'
+        })
+        res.send({ProfilePic:'https://res.cloudinary.com/dcglxmssd/image/upload/v1645077067/ProfilePic/DefaultProfile_o0zbci.jpg'});
+    }   
+    catch(err){
+        console.log(err);
+    }
+}
+
+exports.UpdateUserProfilePic=async(req,res,next)=>{
+    const {userId}=req.body;
+    const file=req.file;
+    let filePath=undefined;
+    if(file!==undefined){
+        filePath=file.path;
+    }
+    try{
+        await cloudinary.uploader.upload(filePath,async(err,result)=>{
+            if(err){
+                return res.status(500).send({message:"Error uploading image",type:"Error"});
+            }
+            await UserModal.findByIdAndUpdate(userId,{ProfilePic:result.url});
+            res.send({ProfilePic:result.url});
+        })
     }   
     catch(err){
         console.log(err);

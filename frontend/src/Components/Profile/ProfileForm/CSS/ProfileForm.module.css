@@ -1,0 +1,135 @@
+.ProfileForm_FormContainer {
+  width: 50%;
+}
+
+.ProfileForm_MainElementContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  margin: 0.5em;
+}
+
+.ProfileForm_MainElementContainer p {
+  color: white;
+  font-size: 0.8em;
+}
+
+.ProfileForm_MainElementContainer p span {
+  color: var(--mainTextColor);
+  font-size: 0.8em;
+}
+
+.ProfileForm_MainElementContainer input,
+.ProfileForm_MainElementContainer select {
+  width: 100%;
+  font-size: 1.1em;
+  color: white;
+  padding: 0.5em;
+  outline: none;
+  border: 1px solid var(--StrokeColor);
+  background-color: transparent;
+  margin: 0.2em 0;
+}
+
+.ProfileForm_MainElementContainer select option {
+  width: 100%;
+  font-size: 1.1em;
+  color: white;
+  padding: 0.5em;
+  outline: none;
+  border: 1px solid var(--StrokeColor);
+  background-color: black;
+  margin: 0.2em 0;
+}
+
+.ProfileForm {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.ProfileForm_ProfilePic {
+  background-color: var(--ItemCardBG);
+  padding: 0.5em;
+  border-radius: 15px;
+  position: relative;
+  width: 40%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 50%;
+  min-height: 31vh;
+  align-self: center;
+}
+
+.ProfileForm_ImageContainer {
+  position: absolute;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 12em;
+  height: 12em;
+  top: -50%;
+}
+
+.ProfileForm_ImageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ProfileForm_UpdateButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.ProfileForm_UpdateButtons p {
+  color: white;
+  /* margin: 0.5em 0; */
+}
+
+.ProfileForm_ButtonContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 0.5em 0;
+}
+
+.ProfileForm_Buttons {
+  font-size: 0.98em;
+  padding: 0.5em;
+  width: 8em;
+  height: 2.5em;
+  outline: none;
+  font-weight: 550;
+  cursor: pointer;
+}
+
+.ProfileForm_Remove {
+  background-color: transparent;
+  color: var(--mainRed);
+  border: 2px solid var(--mainRed);
+}
+
+.ProfileForm_Remove:hover {
+  background-color: var(--mainRed);
+  color: white;
+}
+
+.ProfileForm_Update {
+  background-color: var(--SecondaryGreen);
+  color: black;
+  border: 2px solid var(--SecondaryGreen);
+}
+
+.ProfileForm_Update:hover {
+  background-color: var(--SecondaryGreenHover);
+  border: 2px solid var(--SecondaryGreenHover);
+}

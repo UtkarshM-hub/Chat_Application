@@ -16,6 +16,7 @@ import SettingsContainer from './Components/Settings/SettingsContainer/JS/Settin
 import Address from './Pages/Address';
 import MyOrders from './Pages/MyOrders';
 import Sales from './Pages/Sales';
+import UpdateProfile from './Pages/UpdateProfile';
 
 function App() { 
   // Declerations
@@ -68,7 +69,7 @@ function App() {
         <Route path="/Settings">
           <SettingsContainer>
             <Route path="/Settings/Profile" exact>
-              <Settings/>
+              <UpdateProfile/>
             </Route>
             <Route path="/Settings/General" exact>
               <Address/>

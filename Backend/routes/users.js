@@ -45,4 +45,10 @@ router.post("/GetMyOrders",userController.GetOrdersHandler)
 
 router.post("/GetSalesData",userController.GetSalesHandler)
 
+router.post("/EditUserData",userController.EditUserDataHandler)
+
+router.post("/RemoveProfilePic",userController.RemoveUserProfilePic)
+
+router.post("/UpdateProfilePic",upload.single("picture"),userController.UpdateUserProfilePic)
+
 module.exports = router;
