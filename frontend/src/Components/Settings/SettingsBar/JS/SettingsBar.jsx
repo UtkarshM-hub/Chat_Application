@@ -22,14 +22,14 @@ const SettingsBar = () => {
           General Details
         </NavLink>
       </div>
-      <div
+      {/* <div
         onClick={(e) => history.push("/Settings/Payments")}
         className={classes.SettingsBar_Elements}
       >
         <NavLink to="/Settings/Payments" activeClassName={classes.active}>
           Payments
         </NavLink>
-      </div>
+      </div> */}
     </div>
   );
 };

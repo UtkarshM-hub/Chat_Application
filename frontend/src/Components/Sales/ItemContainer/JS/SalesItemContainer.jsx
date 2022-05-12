@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import classes from "../CSS/SalesItemContainer.module.css";
+import DoneIcon from "@mui/icons-material/Done";
 
 const SalesItemContainer = ({
   _id,
   Name,
   time,
   Status,
+  Address,
+  Phone,
+  Email,
   Items,
   TotalAmount,
 }) => {
@@ -49,11 +53,34 @@ const SalesItemContainer = ({
             : classes.SalesItemContainer_HideIt
         }`}
       >
+        <div className={classes.SalesItemContainer_AddressInfo}>
+          <h3 style={{ color: "white", margin: "0.5em 0" }}>Address: </h3>
+          <div className={classes.SalesItemContainer_AddressInfoContainer}>
+            <h4>Name: </h4>
+            <p>{Name}</p>
+          </div>
+          <div className={classes.SalesItemContainer_AddressInfoContainer}>
+            <h4>Email: </h4>
+            <p>{Email}</p>
+          </div>
+          <div className={classes.SalesItemContainer_AddressInfoContainer}>
+            <h4>Address: </h4>
+            <p>{Address}</p>
+          </div>
+          <div className={classes.SalesItemContainer_AddressInfoContainer}>
+            <h4>Phone No: </h4>
+            <p>{Phone}</p>
+          </div>
+        </div>
         <div className={classes.SalesItemContainer_ItemContainer}>
+          <h3 style={{ color: "white", margin: "0.5em" }}>Items:</h3>
           <div className={classes.SalesItemContainer_Fixer}>
             {Items !== undefined &&
               Items.map((item) => (
-                <>
+                <div
+                  key={item._id}
+                  className={classes.SalesItemContainer_AdjustedDiv}
+                >
                   <div className={classes.SalesItemContainer_InfoContainer}>
                     <div className={classes.SalesItemContainer_ImageContainer}>
                       <img src={item.ProductId.Image} alt="item" />
@@ -72,9 +99,15 @@ const SalesItemContainer = ({
                       ₹{item.ProductId.Price * item.Quantity}
                     </h3>
                   </div>
-                </>
+                </div>
               ))}
           </div>
+        </div>
+        <div className={classes.SalesItemContainer_ITemDeliveredContainer}>
+          <button className={classes.SalesItemContainer_SentBtn}>
+            <p>Sent</p>
+            {/* <DoneIcon /> */}
+          </button>
         </div>
       </div>
     </div>

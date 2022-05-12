@@ -5,6 +5,9 @@ import ProfileForm from "../Components/Profile/ProfileForm/JS/ProfileForm";
 import SettingsHeader from "../Components/UI/SettingsHeader/JS/SettingsHeader";
 import { ChatActions } from "../Store/store";
 
+const emailRegx =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 const UpdateProfile = () => {
   const userId = localStorage.getItem("userId");
   const userData = useSelector((state) => state.user);
@@ -23,7 +26,10 @@ const UpdateProfile = () => {
       Email: Email,
       Description: Description,
     };
-    if (UserName !== "" && Name !== "" && Description !== "" && Email !== "") {
+    if (
+      (UserName !== "" && Name !== "" && Description !== "" && Email !== "",
+      emailRegx.test(Email))
+    ) {
       await axios
         .post(
           "http://localhost/users/EditUserData",
@@ -33,7 +39,17 @@ const UpdateProfile = () => {
           }
         )
         .then((res) => {
-          console.log(res);
+          dispatch(
+            ChatActions.setUser({
+              Name: res.data.Name,
+              ProfilePic: res.data.ProfilePic,
+              _id: res.data._id,
+              Type: res.data.Type,
+              Description: res.data.Description,
+              Email: res.data.Email,
+              UserName: res.data.UserName,
+            })
+          );
         });
     }
   };
@@ -60,14 +76,16 @@ const UpdateProfile = () => {
       setSetFile(e.target.files[0]);
       let FileData = new FormData();
       FileData.append("userId", userId);
-      FileData.append("picture", SetFile);
-      await axios
-        .post("http://localhost/users/UpdateProfilePic", FileData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        })
-        .then((res) =>
-          dispatch(ChatActions.setImage({ url: res.data.ProfilePic }))
-        );
+      FileData.append("picture", e.target.files[0]);
+      setTimeout(async () => {
+        await axios
+          .post("http://localhost/users/UpdateProfilePic", FileData, {
+            headers: { "Content-Type": "multipart/form-data" },
+          })
+          .then((res) =>
+            dispatch(ChatActions.setImage({ url: res.data.ProfilePic }))
+          );
+      }, 2000);
     };
   };
 

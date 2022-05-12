@@ -31,9 +31,12 @@ const Sales = () => {
         {Sales !== undefined &&
           Sales.map((item) => (
             <SalesItemContainer
+              key={item._id}
               time={item.time}
               Name={item.Name}
-              key={item._id}
+              Email={item.Email}
+              Address={item.Address}
+              Phone={item.PhoneNumber}
               _id={item._id}
               Items={item.Item}
               Status={item.Status}

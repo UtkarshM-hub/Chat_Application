@@ -212,7 +212,18 @@ exports.EditUserDataHandler=async(req,res,next)=>{
             UserName:data.UserName
         })
         // console.log(user);
-        res.send("Success");
+        setTimeout(()=>{
+            res.send({
+                Name: data.Name,
+                ProfilePic: user.ProfilePic,
+                _id: user._id,
+                Type: user.Type,
+                Description: data.Description,
+                Email: data.Email,
+                UserName: data.UserName,
+              });
+        },2000)
+        
     }   
     catch(err){
         console.log(err);

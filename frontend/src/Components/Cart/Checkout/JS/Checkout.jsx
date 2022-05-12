@@ -39,13 +39,16 @@ const Checkout = ({ TotalAmount, Items, display }) => {
       {state.GeneralDetails.Addresses !== undefined && (
         <div className={classes.Checkout_Address}>
           <p className={classes.Checkout_Header}>Address:</p>
-          <div className={classes.Checkout_Address}>
-            <p>
-              {address.FirstName} {address.LastName},<br />
-              {address.Address},{address.District},<br />
-              {address.State},{address.PinCode}
-            </p>
-          </div>
+          {address !== undefined && (
+            <div className={classes.Checkout_Address}>
+              <p>
+                {address.FirstName} {address.LastName},<br />
+                {address.Address},{address.District},<br />
+                {address.State},{address.PinCode}
+              </p>
+            </div>
+          )}
+
           <NavLink to="/Settings/General">Choose Different Address</NavLink>
         </div>
       )}

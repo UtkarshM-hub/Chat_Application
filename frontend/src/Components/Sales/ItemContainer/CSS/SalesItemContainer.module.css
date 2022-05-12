@@ -110,12 +110,20 @@
   padding: 2em 0;
 }
 
-.SalesItemContainer_InfoContainer {
+.SalesItemContainer_AdjustedDiv {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   height: 100%;
-  width: 50%;
+  width: 100%;
+}
+
+.SalesItemContainer_InfoContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
 }
 
 .SalesItemContainer_ImageContainer {
@@ -135,6 +143,7 @@
   align-items: flex-start;
   color: white;
   /* width: 100%; */
+  margin: 0 2em;
 }
 
 .SalesItemContainer_NormalInfo p {
@@ -164,4 +173,51 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+.SalesItemContainer_AddressInfo {
+  width: 100%;
+  padding: 0.5em;
+}
+
+.SalesItemContainer_AddressInfoContainer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.SalesItemContainer_AddressInfoContainer h4 {
+  color: var(--SecondaryText);
+}
+
+.SalesItemContainer_AddressInfoContainer p {
+  color: white;
+  margin: 0 0.5em;
+}
+
+.SalesItemContainer_ITemDeliveredContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1em;
+  color: var(--DeliveredGreen);
+}
+
+.SalesItemContainer_ITemDeliveredContainer p {
+  padding: 0 0.5em;
+}
+
+.SalesItemContainer_SentBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+  font-weight: 550;
+  color: var(--DesignMainColor);
+  background: transparent;
+  padding: 0.5em;
+  border-radius: 25px;
+  border: 2px solid;
+  cursor: pointer;
 }

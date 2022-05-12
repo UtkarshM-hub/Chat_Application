@@ -173,7 +173,10 @@ const NavBar = () => {
     <div className={classes.NavBar}>
       <div className={classes.NavBar_ContentContianer}>
         <div className={classes.NavBar_Logo}>
-          <div className={classes.NavBar_LogoSec}>
+          <div
+            className={classes.NavBar_LogoSec}
+            onClick={(e) => history.push("/")}
+          >
             <p>
               C<span>.</span>
             </p>
