@@ -44,7 +44,7 @@ const Sidebar = () => {
           <SellOutlined />
         </NavLink>
         <NavLink
-          to="/chart"
+          to="/Analytics"
           activeClassName={classes.active}
           className={classes.Sidebar_IconContainer}
         >

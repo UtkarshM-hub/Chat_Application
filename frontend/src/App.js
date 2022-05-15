@@ -17,6 +17,7 @@ import Address from './Pages/Address';
 import MyOrders from './Pages/MyOrders';
 import Sales from './Pages/Sales';
 import UpdateProfile from './Pages/UpdateProfile';
+import Analytics from './Pages/Analytics';
 
 function App() { 
   // Declerations
@@ -84,6 +85,9 @@ function App() {
         </Route>
         <Route path="/Sales">
           <Sales/>
+        </Route>
+        <Route path="/Analytics">
+          <Analytics/>
         </Route>
       </Layout>
     </Switch>

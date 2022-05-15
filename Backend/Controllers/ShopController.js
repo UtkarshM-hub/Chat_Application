@@ -1,5 +1,11 @@
+const Analytics = require("../Models/Analytics");
 const Product=require("../Models/Product");
 const UserModal = require("../Models/UserModal");
+
+const date=new Date();
+const today=date.getDate();
+const month=date.getMonth();
+const day=date.getDay();
 
 exports.GetProducts=async(req,res,next)=>{
     const {ItemName}=req.body;
@@ -18,8 +24,109 @@ exports.GetProductData=async(req,res,next)=>{
     console.log(req.body)
     try{
         await Product.updateOne({"_id":ProductId},{$inc:{"Visits":+1}})
-        const data=await Product.findById(ProductId);
-        res.send(data);
+        const data=await Product.findById(ProductId).then(async(result)=>{
+            let creator=result.Creator;
+            const analytics=await Analytics.findOne({"creator":creator});
+
+            if(analytics!==undefined){
+                if(analytics.currentMonth.MonthNo!==month){
+                  if(today>=1 && today<=7){
+                    week=1;
+                  }
+                  if(today>=8 && today<=15){
+                    week=2;
+                  }
+                  if(today>=16 && today<=23){
+                    week=3;
+                  }
+                  if(today>=24 && today<=31){
+                    week=4;
+                  }
+                  console.log(day,today,week,month)
+                  analytics.currentMonth.MonthNo=month;
+                  analytics.currentMonth={
+                      MonthNo:month,
+                      Orders:{
+                            data:[0,0,0,0],
+                            Items:[
+                            {
+                                data:[0,0,0,0,0,0,0],
+                            },
+                            {
+                                data:[0,0,0,0,0,0,0],
+                            },
+                            {
+                                data:[0,0,0,0,0,0,0],
+                            },
+                            {
+                                data:[0,0,0,0,0,0,0],
+                            },
+                        ]
+                      },
+                      Visits:{
+                            data:[0,0,0,0],
+                            Items:[
+                            {
+                                data:[0,0,0,0,0,0,0],
+                            },
+                            {
+                                data:[0,0,0,0,0,0,0],
+                            },
+                            {
+                                data:[0,0,0,0,0,0,0],
+                            },
+                            {
+                                data:[0,0,0,0,0,0,0],
+                            },
+                        ]
+                      },
+                      Revenue:{
+                            data:[0,0,0,0],
+                            Items:[
+                            {
+                                data:[0,0,0,0,0,0,0],
+                            },
+                            {
+                                data:[0,0,0,0,0,0,0],
+                            },
+                            {
+                                data:[0,0,0,0,0,0,0],
+                            },
+                            {
+                                data:[0,0,0,0,0,0,0],
+                            },
+                        ]
+                      }
+                  }
+                  analytics.currentMonth.Visits.Items[week-1].data[day]=1;
+                  let sum=analytics.currentMonth.Visits.Items[week-1].data.reduce((prev,curr)=>{prev+=curr},0)
+                  analytics.currentMonth.Visits.data[week-1]=sum;
+                  await Analytics.updateOne({"Creator":creator},{"currentMonth":analytics.currentMonth});
+                }
+                if(analytics.currentMonth.MonthNo===month){
+                  if(today>=1 && today<=7){
+                    week=1;
+                  }
+                  if(today>=8 && today<=15){
+                    week=2;
+                  }
+                  if(today>=16 && today<=23){
+                    week=3;
+                  }
+                  if(today>=24 && today<=31){
+                    week=4;
+                  }
+                  console.log(day,today,week,month)
+                  analytics.currentMonth.Visits.Items[week-1].data[day]=analytics.currentMonth.Visits.Items[week-1].data[day]+1;
+                  let sumOfWeek=analytics.currentMonth.Visits.Items[week-1].data.reduce((prev,curr)=>prev+=curr,0);
+                  analytics.currentMonth.Visits.data[week-1]=sumOfWeek;
+                  await Analytics.updateOne({"Creator":creator},{"currentMonth":analytics.currentMonth});
+                }
+              }
+              return res.send(result);
+        });
+
+        // return res.send(data);
     }catch(err){
         console.log(err);
     }

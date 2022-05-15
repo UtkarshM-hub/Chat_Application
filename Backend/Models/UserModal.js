@@ -187,6 +187,7 @@ const UserSchema=new Schema({
             ],
             SelectedAddress:{
                 type:Schema.Types.ObjectId,
+                required:false
             }
         },
         "Payments":{}

@@ -4,12 +4,18 @@ const jwt=require("jsonwebtoken");
 const cloudinary=require("cloudinary").v2;
 const fs=require("fs");
 const UserModal = require("../Models/UserModal");
+const Analytics = require("../Models/Analytics");
+const { Mongoose } = require("mongoose");
 
 cloudinary.config({
     cloud_name:'dcglxmssd',
     api_key:'794641158514839',
     api_secret:'2aJZb6u-QdkJV-HDb2MTTg5PtQ8'
 })
+
+
+const date=new Date();
+const month=date.getMonth();
 
 exports.SignUpHandler=async(req,res,next)=>{
     const file=req.file;
@@ -53,18 +59,81 @@ exports.SignUpHandler=async(req,res,next)=>{
                     },
                     GeneralDetails:{
                         Addresses:[],
-                        SelectedAddress:""
                     },
                     Payments:{}
                 },
                 SalesOrders:[]
             });
-            newUser.save();
+            await newUser.save();
+
+            console.log(newUser._id)
+
+            const analytics=await new Analytics(
+                {
+                    creator:newUser._id,
+                    currentMonth:{
+                        MonthNo:month,
+                        Orders:{
+                              data:[0,0,0,0],
+                              Items:[
+                              {
+                                  data:[0,0,0,0,0,0,0],
+                              },
+                              {
+                                  data:[0,0,0,0,0,0,0],
+                              },
+                              {
+                                  data:[0,0,0,0,0,0,0],
+                              },
+                              {
+                                  data:[0,0,0,0,0,0,0],
+                              },
+                          ]
+                        },
+                        Visits:{
+                              data:[0,0,0,0],
+                              Items:[
+                              {
+                                  data:[0,0,0,0,0,0,0],
+                              },
+                              {
+                                  data:[0,0,0,0,0,0,0],
+                              },
+                              {
+                                  data:[0,0,0,0,0,0,0],
+                              },
+                              {
+                                  data:[0,0,0,0,0,0,0],
+                              },
+                          ]
+                        },
+                        Revenue:{
+                              data:[0,0,0,0],
+                              Items:[
+                              {
+                                  data:[0,0,0,0,0,0,0],
+                              },
+                              {
+                                  data:[0,0,0,0,0,0,0],
+                              },
+                              {
+                                  data:[0,0,0,0,0,0,0],
+                              },
+                              {
+                                  data:[0,0,0,0,0,0,0],
+                              },
+                          ]
+                        }
+                    }
+                }
+            )
+            await analytics.save();
+            
             res.status(200).send({message:"Successfully Signed in",type:"Success"});
         })
     }
     catch(err){
-        console.log(err);
+        console.log("This is "+err);
     }
     
 }
@@ -108,6 +177,7 @@ exports.LoginController=async(req,res,next)=>{
             return res.send({message:"Invalid Password",inValidOptions:"Password",type:"Error"})
         }
         const token=jwt.sign({Email:Email,userId:user._id.toString()},'2e84dKZVTP',expiresIn);
+        
         res.status(200).json({message:"You Logged in successfully",inValidOptions:"",type:"Success",token:token,userId:user._id.toString()})
     }
     catch(err){

@@ -1,0 +1,106 @@
+.AnalyticsComponent {
+  width: 90%;
+  margin: 0 auto;
+  background-color: var(--ItemCardBG);
+  border-radius: 15px;
+  overflow: hidden;
+  max-height: 80%;
+  height: 80%;
+}
+
+.AnalyticsComponent_header h3 {
+  color: white;
+  padding: 0 0.5em;
+}
+
+.AnalyticsComponent_AnalyticsOptions {
+  border-bottom: 1px solid var(--StrokeColor);
+}
+
+.AnalyticsComponent_AnalyticsOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* padding: 0.5em; */
+}
+
+.AnalyticsComponent_Types {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.AnalyticsComponent_TypesElement {
+  height: 100%;
+  width: 5em;
+  border-bottom: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--SecondaryText);
+  cursor: pointer;
+}
+
+.AnalyticsComponent_TypesElement p {
+  padding: 0.8em;
+}
+
+.ActiveElement {
+  color: white !important;
+  background: rgb(250, 250, 250);
+  background: linear-gradient(
+    0deg,
+    rgba(250, 250, 250, 0.10454604204963236) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  border-bottom: 3px solid var(--mainColor);
+}
+
+.AnalyticsComponent_MainContainer {
+  padding: 0.5em;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.AnalyticsComponent_Options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.AnalyticsComponent_OptionsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5em;
+}
+
+.AnalyticsComponent_OptionsContainer p {
+  color: var(--SecondaryText);
+}
+
+.AnalyticsComponent_OptionsContainer select {
+  width: 100%;
+  font-size: 0.8em;
+  color: white;
+  padding: 0.5em;
+  outline: none;
+  border: 1px solid var(--StrokeColor);
+  background-color: transparent;
+  margin: 0.2em 0.3em;
+}
+
+.AnalyticsComponent_OptionsContainer select option {
+  width: 100%;
+  font-size: 1em;
+  color: white;
+  padding: 0.5em;
+  outline: none;
+  border: 1px solid var(--StrokeColor);
+  background-color: black;
+  margin: 0.2em 0;
+}

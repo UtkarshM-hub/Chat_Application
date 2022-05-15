@@ -19,6 +19,7 @@ var ConnectionRouter = require('./routes/Connections');
 var InventoryRouter = require('./routes/Inventory');
 var ShopRouter = require('./routes/Store');
 var Payment = require('./routes/Payment');
+var Analytics = require('./routes/Analytics');
 const socket = require('../frontend/src/socket');
 
 // declerations
@@ -55,6 +56,7 @@ app.use('/Connection', ConnectionRouter);
 app.use('/Inventory', InventoryRouter);
 app.use('/Shop', ShopRouter);
 app.use('/Payment', Payment);
+app.use('/Analytics', Analytics);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
