@@ -34,6 +34,9 @@ exports.AddSectionHandler=async(req,res,next)=>{
             Image:result===undefined?"https://res.cloudinary.com/dcglxmssd/image/upload/v1648127476/Group_1_ot7swd.png":result.url,
             items:[]}}});
         console.log(user._id);
+        if(file.path!==undefined){
+            fs.unlinkSync(filePath);
+        }
         res.send({Name:Name,Type:Type,Image:result===undefined?"https://res.cloudinary.com/dcglxmssd/image/upload/v1648127476/Group_1_ot7swd.png":result.url});
 
     }
@@ -91,6 +94,9 @@ exports.EditSectionHandler=async(req,res,next)=>{
             });
         }        
             await User.findByIdAndUpdate(userId,{"Inventory":{_id:sectionId,Name:Name,Type:Type,Image:filePath.url,Items:JSON.parse(Items)}});
+            if(file.path!==undefined){
+                fs.unlinkSync(filePath);
+            }
             res.send({_id:sectionId,Name:Name,Type:Type,Image:filePath.url});
         }
         catch(err){
@@ -127,6 +133,9 @@ exports.AddItemToSectionHandler=async(req,res,next)=>{
                 await User.updateOne({_id:UserId,"Inventory._id":SectionId},{$push:{"Inventory.$.Items":{
                     ProductId:pro._id,visits:0,purcheses:0
                 }}})
+                if(file.path!==undefined){
+                    fs.unlinkSync(filePath);
+                }
                 return res.send({
                     _id:pro._id,
                     Name:Name,
@@ -186,6 +195,9 @@ exports.EditItemFromSectionHandler=async(req,res,next)=>{
             // Inventory[index].Items[ItemIndex]=Ddata;
             // console.log(Inventory[index].Items[ItemIndex]);
             // await User.updateOne({"_id":UserId},{$set:{"Inventory":Inventory}});
+            if(file.path!==undefined){
+                fs.unlinkSync(filePath);
+            }
             res.send(Ddata);
         }
         catch(err){
